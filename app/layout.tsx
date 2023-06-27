@@ -4,6 +4,7 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/components/providers"
 import { SiteHeader } from "@/components/site-header"
 
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteHeader />
               <div className="container flex-1">{children}</div>
             </div>
+            <Toaster />
           </Providers>
         </body>
       </html>

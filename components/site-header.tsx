@@ -7,7 +7,7 @@ import { Button } from "./ui/button"
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background px-5">
+    <header className="w-full border-b bg-background px-5">
       {/* right part */}
       <div className="flex h-20 items-center justify-between">
         <div className="flex gap-6">
@@ -15,10 +15,9 @@ export function SiteHeader() {
             <AlignJustify />
           </Button> */}
           <Link href="/" className="flex items-center space-x-2">
-            <span className="inline-block select-none text-3xl font-semibold">
+            <span className="inline-block select-none text-3xl font-semibold tracking-tighter">
               Code
-              {/* Code<span className="font-extrabold italic">Crew</span> */}
-              <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-pyellow">
+              <span className="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-main">
                 <span className="relative text-white">Crew</span>
               </span>
             </span>
@@ -26,13 +25,12 @@ export function SiteHeader() {
           <nav className="flex gap-2">
             {siteConfig.navButton.map((item, index) => (
               <Button
-                variant={"text"}
                 asChild
+                variant={"text"}
+                key={index}
                 className="text-base font-semibold"
               >
-                <Link key={index} href={item.href}>
-                  {item.title}
-                </Link>
+                <Link href={item.href}>{item.title}</Link>
               </Button>
             ))}
           </nav>
@@ -40,8 +38,12 @@ export function SiteHeader() {
         {/* left part */}
         <div className="flex items-center space-x-4">
           <nav className="flex items-center space-x-2">
-            <Button variant={"secondary"}>Войти</Button>
-            <Button variant={"secondary"}>Зарегистрироваться</Button>
+            <Button variant={"secondary"} asChild>
+              <Link href="/login">Войти</Link>
+            </Button>
+            <Button variant={"secondary"} asChild>
+              <Link href="/register">Зарегистрироваться</Link>
+            </Button>
           </nav>
           <ThemeToggle />
         </div>

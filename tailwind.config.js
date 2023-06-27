@@ -38,11 +38,14 @@ module.exports = {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        pviolet: {
-          DEFAULT: "hsl(var(--violet))",
-        },
-        pyellow: {
-          DEFAULT: "hsl(var(--yellow))",
+        // pviolet: {
+        //   DEFAULT: "hsl(var(--violet))",
+        // },
+        // pyellow: {
+        //   DEFAULT: "hsl(var(--yellow))",
+        // },
+        main: {
+          DEFAULT: "hsl(var(--main))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
