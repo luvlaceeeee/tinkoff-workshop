@@ -6,7 +6,6 @@ import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/components/providers"
-import { SiteHeader } from "@/components/site-header"
 
 export const metadata: Metadata = {
   title: {
@@ -34,15 +33,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background antialiased",
+            "scrollbar min-h-screen bg-background antialiased",
             fontSans.className
           )}
         >
           <Providers attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="container flex-1">{children}</div>
-            </div>
+            {children}
             <Toaster />
           </Providers>
         </body>

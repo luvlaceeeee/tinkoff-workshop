@@ -7,7 +7,7 @@ export const siteConfig = {
   navButton: [
     {
       title: "Главная",
-      href: "/",
+      href: "/main",
     },
     {
       title: "Найти команду",
