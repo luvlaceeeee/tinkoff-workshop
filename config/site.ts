@@ -10,11 +10,11 @@ export const siteConfig = {
       href: "/main",
     },
     {
-      title: "Найти команду",
+      title: "Поиск команды",
       href: "/searchTeam",
     },
     {
-      title: "Собрать команду",
+      title: "Создать команду",
       href: "/createTeam",
     },
   ],

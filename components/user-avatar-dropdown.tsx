@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/store/authStore"
-import { LogOut, User, Users } from "lucide-react"
+import { LogOut } from "lucide-react"
 
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
 
@@ -26,15 +26,15 @@ export default function UserAvatarDropdown() {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-40">
+      <DropdownMenuContent className="w-60" align="end">
         <DropdownMenuLabel>{login}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
+          {/* <User className="mr-2 h-4 w-4" /> */}
           Профиль
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Users className="mr-2 h-4 w-4" />
+          {/* <Users className="mr-2 h-4 w-4" /> */}
           Мои команды
         </DropdownMenuItem>
         <DropdownMenuSeparator />

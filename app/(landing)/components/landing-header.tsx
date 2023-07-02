@@ -1,10 +1,11 @@
 import Link from "next/link"
 
+import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
+import RightPartHeader from "@/components/header/right-part-header"
+import { Icons } from "@/components/icons"
 
-import { landingConfig } from "../../app/(landing)/config/landing"
-import Logo from "../logo"
-import RightPartHeader from "./right-part-header"
+import { landingConfig } from "../config/landing"
 
 const LandingHeader = () => {
   return (
@@ -12,14 +13,15 @@ const LandingHeader = () => {
       <div className="flex h-20 items-center justify-between">
         <div className="flex gap-6">
           <Link href="/">
-            <Logo />
+            {/* <Logo /> */}
+            <Icons.logo />
           </Link>
           <nav className="flex gap-2">
             {landingConfig.navButton.map((item, index) => (
               <Button
                 asChild
                 variant={"text"}
-                key={index}
+                key={generateKey("head-btn")}
                 className="text-base font-semibold"
               >
                 <Link href={item.href}>{item.title}</Link>

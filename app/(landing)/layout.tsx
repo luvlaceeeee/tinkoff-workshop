@@ -1,4 +1,4 @@
-import LandingHeader from "../../components/header/landing-header"
+import LandingHeader from "./components/landing-header"
 
 interface LandingLayoutProps {
   children: React.ReactNode

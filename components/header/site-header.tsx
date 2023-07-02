@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
 
-import Logo from "../logo"
+import { Icons } from "../icons"
 import { Button } from "../ui/button"
 import RightPartHeader from "./right-part-header"
 
@@ -12,7 +12,8 @@ export function SiteHeader() {
       <div className="flex h-20 items-center justify-between">
         <div className="flex gap-6">
           <Link href="/">
-            <Logo />
+            {/* <Logo /> */}
+            <Icons.logo />
           </Link>
           <nav className="flex gap-2">
             {siteConfig.navButton.map((item, index) => (

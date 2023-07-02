@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { Button } from "@/components/ui/button"
 import Logo from "@/components/logo"
 
 import UserLoginForm from "./components/user-login-form"
@@ -12,18 +13,21 @@ const LoginPage = () => {
         <h1 className="text-2xl font-semibold tracking-tight">
           С Возвращением!
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Введите почту и пароль, чтобы войти в аккаунт
-        </p>
+        <p className="text-sm text-muted-foreground">Войдите с помощью:</p>
       </div>
       <UserLoginForm />
-      <p className="px-8 text-center text-sm text-muted-foreground">
-        <Link
-          href="/register"
-          className="hover:text-brand underline underline-offset-4"
+      <p className="px-8 text-center text-sm">
+        <Button
+          variant={"link"}
+          className="text-muted-foreground/80 hover:text-muted-foreground"
         >
-          Нету аккаунта? Зарегистрируйтесь
-        </Link>
+          <Link
+            href="/register"
+            className="hover:text-brand underline underline-offset-4"
+          >
+            Нету аккаунта? Зарегистрируйтесь
+          </Link>
+        </Button>
       </p>
     </div>
   )
