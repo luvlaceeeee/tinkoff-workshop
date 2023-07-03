@@ -8,7 +8,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader />
-      <div className="container flex-1">{children}</div>
+      <div className="container flex-1 pb-5 pt-5">{children}</div>
     </div>
   )
 }

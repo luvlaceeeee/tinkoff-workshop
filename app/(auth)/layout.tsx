@@ -13,7 +13,7 @@ function AuthLayout({ children }: AuthLayoutProps) {
       <Button variant={"secondary"} asChild className="absolute left-4 top-4">
         <Link href={"/"}>
           <ArrowLeft />
-          Назад
+          На главную
         </Link>
       </Button>
       <div className="container">{children}</div>

@@ -9,8 +9,8 @@ import { landingConfig } from "../config/landing"
 
 const LandingHeader = () => {
   return (
-    <header className="container sticky top-0 z-40 w-full bg-background/70 backdrop-blur-lg">
-      <div className="flex h-20 items-center justify-between">
+    <header className="sticky top-0 z-40 w-full bg-background/70 backdrop-blur-lg">
+      <div className="container flex h-20 items-center justify-between">
         <div className="flex gap-6">
           <Link href="/">
             {/* <Logo /> */}

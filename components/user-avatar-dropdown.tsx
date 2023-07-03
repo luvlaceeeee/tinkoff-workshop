@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useAuthStore } from "@/store/authStore"
 import { LogOut } from "lucide-react"
 
@@ -14,7 +15,7 @@ import {
 } from "./ui/dropdown-menu"
 
 export default function UserAvatarDropdown() {
-  const { isAuth, user } = useAuthStore((state) => state)
+  const { user } = useAuthStore((state) => state)
   const { avatar, login, firstName, lastName } = user
   return (
     <DropdownMenu>
@@ -29,10 +30,12 @@ export default function UserAvatarDropdown() {
       <DropdownMenuContent className="w-60" align="end">
         <DropdownMenuLabel>{login}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          {/* <User className="mr-2 h-4 w-4" /> */}
-          Профиль
-        </DropdownMenuItem>
+        <Link href={"/profile"}>
+          <DropdownMenuItem>
+            {/* <User className="mr-2 h-4 w-4" /> */}
+            Профиль
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>
           {/* <Users className="mr-2 h-4 w-4" /> */}
           Мои команды
