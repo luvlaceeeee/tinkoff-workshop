@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
-import RightPartHeader from "@/components/header/right-part-header"
+import { RightPartHeader } from "@/components/header/right-part-header"
 import { Icons } from "@/components/icons"
 
 import { landingConfig } from "../config/landing"

@@ -6,7 +6,7 @@ interface ProfileUserAboutProps extends HTMLAttributes<HTMLDivElement> {
   description: string
 }
 
-export default function ProfileUserAbout({
+export function ProfileUserAbout({
   description,
   className,
   ...props

@@ -1,10 +1,12 @@
-import { HTMLAttributes, ReactNode } from "react"
+import { HTMLAttributes } from "react"
+import Link from "next/link"
 import dayjs from "dayjs"
 
 import { IResume } from "@/types/interfaces/IResume"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
+import { buttonVariants } from "../ui/button"
 import {
   Card,
   CardContent,
@@ -14,21 +16,29 @@ import {
   CardTitle,
 } from "../ui/card"
 
-type ResumeCardSmallProps = HTMLAttributes<HTMLDivElement> &
-  Pick<IResume, "description" | "direction" | "skills" | "createWhen">
+type ResumeCardSmallProps = Omit<HTMLAttributes<HTMLDivElement>, "id"> &
+  Pick<IResume, "description" | "direction" | "skills" | "createWhen" | "id">
 
-export default function ResumeCardSmall(
-  props: ResumeCardSmallProps
-): ReactNode {
-  const { createWhen, description, direction, skills, className, ...rest } =
+export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
+  const { createWhen, description, direction, skills, id, className, ...rest } =
     props
-
   const skillsString = skills.slice(0, 4).join(", ")
+
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
       <CardHeader>
         <div>
-          <CardTitle>{direction}</CardTitle>
+          <CardTitle>
+            <Link
+              href={`/resume/${id}`}
+              className={cn(
+                buttonVariants({ variant: "link" }),
+                "h-fit p-0 text-2xl"
+              )}
+            >
+              {direction}
+            </Link>
+          </CardTitle>
           <CardDescription>
             {dayjs.unix(createWhen).format("DD.MM.YYYY")}
           </CardDescription>

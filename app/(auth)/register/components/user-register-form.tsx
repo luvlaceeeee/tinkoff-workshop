@@ -43,7 +43,7 @@ const registerSchema = z
     message: "Пароли не совпадают",
   })
 
-export default function UserRegisterForm() {
+export function UserRegisterForm() {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     mode: "onChange",

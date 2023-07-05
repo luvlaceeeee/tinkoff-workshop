@@ -2,6 +2,7 @@ import Link from "next/link"
 import { useAuthStore } from "@/store/authStore"
 import { LogOut } from "lucide-react"
 
+import { concatStrings } from "@/lib/concatStrings"
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
@@ -14,21 +15,23 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 
-export default function UserAvatarDropdown() {
+export function UserAvatarDropdown() {
   const { user } = useAuthStore((state) => state)
-  const { avatar, login, firstName, lastName } = user
+  const { name, surname, picture } = user
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="select-none rounded-full">
         <Avatar>
-          <AvatarImage src={avatar} />
+          <AvatarImage src={picture} />
           <AvatarFallback>
-            {getNameAbbreviation(firstName + " " + lastName)}
+            {getNameAbbreviation(concatStrings(" ", name, surname)!)}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-60" align="end">
-        <DropdownMenuLabel>{login}</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          {concatStrings(" ", name, surname)}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/profile"}>
           <DropdownMenuItem>

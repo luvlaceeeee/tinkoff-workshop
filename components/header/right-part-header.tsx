@@ -2,31 +2,42 @@
 
 import Link from "next/link"
 import { useAuthStore } from "@/store/authStore"
+import { Bell } from "lucide-react"
 
 import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
-import UserAvatarDropdown from "../user-avatar-dropdown"
+import { UserAvatarDropdown } from "../user-avatar-dropdown"
 
-export default function RightPartHeader() {
-  const { isAuth, user } = useAuthStore((state) => state)
-  const { avatar, login, firstName, lastName } = user
+export function RightPartHeader() {
+  const { isAuth } = useAuthStore((state) => state)
   return (
-    <div className="flex items-center space-x-4">
-      <nav className="flex items-center space-x-2">
-        {isAuth ? (
+    <nav className="flex items-center space-x-3">
+      {isAuth ? (
+        <>
+          <Button variant={"secondary"} asChild>
+            <Link href="/projects">Мои проекты</Link>
+          </Button>
+          <Button variant={"secondary"} asChild>
+            <Link href="/resumes">Мои резюме</Link>
+          </Button>
+          <Button variant="secondary" size="icon" asChild>
+            <Link href="/notifications">
+              <Bell />
+            </Link>
+          </Button>
           <UserAvatarDropdown />
-        ) : (
-          <>
-            <Button variant={"secondary"} asChild>
-              <Link href="/login">Войти</Link>
-            </Button>
-            <Button variant={"secondary"} asChild>
-              <Link href="/register">Зарегистрироваться</Link>
-            </Button>
-          </>
-        )}
-      </nav>
+        </>
+      ) : (
+        <>
+          <Button variant={"secondary"} asChild>
+            <Link href="/login">Войти</Link>
+          </Button>
+          <Button variant={"secondary"} asChild>
+            <Link href="/register">Зарегистрироваться</Link>
+          </Button>
+        </>
+      )}
       <ThemeToggle />
-    </div>
+    </nav>
   )
 }

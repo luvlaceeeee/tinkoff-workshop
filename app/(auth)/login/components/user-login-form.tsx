@@ -1,7 +1,10 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
+import { useAuthStore } from "@/store/authStore"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -14,6 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { toast } from "@/components/ui/use-toast"
 
 const loginSchema = z.object({
   email: z
@@ -23,7 +27,7 @@ const loginSchema = z.object({
   password: z.string().min(1, { message: "Обязательное поле" }),
 })
 
-export default function UserLoginForm() {
+export function UserLoginForm() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
@@ -34,8 +38,27 @@ export default function UserLoginForm() {
   })
 
   const router = useRouter()
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      useAuthStore.getState().login(email, password),
+    onSuccess: () => {
+      toast({
+        variant: "accept",
+        title: "Авторизация прошла успешно",
+      })
+      // router.push("/searchTeam")
+    },
+    onError: (error: AxiosError) =>
+      toast({
+        variant: "destructive",
+        title: "Ошибка",
+        description: `${error}`,
+      }),
+  })
+
   function onSubmit(values: z.infer<typeof loginSchema>) {
-    router.push("/searchTeam")
+    mutate(values)
   }
 
   return (
@@ -46,13 +69,9 @@ export default function UserLoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Почта</FormLabel> */}
               <FormControl>
                 <Input className="rounded-xl" placeholder="Почта" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -62,7 +81,6 @@ export default function UserLoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              {/* <FormLabel>Пароль</FormLabel> */}
               <FormControl>
                 <Input
                   className="rounded-xl"
@@ -71,9 +89,6 @@ export default function UserLoginForm() {
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -84,7 +99,7 @@ export default function UserLoginForm() {
           variant={"main"}
           disabled={!form.formState.isValid}
         >
-          Войти
+          {isLoading ? "Загрузка" : "Войти"}
         </Button>
       </form>
     </Form>

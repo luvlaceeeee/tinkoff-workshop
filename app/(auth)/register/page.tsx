@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 
-import UserRegisterForm from "./components/user-register-form"
+import { UserRegisterForm } from "./components/user-register-form"
 
 const Page = () => {
   return (

@@ -1,0 +1,17 @@
+import axios from "axios"
+
+//TODO Перенести в env
+
+export const API_URL = "http://localhost:8080"
+
+const $api = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+})
+
+$api.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`
+  return config
+})
+
+export default $api

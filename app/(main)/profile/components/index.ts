@@ -1,0 +1,6 @@
+export * from "./profile-user-about"
+export * from "./profile-user-avatar"
+export * from "./profile-user-contacts"
+export * from "./profile-user-header"
+export * from "./profile-user-projects"
+export * from "./profile-user-resumes"

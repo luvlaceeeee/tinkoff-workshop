@@ -9,7 +9,7 @@ interface ProfileUserContactsProps extends HTMLAttributes<HTMLDivElement> {
   contacts: string[]
 }
 
-export default function ProfileUserContacts({
+export function ProfileUserContacts({
   contacts,
   className,
   ...props

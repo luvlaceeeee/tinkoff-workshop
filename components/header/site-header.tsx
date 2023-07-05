@@ -1,10 +1,8 @@
 import Link from "next/link"
 
-import { siteConfig } from "@/config/site"
-
 import { Icons } from "../icons"
-import { Button } from "../ui/button"
-import RightPartHeader from "./right-part-header"
+import { HeaderNavigationMenu } from "./header-navigation-menu"
+import { RightPartHeader } from "./right-part-header"
 
 export function SiteHeader() {
   return (
@@ -12,21 +10,9 @@ export function SiteHeader() {
       <div className="flex h-20 items-center justify-between">
         <div className="flex gap-6">
           <Link href="/">
-            {/* <Logo /> */}
             <Icons.logo />
           </Link>
-          <nav className="flex gap-2">
-            {siteConfig.navButton.map((item, index) => (
-              <Button
-                asChild
-                variant={"text"}
-                key={index}
-                className="text-base font-semibold"
-              >
-                <Link href={item.href}>{item.title}</Link>
-              </Button>
-            ))}
-          </nav>
+          <HeaderNavigationMenu />
         </div>
         <RightPartHeader />
       </div>

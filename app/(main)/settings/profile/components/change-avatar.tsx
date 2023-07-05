@@ -7,19 +7,19 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
-interface ProfileUserAvatarProps extends HTMLAttributes<HTMLElement> {
+interface ChangeAvatarProps extends HTMLAttributes<HTMLElement> {
   avatar: string
   name: string
   surname: string
 }
 
-export function ProfileUserAvatar({
+export function ChangeAvatar({
   avatar,
   name,
   surname,
   className,
   ...props
-}: ProfileUserAvatarProps) {
+}: ChangeAvatarProps) {
   return (
     <section
       className={cn("flex flex-col items-center gap-3", className)}
@@ -32,7 +32,7 @@ export function ProfileUserAvatar({
         </AvatarFallback>
       </Avatar>
       <Button variant={"main"} asChild>
-        <Link href={"/settings/profile"}>Изменить профиль</Link>
+        <Link href={"/settings/profile"}>Изменить фото</Link>
       </Button>
     </section>
   )
