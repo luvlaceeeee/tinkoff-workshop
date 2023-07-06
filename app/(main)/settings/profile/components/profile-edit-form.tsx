@@ -1,6 +1,6 @@
 "use client"
 
-import { generateMock } from "@anatine/zod-mock"
+//BUG: Можно добавит много ссылок на интерфейсе, но на бек они не прилетят
 import { zodResolver } from "@hookform/resolvers/zod"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -45,7 +45,7 @@ type UserProfileFormValues = z.infer<typeof userProfileSchema>
 export function ProfileEditForm() {
   const form = useForm<UserProfileFormValues>({
     resolver: zodResolver(userProfileSchema),
-    defaultValues: generateMock(userProfileSchema),
+    // defaultValues: generateMock(userProfileSchema),
     mode: "onChange",
   })
 
@@ -53,7 +53,7 @@ export function ProfileEditForm() {
     name: "contacts",
     control: form.control,
   })
-
+  //В ресет сетить данные, которые прилетят с бека
   function onSubmit(data: UserProfileFormValues) {
     const queryData = {
       ...data,
@@ -78,7 +78,7 @@ export function ProfileEditForm() {
                 <FormItem>
                   <FormLabel>Имя</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -91,7 +91,7 @@ export function ProfileEditForm() {
                 <FormItem>
                   <FormLabel>Фамилия</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,7 +104,7 @@ export function ProfileEditForm() {
                 <FormItem>
                   <FormLabel>Почта</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,7 +120,7 @@ export function ProfileEditForm() {
                   <FormLabel>О себе</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us a little bit about yourself"
+                      placeholder="Расскажите немного о себе"
                       className="resize-none"
                       {...field}
                     />
@@ -142,7 +142,7 @@ export function ProfileEditForm() {
                       </FormLabel>
                       <div className="flex items-center gap-3">
                         <FormControl>
-                          <Input {...field} />
+                          <Input placeholder="URL" {...field} />
                         </FormControl>
                         <Button
                           type="button"

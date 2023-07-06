@@ -3,9 +3,12 @@
 //TODO: Add destructive border on input
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -16,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { toast } from "@/components/ui/use-toast"
 
 const registerSchema = z
   .object({
@@ -58,8 +62,43 @@ export function UserRegisterForm() {
 
   const router = useRouter()
 
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({
+      email,
+      password,
+      name,
+      surname,
+    }: {
+      email: string
+      password: string
+      name: string
+      surname: string
+    }) =>
+      $api.post("http://localhost:8080/register", {
+        email,
+        password,
+        name,
+        surname,
+      }),
+    onSuccess: () => {
+      toast({
+        variant: "accept",
+        title: "Регистрация прошла успешно",
+        description: "Авторизуйтесь",
+      })
+      router.push("/login")
+    },
+    onError: (error: AxiosError) =>
+      toast({
+        variant: "destructive",
+        title: "Ошибка",
+        description: `${error}`,
+      }),
+  })
+
   function onSubmit(values: z.infer<typeof registerSchema>) {
-    router.push("/searchTeam")
+    mutate(values)
+    // router.push("/searchTeam")
   }
 
   return (
@@ -155,7 +194,7 @@ export function UserRegisterForm() {
           variant={"main"}
           disabled={!form.formState.isValid}
         >
-          Создать аккаунт
+          {isLoading ? "Loading" : "Создать аккаунт"}
         </Button>
       </form>
     </Form>

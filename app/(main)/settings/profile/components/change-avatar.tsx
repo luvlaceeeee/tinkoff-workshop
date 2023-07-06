@@ -1,11 +1,11 @@
 import { HTMLAttributes } from "react"
-import Link from "next/link"
 
 import { concatStrings } from "@/lib/concatStrings"
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+
+import { ChangeAvatarDialog } from "./change-avatar-dialog"
 
 interface ChangeAvatarProps extends HTMLAttributes<HTMLElement> {
   avatar: string
@@ -31,9 +31,10 @@ export function ChangeAvatar({
           {getNameAbbreviation(concatStrings(" ", name, surname)!)}
         </AvatarFallback>
       </Avatar>
-      <Button variant={"main"} asChild>
+      {/* <Button variant={"main"} asChild>
         <Link href={"/settings/profile"}>Изменить фото</Link>
-      </Button>
+      </Button> */}
+      <ChangeAvatarDialog />
     </section>
   )
 }

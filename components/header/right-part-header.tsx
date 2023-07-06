@@ -1,18 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { useAuthStore } from "@/store/authStore"
 import { Bell } from "lucide-react"
+import { useSession } from "next-auth/react"
 
-import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { UserAvatarDropdown } from "../user-avatar-dropdown"
 
 export function RightPartHeader() {
-  const { isAuth } = useAuthStore((state) => state)
+  const { data, status } = useSession()
   return (
     <nav className="flex items-center space-x-3">
-      {isAuth ? (
+      {data?.user ? (
         <>
           <Button variant={"secondary"} asChild>
             <Link href="/projects">Мои проекты</Link>
@@ -37,7 +36,6 @@ export function RightPartHeader() {
           </Button>
         </>
       )}
-      <ThemeToggle />
     </nav>
   )
 }

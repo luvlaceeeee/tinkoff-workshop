@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { useAuthStore } from "@/store/authStore"
 import { LogOut } from "lucide-react"
+import { signOut } from "next-auth/react"
 
 import { concatStrings } from "@/lib/concatStrings"
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
@@ -44,7 +45,10 @@ export function UserAvatarDropdown() {
           Мои команды
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive">
+        <DropdownMenuItem
+          className="text-destructive"
+          onClick={() => signOut()}
+        >
           <LogOut className="mr-2 h-4 w-4" />
           Выйти
         </DropdownMenuItem>

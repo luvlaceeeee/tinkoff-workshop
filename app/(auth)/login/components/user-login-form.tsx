@@ -1,10 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useAuthStore } from "@/store/authStore"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
-import { AxiosError } from "axios"
+import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -39,26 +37,41 @@ export function UserLoginForm() {
 
   const router = useRouter()
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-      useAuthStore.getState().login(email, password),
-    onSuccess: () => {
-      toast({
-        variant: "accept",
-        title: "Авторизация прошла успешно",
-      })
-      // router.push("/searchTeam")
-    },
-    onError: (error: AxiosError) =>
-      toast({
-        variant: "destructive",
-        title: "Ошибка",
-        description: `${error}`,
-      }),
-  })
+  // const { mutate, isLoading } = useMutation({
+  //   mutationFn: ({ email, password }: { email: string; password: string }) =>
+  //     useAuthStore.getState().login(email, password),
+  //   onSuccess: () => {
+  //     toast({
+  //       variant: "accept",
+  //       title: "Авторизация прошла успешно",
+  //     })
+  //     // router.push("/searchTeam")
+  //   },
+  //   onError: (error: AxiosError) =>
+  //     toast({
+  //       variant: "destructive",
+  //       title: "Ошибка",
+  //       description: `${error}`,
+  //     }),
+  // })
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    mutate(values)
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    await signIn("credentials", {
+      username: values.email,
+      password: values.password,
+      redirect: false,
+    }).then((res) => {
+      if (res?.error) {
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: `${res?.error}`,
+        })
+        console.log(res.error)
+      } else {
+        router.push("/main")
+      }
+    })
   }
 
   return (
@@ -99,7 +112,7 @@ export function UserLoginForm() {
           variant={"main"}
           disabled={!form.formState.isValid}
         >
-          {isLoading ? "Загрузка" : "Войти"}
+          {"Войти"}
         </Button>
       </form>
     </Form>

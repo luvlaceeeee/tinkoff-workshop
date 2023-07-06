@@ -1,5 +1,3 @@
-import { AuthResponse, AuthService } from "@/services/AuthServices"
-import axios from "axios"
 import { create } from "zustand"
 
 import { IUser } from "@/types/interfaces/IUser"
@@ -19,25 +17,8 @@ const mockUser: IUser = {
 
 interface AuthState {
   user: IUser
-  isAuth: boolean
-  login: (email: string, password: string) => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  isAuth: true,
-  user: {} as IUser,
-  login: async (email, password) => {
-    const res = await AuthService.login(email, password)
-    localStorage.setItem("token", res.data.access_token)
-    set(() => ({ isAuth: true }))
-    set(() => ({ user: mockUser }))
-  },
-  checkAuth: async () => {
-    const res = await axios.post<AuthResponse>(
-      "http://localhost:8080/oauth/access_token"
-    )
-    localStorage.setItem("token", res.data.access_token)
-    set(() => ({ isAuth: true }))
-    set(() => ({ user: mockUser }))
-  },
+  user: mockUser,
 }))
