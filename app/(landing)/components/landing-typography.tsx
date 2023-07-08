@@ -7,7 +7,7 @@ export const LandingTypography = () => {
         <span className="relative font-extrabold tracking-tighter text-main before:absolute before:-inset-0 before:bg-main/30 before:blur-2xl">
           {landingConfig.name}
         </span>{" "}
-        - Ваша платформа для совместного роста!
+        {landingConfig.subName}
       </h1>
       <p className="text-2xl text-muted-foreground">
         {landingConfig.description}

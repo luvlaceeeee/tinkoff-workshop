@@ -13,7 +13,6 @@ const LandingHeader = () => {
       <div className="container flex h-20 items-center justify-between">
         <div className="flex gap-6">
           <Link href="/">
-            {/* <Logo /> */}
             <Icons.logo />
           </Link>
           <nav className="flex gap-2">

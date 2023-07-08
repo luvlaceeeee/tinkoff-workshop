@@ -1,10 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,16 +17,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
-const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: "Обязательное поле" })
-    .email({ message: "Неправильный формат почты" }),
-  password: z.string().min(1, { message: "Обязательное поле" }),
-})
+import { LoginSchema, loginSchema } from "../types/loginSchema"
 
 export function UserLoginForm() {
-  const form = useForm<z.infer<typeof loginSchema>>({
+  const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
     defaultValues: {
@@ -36,39 +30,28 @@ export function UserLoginForm() {
   })
 
   const router = useRouter()
+  const [isLoading, setLoading] = useState(false)
 
-  // const { mutate, isLoading } = useMutation({
-  //   mutationFn: ({ email, password }: { email: string; password: string }) =>
-  //     useAuthStore.getState().login(email, password),
-  //   onSuccess: () => {
-  //     toast({
-  //       variant: "accept",
-  //       title: "Авторизация прошла успешно",
-  //     })
-  //     // router.push("/searchTeam")
-  //   },
-  //   onError: (error: AxiosError) =>
-  //     toast({
-  //       variant: "destructive",
-  //       title: "Ошибка",
-  //       description: `${error}`,
-  //     }),
-  // })
-
-  async function onSubmit(values: z.infer<typeof loginSchema>) {
+  async function onSubmit(values: LoginSchema) {
+    setLoading(true)
     await signIn("credentials", {
       username: values.email,
       password: values.password,
       redirect: false,
     }).then((res) => {
+      setLoading(false)
       if (res?.error) {
         toast({
           variant: "destructive",
           title: "Ошибка",
-          description: `${res?.error}`,
+          description: "Неправильная почта или пароль",
         })
-        console.log(res.error)
       } else {
+        toast({
+          variant: "accept",
+          title: "Успешно",
+          description: "Удачной работы!",
+        })
         router.push("/main")
       }
     })
@@ -110,7 +93,8 @@ export function UserLoginForm() {
           className="w-full"
           type="submit"
           variant={"main"}
-          disabled={!form.formState.isValid}
+          loading={isLoading}
+          disabled={!form.formState.isValid || isLoading}
         >
           {"Войти"}
         </Button>

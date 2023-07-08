@@ -97,7 +97,7 @@ export function ProfileEditForm() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
@@ -109,7 +109,7 @@ export function ProfileEditForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
           </section>
           <section className="flex flex-1 flex-col gap-5">
             <FormField

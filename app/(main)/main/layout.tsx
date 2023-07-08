@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import { MainPagesHeader } from "@/components/main-pages-header"
+import { MainPagesHeader } from "../shared/components/main-pages-header"
 
 interface MainPageLayoutProps {
   children: ReactNode

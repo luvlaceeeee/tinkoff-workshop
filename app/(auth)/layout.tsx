@@ -18,6 +18,7 @@ async function AuthLayout({ children }: AuthLayoutProps) {
   if (session) {
     redirect("/main")
   }
+
   return (
     <div className="relative min-h-screen">
       <Button variant={"secondary"} asChild className="absolute left-4 top-4">

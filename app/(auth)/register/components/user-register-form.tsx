@@ -1,14 +1,9 @@
 "use client"
 
 //TODO: Add destructive border on input
-import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
-import { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
-import * as z from "zod"
 
-import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -19,36 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
 
-const registerSchema = z
-  .object({
-    email: z
-      .string()
-      .min(1, { message: "Обязательное поле" })
-      .email({ message: "Неправильный формат почты" }),
-    name: z
-      .string()
-      .min(1, { message: "Обязательное поле" })
-      .min(2, { message: "Имя слишком короткое" }),
-    surname: z
-      .string()
-      .min(1, { message: "Обязательное поле" })
-      .min(2, { message: "Фамилия слишком короткая" }),
-    password: z
-      .string()
-      .min(6, { message: "Пароль не может быть меньше 6 символов" }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: "Подтверждение пароля обязательно" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Пароли не совпадают",
-  })
+import { useRegister } from "../hooks/useRegister"
+import { RegisterSchema, registerSchema } from "../types/registerSchema"
 
 export function UserRegisterForm() {
-  const form = useForm<z.infer<typeof registerSchema>>({
+  const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
     mode: "onChange",
     defaultValues: {
@@ -60,45 +31,10 @@ export function UserRegisterForm() {
     },
   })
 
-  const router = useRouter()
+  const { mutate, isLoading } = useRegister()
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: ({
-      email,
-      password,
-      name,
-      surname,
-    }: {
-      email: string
-      password: string
-      name: string
-      surname: string
-    }) =>
-      $api.post("http://localhost:8080/register", {
-        email,
-        password,
-        name,
-        surname,
-      }),
-    onSuccess: () => {
-      toast({
-        variant: "accept",
-        title: "Регистрация прошла успешно",
-        description: "Авторизуйтесь",
-      })
-      router.push("/login")
-    },
-    onError: (error: AxiosError) =>
-      toast({
-        variant: "destructive",
-        title: "Ошибка",
-        description: `${error}`,
-      }),
-  })
-
-  function onSubmit(values: z.infer<typeof registerSchema>) {
+  function onSubmit(values: RegisterSchema) {
     mutate(values)
-    // router.push("/searchTeam")
   }
 
   return (
@@ -117,9 +53,6 @@ export function UserRegisterForm() {
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -133,9 +66,6 @@ export function UserRegisterForm() {
               <FormControl>
                 <Input className="rounded-xl" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -149,9 +79,6 @@ export function UserRegisterForm() {
               <FormControl>
                 <Input className="rounded-xl" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -165,9 +92,6 @@ export function UserRegisterForm() {
               <FormControl>
                 <Input className="rounded-xl" type="password" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -181,9 +105,6 @@ export function UserRegisterForm() {
               <FormControl>
                 <Input className="rounded-xl" type="password" {...field} />
               </FormControl>
-              {/* <FormDescription>
-                This is your public display name.
-              </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
@@ -192,9 +113,10 @@ export function UserRegisterForm() {
           className="w-full"
           type="submit"
           variant={"main"}
-          disabled={!form.formState.isValid}
+          loading={isLoading}
+          disabled={!form.formState.isValid || isLoading}
         >
-          {isLoading ? "Loading" : "Создать аккаунт"}
+          Создать аккаунт
         </Button>
       </form>
     </Form>

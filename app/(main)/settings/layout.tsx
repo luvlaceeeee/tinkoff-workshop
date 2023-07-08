@@ -2,7 +2,8 @@ import { ReactNode } from "react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { MainPagesHeader } from "@/components/main-pages-header"
+
+import { MainPagesHeader } from "../shared/components/main-pages-header"
 
 function SettingsLayout({ children }: { children: ReactNode }) {
   return (

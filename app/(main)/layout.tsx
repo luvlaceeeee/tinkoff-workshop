@@ -16,6 +16,7 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
   if (!session) {
     redirect("/")
   }
+
   return (
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader />

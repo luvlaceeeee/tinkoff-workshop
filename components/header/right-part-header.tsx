@@ -1,14 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { Bell } from "lucide-react"
 import { useSession } from "next-auth/react"
 
+import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { UserAvatarDropdown } from "../user-avatar-dropdown"
 
 export function RightPartHeader() {
-  const { data, status } = useSession()
+  const { data } = useSession()
+
   return (
     <nav className="flex items-center space-x-3">
       {data?.user ? (
@@ -19,11 +20,12 @@ export function RightPartHeader() {
           <Button variant={"secondary"} asChild>
             <Link href="/resumes">Мои резюме</Link>
           </Button>
-          <Button variant="secondary" size="icon" asChild>
+          {/* TODO Add Notifications */}
+          {/* <Button variant="secondary" size="icon" asChild>
             <Link href="/notifications">
               <Bell />
             </Link>
-          </Button>
+          </Button> */}
           <UserAvatarDropdown />
         </>
       ) : (
@@ -36,6 +38,7 @@ export function RightPartHeader() {
           </Button>
         </>
       )}
+      <ThemeToggle />
     </nav>
   )
 }

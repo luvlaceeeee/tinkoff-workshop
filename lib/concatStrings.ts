@@ -1,7 +1,7 @@
 export function concatStrings(
   separator: string,
-  ...string: string[]
+  ...string: (string | undefined)[]
 ): string | null {
-  if (!string.length) return null
+  if (string && !string.length) return null
   return [...string].join(separator)
 }

@@ -1,3 +1,10 @@
+"use client"
+
+import { createContext } from "react"
+
+import { IUser } from "@/types/interfaces/IUser"
+
+import { useUser } from "../shared/hooks/useUser"
 import {
   ProfileUserAbout,
   ProfileUserAvatar,
@@ -8,14 +15,34 @@ import {
 } from "./components"
 import { projectsMock, resumesMock, userMock } from "./config/mock"
 
+const initialContextValue: IUser = {
+  id: 0,
+  email: "",
+  password: "",
+  name: "",
+  surname: "",
+  picture: "",
+  description: "",
+  contacts: [],
+  createWhen: 0,
+}
+
+export const UserContext = createContext<IUser>(initialContextValue)
+
 function ProfilePage() {
-  const { contacts, picture, name, surname, email, description, createWhen } =
-    userMock
+  const { contacts, description } = userMock
+
+  const { data: user, isLoading, error } = useUser()
+
+  if (isLoading) return <div>Loading</div>
+
+  if (!user) return <div>{error.response?.data.message}</div>
+
   return (
-    <>
-      <ProfileUserAvatar avatar={picture} name={name} surname={surname} />
+    <UserContext.Provider value={user}>
+      <ProfileUserAvatar />
       <section className="flex w-full flex-col gap-5">
-        <ProfileUserHeader name={name} surname={surname} email={email} />
+        <ProfileUserHeader />
         <section className="flex justify-between gap-6 border-b pb-4">
           <ProfileUserContacts className="flex-1" contacts={contacts} />
           <ProfileUserAbout className="flex-1" description={description} />
@@ -23,7 +50,7 @@ function ProfilePage() {
         <ProfileUserResume resumes={resumesMock} />
         <ProfileUserProjects projects={projectsMock} />
       </section>
-    </>
+    </UserContext.Provider>
   )
 }
 
