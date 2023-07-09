@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
-import { Loader } from "@/components/loader"
+import { LoaderScreen } from "@/components/loader"
 import { Providers } from "@/components/providers"
 
 export const metadata: Metadata = {
@@ -39,10 +39,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <Providers attribute="class" defaultTheme="system" enableSystem>
-            <Loader>
+            <LoaderScreen>
               {children}
               <Toaster />
-            </Loader>
+            </LoaderScreen>
           </Providers>
         </body>
       </html>
