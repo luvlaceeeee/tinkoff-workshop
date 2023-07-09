@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { getServerSession } from "next-auth"
 
+import { authOptions } from "@/config/authOptions"
 import { Button } from "@/components/ui/button"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 

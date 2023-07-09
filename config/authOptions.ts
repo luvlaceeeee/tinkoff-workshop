@@ -1,6 +1,21 @@
-import NextAuth from "next-auth"
+import axios from "axios"
+import { AuthOptions } from "next-auth"
+import CredentialsProvider from "next-auth/providers/credentials"
+import { signIn, signOut } from "next-auth/react"
 
-import { authOptions } from "@/config/authOptions"
+export const authOptions: AuthOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const res = await axios.post("http://localhost:8080/auth/login", {
+          username: credentials?.username,
+          password: credentials?.password,
+        })
 
         // const userInfo = await axios.get(
         //   "http://localhost:8080/api/v1/users/email",
@@ -27,7 +42,7 @@ import { authOptions } from "@/config/authOptions"
     async jwt({ token, user }) {
       if (!!user) {
         return { ...user }
-        //@ts-ignore
+        // @ts-ignore
       } else if (Date.now() < token.expires_in) {
         return token
       } else {
@@ -65,7 +80,3 @@ import { authOptions } from "@/config/authOptions"
   },
   secret: "bOCUzHTqw5xa+PFn4wFDIk3SSt5wBcveJe2Lp2eqdrQ=",
 }
-
-const handler = NextAuth(authOptions)
-
-export { handler as GET, handler as POST }

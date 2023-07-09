@@ -1,13 +1,11 @@
 "use client"
 
-import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 
 import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
-import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 
-import { resumesMockMany } from "../../profile/config/mock"
+import { MainResumeCarousel } from "./main-resume-carousel"
 
 export function MainResumes() {
   const { data } = useQuery(["test"], () => $api.get("/requests"))
@@ -23,10 +21,10 @@ export function MainResumes() {
         </div>
       </div>
       {/* BUG next 13 bug */}
-      {/* <Suspense fallback={<div>Loading</div>}>
-        <MainResumeCarousel />
-      </Suspense> */}
-      <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
+      {/* <Suspense fallback={<div>Loading</div>}> */}
+      <MainResumeCarousel />
+      {/* </Suspense> */}
+      {/* <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
         {resumesMockMany.map(
           ({ description, direction, skills, createWhen, id }) => (
             <ResumeCardSmall
@@ -44,7 +42,7 @@ export function MainResumes() {
             <p className="font-semibold">Смотреть все резюме</p>
           </div>
         </Link>
-      </div>
+      </div> */}
     </section>
   )
 }

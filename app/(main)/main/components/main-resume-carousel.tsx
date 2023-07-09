@@ -1,7 +1,7 @@
 "use client"
 
+import Link from "next/link"
 import { Carousel } from "@mantine/carousel"
-import { Link } from "lucide-react"
 
 import { generateKey } from "@/lib/generateKey"
 import { ResumeCardSmall } from "@/components/cards/resume-card-sm"

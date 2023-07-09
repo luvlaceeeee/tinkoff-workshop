@@ -12,9 +12,10 @@ import {
 import { projectsMock, resumesMock, userMock } from "./config/mock"
 import { UserContext } from "./context/UserContext"
 
-function ProfilePage() {
-  const { contacts, description } = userMock
 
+function ProfilePage() {
+  const { contacts, picture, name, surname, email, description, createWhen } =
+    userMock
   const { data: user, isLoading, error } = useUser()
 
   if (isLoading) return <div>Loading</div>
@@ -22,10 +23,18 @@ function ProfilePage() {
   if (!user) return <div>{error.response?.data.message}</div>
 
   return (
-    <UserContext.Provider value={user}>
-      <ProfileUserAvatar />
+    <>
+      <ProfileUserAvatar
+        picture={user.picture}
+        name={user.name}
+        surname={user.surname}
+      />
       <section className="flex w-full flex-col gap-5">
-        <ProfileUserHeader />
+        <ProfileUserHeader
+          name={user.name}
+          surname={user.surname}
+          email={user.email}
+        />
         <section className="flex justify-between gap-6 border-b pb-4">
           <ProfileUserContacts className="flex-1" contacts={contacts} />
           <ProfileUserAbout className="flex-1" description={description} />
@@ -33,7 +42,7 @@ function ProfilePage() {
         <ProfileUserResume resumes={resumesMock} />
         <ProfileUserProjects projects={projectsMock} />
       </section>
-    </UserContext.Provider>
+    </>
   )
 }
 

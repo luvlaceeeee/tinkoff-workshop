@@ -4,7 +4,11 @@ import { ReactNode } from "react"
 import { LoaderIcon } from "lucide-react"
 import { useSession } from "next-auth/react"
 
-export function Loader({ children }: { children: ReactNode }) {
+export function LoaderScreen({
+  children,
+}: {
+  children: ReactNode
+}): JSX.Element {
   const { status } = useSession()
 
   if (status === "loading") {
@@ -21,5 +25,5 @@ export function Loader({ children }: { children: ReactNode }) {
     )
   }
 
-  return children
+  return <>children</>
 }
