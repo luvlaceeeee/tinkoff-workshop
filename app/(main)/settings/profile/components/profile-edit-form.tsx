@@ -6,6 +6,9 @@ import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
+//TODO Докинуть контакты в мутацию
+
+import { z } from "zod"
 
 import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import { IUser } from "@/types/interfaces/IUser"
@@ -25,12 +28,28 @@ import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/components/providers"
 
-import {
-  UserProfileSchema,
-  userProfileSchema,
-} from "../types/userProfileSchema"
+export const userProfileSchema = z.object({
+  name: z
+    .string({ required_error: "Обязательное поле" })
+    .min(2, { message: "Имя слишком короткое" }),
+  surname: z
+    .string({ required_error: "Обязательное поле" })
+    .min(2, { message: "Фамилия слишком короткая" }),
+  // email: z
+  //   .string({ required_error: "Обязательное поле" })
+  //   .email({ message: "Неправильный формат почты" }),
+  contacts: z
+    .array(
+      z.object({
+        value: z.string().url({ message: "Введите правильную ссылку" }),
+      })
+    )
+    .optional(),
+  // contacts: z.string().url().array().max(5),
+  description: z.string().max(250).optional(),
+})
 
-//TODO Докинуть контакты в мутацию
+export type UserProfileSchema = z.infer<typeof userProfileSchema>
 
 interface ProfileEditFormProps {
   user: IUser
