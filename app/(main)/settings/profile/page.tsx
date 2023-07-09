@@ -1,17 +1,18 @@
 "use client"
 
-import { useUser } from "../../../../hooks/useUser"
-import { userMock } from "../../profile/config/mock"
+import { useUser } from "@/hooks/useUser"
+
 import { ChangeAvatar } from "./components/change-avatar"
 import { ProfileEditForm } from "./components/profile-edit-form"
 
 function ProfileSettingsPage() {
-  const { contacts, picture, name, surname, email, description, createWhen } =
-    userMock
   const { data: user, isLoading, error } = useUser()
+
+  if (isLoading) return <div>Loading</div>
+
   return (
     <>
-      <ChangeAvatar avatar={picture} name={name} surname={surname} />
+      <ChangeAvatar avatar={""} name={user?.name!} surname={user?.surname!} />
       <ProfileEditForm user={user!} />
     </>
   )

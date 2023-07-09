@@ -6,17 +6,19 @@ import { useQuery } from "@tanstack/react-query"
 
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
-import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
+import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 
-import { resumesMockMany } from "../../profile/config/mock"
+import { vacanciesMockMany } from "../../profile/config/mock"
 
-export function MainResumeCarousel() {
+export function MainVacancyCarousel() {
   const { data, isLoading } = useQuery(
-    ["10-resume"],
-    () => $api.get("/requests"),
+    ["10-vacancy"],
+    () =>
+      $api.get("/positions/vacancies", {
+        params: { page: 0, size: 10, dateSort: "DESC" },
+      }),
     { refetchOnMount: true, refetchInterval: 10000 }
   )
-
   return (
     <Carousel
       height={250}
@@ -38,10 +40,10 @@ export function MainResumeCarousel() {
         { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
       ]}
     >
-      {resumesMockMany.map(
+      {vacanciesMockMany.map(
         ({ description, direction, skills, createWhen, id }) => (
-          <Carousel.Slide key={generateKey("resume-card")}>
-            <ResumeCardSmall
+          <Carousel.Slide key={generateKey("vacancy-card")}>
+            <VacancyCardSmall
               className="h-[250px]"
               direction={direction}
               createWhen={createWhen}

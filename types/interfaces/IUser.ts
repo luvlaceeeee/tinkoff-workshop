@@ -5,7 +5,7 @@ export interface IUser {
   name: string
   surname: string
   picture: string
-  description: string
+  mainInformation: string
   contacts: string[]
   createWhen: EpochTimeStamp
 }

@@ -4,8 +4,8 @@ import { MainVacancies } from "./components/main-vacancies"
 async function MainPage() {
   return (
     <>
-      <MainResumes />
       <MainVacancies />
+      <MainResumes />
     </>
   )
 }

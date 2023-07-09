@@ -18,7 +18,7 @@ export const userProfileSchema = z.object({
     )
     .optional(),
   // contacts: z.string().url().array().max(5),
-  description: z.string().max(250).optional(),
+  mainInformation: z.string().max(250).optional(),
 })
 
 export type UserProfileSchema = z.infer<typeof userProfileSchema>

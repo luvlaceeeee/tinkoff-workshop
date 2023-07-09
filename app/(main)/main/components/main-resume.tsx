@@ -1,14 +1,8 @@
-"use client"
-
-import { useQuery } from "@tanstack/react-query"
-
-import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
 
 import { MainResumeCarousel } from "./main-resume-carousel"
 
 export function MainResumes() {
-  const { data } = useQuery(["test"], () => $api.get("/requests"))
   return (
     <section className="space-y-3">
       <div className="flex justify-between">
@@ -21,9 +15,7 @@ export function MainResumes() {
         </div>
       </div>
       {/* BUG next 13 bug */}
-      {/* <Suspense fallback={<div>Loading</div>}> */}
       <MainResumeCarousel />
-      {/* </Suspense> */}
       {/* <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
         {resumesMockMany.map(
           ({ description, direction, skills, createWhen, id }) => (

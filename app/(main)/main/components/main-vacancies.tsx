@@ -1,11 +1,8 @@
 "use client"
 
-import Link from "next/link"
-
 import { Button } from "@/components/ui/button"
-import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 
-import { vacanciesMockMany } from "../../profile/config/mock"
+import { MainVacancyCarousel } from "./main-vacancy-carousel"
 
 export function MainVacancies() {
   return (
@@ -19,7 +16,8 @@ export function MainVacancies() {
           <Button variant={"secondary"}>Смотреть все</Button>
         </div>
       </div>
-      <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
+      <MainVacancyCarousel />
+      {/* <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
         {vacanciesMockMany.map(
           ({ description, direction, skills, createWhen, id }) => (
             <VacancyCardSmall
@@ -37,7 +35,7 @@ export function MainVacancies() {
             <p className="font-semibold">Смотреть все резюме</p>
           </div>
         </Link>
-      </div>
+      </div> */}
     </section>
   )
 }

@@ -14,6 +14,7 @@ export function SiteHeader() {
           </Link>
           <HeaderNavigationMenu />
         </div>
+        {/* @ts-expect-error Server Component */}
         <RightPartHeader />
       </div>
     </header>

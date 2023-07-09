@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
+
 import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import { IUser } from "@/types/interfaces/IUser"
 import $api from "@/config/axios"
@@ -29,8 +30,6 @@ import {
   userProfileSchema,
 } from "../types/userProfileSchema"
 
-//TODO Докинуть контакты в мутацию
-    
 interface ProfileEditFormProps {
   user: IUser
 }
@@ -39,8 +38,8 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
   const form = useForm<UserProfileSchema>({
     resolver: zodResolver(userProfileSchema),
     defaultValues: {
-      description: user.description,
-      // contacts: user.contacts.map((contact) => ({ value: contact })),
+      mainInformation: user.mainInformation ?? "",
+      contacts: user.contacts.map((contact) => ({ value: contact })) ?? [],
       name: user.name,
       surname: user.surname,
     },
@@ -67,9 +66,10 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
         })
         queryClient.invalidateQueries({ queryKey: ["user"] })
         form.reset({
-          description: data.description,
+          mainInformation: data.mainInformation,
           name: data.name,
           surname: data.surname,
+          contacts: data.contacts.map((contact) => ({ value: contact })),
         })
       },
       onError: (error: AxiosError<IErrorResponse>) => {
@@ -82,7 +82,6 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
     }
   )
 
-  //В ресет сетить данные, которые прилетят с бека
   function onSubmit(values: UserProfileSchema) {
     const queryData = {
       ...values,
@@ -142,7 +141,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
           <section className="flex flex-1 flex-col gap-5">
             <FormField
               control={form.control}
-              name="description"
+              name="mainInformation"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>О себе</FormLabel>

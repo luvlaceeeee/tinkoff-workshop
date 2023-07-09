@@ -1,19 +1,19 @@
-import { HTMLAttributes } from "react"
+import { HTMLAttributes, useContext } from "react"
 import Link from "next/link"
 
 import { generateKey } from "@/lib/generateKey"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
-interface ProfileUserContactsProps extends HTMLAttributes<HTMLDivElement> {
-  contacts: string[]
-}
+import { UserContext } from "../context/UserContext"
+
+type ProfileUserContactsProps = HTMLAttributes<HTMLDivElement>
 
 export function ProfileUserContacts({
-  contacts,
   className,
   ...props
 }: ProfileUserContactsProps) {
+  const { contacts = [] } = useContext(UserContext)
   return (
     <div className={cn("space-y-2", className)} {...props}>
       <h2 className="text-3xl font-semibold transition-colors">Контакты</h2>

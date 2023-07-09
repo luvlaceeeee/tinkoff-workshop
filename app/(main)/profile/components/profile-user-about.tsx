@@ -1,20 +1,20 @@
-import { HTMLAttributes } from "react"
+import { HTMLAttributes, useContext } from "react"
 
 import { cn } from "@/lib/utils"
 
-interface ProfileUserAboutProps extends HTMLAttributes<HTMLDivElement> {
-  description: string
-}
+import { UserContext } from "../context/UserContext"
+
+type ProfileUserAboutProps = HTMLAttributes<HTMLDivElement>
 
 export function ProfileUserAbout({
-  description,
   className,
   ...props
 }: ProfileUserAboutProps) {
+  const { mainInformation = "" } = useContext(UserContext)
   return (
     <div className={cn(className)} {...props}>
       <h2 className="text-3xl font-semibold transition-colors">О себе</h2>
-      <span className="mt-2 inline-block text-sm">{description}</span>
+      <span className="mt-2 inline-block text-sm">{mainInformation}</span>
     </div>
   )
 }

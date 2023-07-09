@@ -1,14 +1,14 @@
-"use client"
-
 import Link from "next/link"
-import { useSession } from "next-auth/react"
+import { getServerSession } from "next-auth"
+
+import { authOptions } from "@/config/authOptions"
 
 import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { UserAvatarDropdown } from "../user-avatar-dropdown"
 
-export function RightPartHeader() {
-  const { data } = useSession()
+export async function RightPartHeader() {
+  const data = await getServerSession(authOptions)
 
   return (
     <nav className="flex items-center space-x-3">

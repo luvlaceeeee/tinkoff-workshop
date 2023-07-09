@@ -28,6 +28,7 @@ const LandingHeader = () => {
             ))}
           </nav>
         </div>
+        {/* @ts-expect-error Server Component */}
         <RightPartHeader />
       </div>
     </header>

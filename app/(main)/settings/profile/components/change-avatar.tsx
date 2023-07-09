@@ -27,7 +27,7 @@ export function ChangeAvatar({
     >
       <Avatar className="h-44 w-44 select-none">
         <AvatarImage src={avatar} />
-        <AvatarFallback>
+        <AvatarFallback className="text-5xl">
           {getNameAbbreviation(concatStrings(" ", name, surname)!)}
         </AvatarFallback>
       </Avatar>

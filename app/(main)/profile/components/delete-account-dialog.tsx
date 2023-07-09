@@ -33,7 +33,7 @@ export function DeleteAccountDialog() {
       <AlertDialogTrigger asChild>
         <Button
           variant={"outline"}
-          className="w-full border-destructive hover:bg-destructive/20"
+          className="w-full border-destructive/30 hover:bg-destructive/20"
         >
           Удалить аккаунт
         </Button>

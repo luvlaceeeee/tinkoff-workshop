@@ -17,14 +17,6 @@ export const authOptions: AuthOptions = {
           password: credentials?.password,
         })
 
-        // const userInfo = await axios.get(
-        //   "http://localhost:8080/api/v1/users/email",
-        //   {
-        //     params: { email: res.data.username },
-        //     headers: { Authorization: `Bearer ${res.data.access_token}` },
-        //   }
-        // )
-
         const user = await {
           ...res.data,
           expires_in: Date.now() + res.data.expires_in * 1000,

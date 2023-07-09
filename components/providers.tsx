@@ -12,7 +12,7 @@ export const queryClient = new QueryClient({
       refetchOnReconnect: false,
       retry: false,
       staleTime: 5 * 60 * 1000,
-      suspense: true,
+      suspense: false,
     },
   },
 })

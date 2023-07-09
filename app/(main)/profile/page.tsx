@@ -10,16 +10,14 @@ import {
   ProfileUserProjects,
   ProfileUserResume,
 } from "./components"
-import { projectsMock, resumesMock, userMock } from "./config/mock"
+import { ProfileLoading } from "./components/profile-loader"
+import { projectsMock, resumesMock } from "./config/mock"
 import { UserContext } from "./context/UserContext"
 
 function ProfilePage() {
-  const { contacts, picture, name, surname, email, description, createWhen } =
-    userMock
-
   const { data: user, isLoading, error } = useUser()
 
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return <ProfileLoading />
 
   if (!user) return <div>{error.response?.data.message}</div>
 
@@ -29,8 +27,8 @@ function ProfilePage() {
       <section className="flex w-full flex-col gap-5">
         <ProfileUserHeader />
         <section className="flex justify-between gap-6 border-b pb-4">
-          <ProfileUserContacts className="flex-1" contacts={contacts} />
-          <ProfileUserAbout className="flex-1" description={description} />
+          <ProfileUserContacts className="flex-1" />
+          <ProfileUserAbout className="flex-1" />
         </section>
         <ProfileUserResume resumes={resumesMock} />
         <ProfileUserProjects projects={projectsMock} />
