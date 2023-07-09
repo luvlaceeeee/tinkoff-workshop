@@ -1,12 +1,13 @@
+"use client"
+
+import { useContext } from "react"
+
 import { concatStrings } from "@/lib/concatStrings"
 
 import { UserContext } from "../context/UserContext"
 
-export function ProfileUserHeader({
-  name,
-  surname,
-  email,
-}: ProfileUserHeaderProps) {
+export function ProfileUserHeader() {
+  const { name, surname, email } = useContext(UserContext)
   return (
     <header className="space-y-1">
       <h1 className="text-4xl font-bold transition-colors">

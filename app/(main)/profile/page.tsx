@@ -1,6 +1,7 @@
 "use client"
 
-import { useUser } from "../shared/hooks/useUser"
+import { useUser } from "@/hooks/useUser"
+
 import {
   ProfileUserAbout,
   ProfileUserAvatar,
@@ -12,10 +13,10 @@ import {
 import { projectsMock, resumesMock, userMock } from "./config/mock"
 import { UserContext } from "./context/UserContext"
 
-
 function ProfilePage() {
   const { contacts, picture, name, surname, email, description, createWhen } =
     userMock
+
   const { data: user, isLoading, error } = useUser()
 
   if (isLoading) return <div>Loading</div>
@@ -23,18 +24,10 @@ function ProfilePage() {
   if (!user) return <div>{error.response?.data.message}</div>
 
   return (
-    <>
-      <ProfileUserAvatar
-        picture={user.picture}
-        name={user.name}
-        surname={user.surname}
-      />
+    <UserContext.Provider value={user}>
+      <ProfileUserAvatar />
       <section className="flex w-full flex-col gap-5">
-        <ProfileUserHeader
-          name={user.name}
-          surname={user.surname}
-          email={user.email}
-        />
+        <ProfileUserHeader />
         <section className="flex justify-between gap-6 border-b pb-4">
           <ProfileUserContacts className="flex-1" contacts={contacts} />
           <ProfileUserAbout className="flex-1" description={description} />
@@ -42,7 +35,7 @@ function ProfilePage() {
         <ProfileUserResume resumes={resumesMock} />
         <ProfileUserProjects projects={projectsMock} />
       </section>
-    </>
+    </UserContext.Provider>
   )
 }
 

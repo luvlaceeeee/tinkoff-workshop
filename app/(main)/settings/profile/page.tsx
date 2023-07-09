@@ -1,9 +1,7 @@
 "use client"
 
-
 import { useUser } from "../../../../hooks/useUser"
 import { userMock } from "../../profile/config/mock"
-import { useUser } from "../../shared/hooks/useUser"
 import { ChangeAvatar } from "./components/change-avatar"
 import { ProfileEditForm } from "./components/profile-edit-form"
 

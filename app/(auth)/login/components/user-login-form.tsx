@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -18,15 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
-export const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: "Обязательное поле" })
-    .email({ message: "Неправильный формат почты" }),
-  password: z.string().min(1, { message: "Обязательное поле" }),
-})
-
-export type LoginSchema = z.infer<typeof loginSchema>
+import { LoginSchema, loginSchema } from "../types/loginSchema"
 
 export function UserLoginForm() {
   const form = useForm<LoginSchema>({

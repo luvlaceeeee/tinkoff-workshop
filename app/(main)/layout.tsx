@@ -1,3 +1,7 @@
+import { redirect } from "next/navigation"
+import { getServerSession } from "next-auth"
+
+import { authOptions } from "@/config/authOptions"
 import { SiteHeader } from "@/components/header/site-header"
 
 interface MainLayoutProps {
@@ -6,11 +10,11 @@ interface MainLayoutProps {
 
 const MainLayout = async ({ children }: MainLayoutProps) => {
   // Protect routes
-  // const session = await getServerSession(authOptions)
+  const session = await getServerSession(authOptions)
 
-  // if (!session) {
-  //   redirect("/")
-  // }
+  if (!session) {
+    redirect("/")
+  }
 
   return (
     <div className="relative flex min-h-screen flex-col">
