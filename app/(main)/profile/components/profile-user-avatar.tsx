@@ -1,4 +1,4 @@
-import { HTMLAttributes, useContext } from "react"
+import { HTMLAttributes } from "react"
 import Link from "next/link"
 
 import { concatStrings } from "@/lib/concatStrings"
@@ -7,16 +7,21 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
-import { UserContext } from "../page"
 import { DeleteAccountDialog } from "./delete-account-dialog"
 
-type ProfileUserAvatarProps = HTMLAttributes<HTMLElement>
+interface ProfileUserAvatarProps extends HTMLAttributes<HTMLElement> {
+  picture: string
+  name: string
+  surname: string
+}
 
 export function ProfileUserAvatar({
+  picture,
+  name,
+  surname,
   className,
   ...props
 }: ProfileUserAvatarProps) {
-  const { picture, name, surname } = useContext(UserContext)
   return (
     <section
       className={cn("flex flex-col items-center gap-3", className)}

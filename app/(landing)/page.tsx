@@ -7,6 +7,7 @@ export default async function IndexPage() {
       <section className="container flex h-[calc(100vh-6rem)] w-full items-center animate-in fade-in duration-700">
         <div className="space-y-6">
           <LandingTypography />
+          {/* @ts-expect-error Server Component */}
           <LandingButtons />
         </div>
       </section>

@@ -2,10 +2,17 @@
 
 //BUG: Можно добавит много ссылок на интерфейсе, но на бек они не прилетят
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
-import * as z from "zod"
+//TODO Докинуть контакты в мутацию
 
+import { z } from "zod"
+
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
+import { IUser } from "@/types/interfaces/IUser"
+import $api from "@/config/axios"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,17 +25,19 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/components/ui/use-toast"
+import { queryClient } from "@/components/providers"
 
-const userProfileSchema = z.object({
+export const userProfileSchema = z.object({
   name: z
     .string({ required_error: "Обязательное поле" })
     .min(2, { message: "Имя слишком короткое" }),
   surname: z
     .string({ required_error: "Обязательное поле" })
     .min(2, { message: "Фамилия слишком короткая" }),
-  email: z
-    .string({ required_error: "Обязательное поле" })
-    .email({ message: "Неправильный формат почты" }),
+  // email: z
+  //   .string({ required_error: "Обязательное поле" })
+  //   .email({ message: "Неправильный формат почты" }),
   contacts: z
     .array(
       z.object({
@@ -37,15 +46,24 @@ const userProfileSchema = z.object({
     )
     .optional(),
   // contacts: z.string().url().array().max(5),
-  aboutSelf: z.string().max(250).optional(),
+  description: z.string().max(250).optional(),
 })
 
-type UserProfileFormValues = z.infer<typeof userProfileSchema>
+export type UserProfileSchema = z.infer<typeof userProfileSchema>
 
-export function ProfileEditForm() {
-  const form = useForm<UserProfileFormValues>({
+interface ProfileEditFormProps {
+  user: IUser
+}
+
+export function ProfileEditForm({ user }: ProfileEditFormProps) {
+  const form = useForm<UserProfileSchema>({
     resolver: zodResolver(userProfileSchema),
-    // defaultValues: generateMock(userProfileSchema),
+    defaultValues: {
+      description: user.description,
+      // contacts: user.contacts.map((contact) => ({ value: contact })),
+      name: user.name,
+      surname: user.surname,
+    },
     mode: "onChange",
   })
 
@@ -53,14 +71,44 @@ export function ProfileEditForm() {
     name: "contacts",
     control: form.control,
   })
-  //В ресет сетить данные, которые прилетят с бека
-  function onSubmit(data: UserProfileFormValues) {
-    const queryData = {
-      ...data,
-      contacts: data.contacts?.map((contact) => contact.value),
+
+  const { mutate, isLoading } = useMutation(
+    ["user-change"],
+    (
+      values: Omit<UserProfileSchema, "contacts"> & {
+        contacts: string[] | undefined
+      }
+    ) => $api.patch<IUser>("/users", values).then((res) => res.data),
+    {
+      onSuccess: (data) => {
+        toast({
+          variant: "accept",
+          title: "Профиль обновлен",
+        })
+        queryClient.invalidateQueries({ queryKey: ["user"] })
+        form.reset({
+          description: data.description,
+          name: data.name,
+          surname: data.surname,
+        })
+      },
+      onError: (error: AxiosError<IErrorResponse>) => {
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: `${error.response?.data.message}`,
+        })
+      },
     }
-    console.log(queryData)
-    form.reset(data)
+  )
+
+  //В ресет сетить данные, которые прилетят с бека
+  function onSubmit(values: UserProfileSchema) {
+    const queryData = {
+      ...values,
+      contacts: values.contacts?.map((contact) => contact.value),
+    }
+    mutate(queryData)
   }
 
   return (
@@ -114,7 +162,7 @@ export function ProfileEditForm() {
           <section className="flex flex-1 flex-col gap-5">
             <FormField
               control={form.control}
-              name="aboutSelf"
+              name="description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>О себе</FormLabel>
@@ -171,7 +219,11 @@ export function ProfileEditForm() {
             </div>
           </section>
         </div>
-        <Button type="submit" disabled={!form.formState.isDirty}>
+        <Button
+          type="submit"
+          loading={isLoading}
+          disabled={!form.formState.isDirty || isLoading}
+        >
           Обновить профиль
         </Button>
       </form>
