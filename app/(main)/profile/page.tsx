@@ -10,6 +10,8 @@ import {
   ProfileUserResume,
 } from "./components"
 import { projectsMock, resumesMock, userMock } from "./config/mock"
+import { UserContext } from "./context/UserContext"
+
 
 function ProfilePage() {
   const { contacts, picture, name, surname, email, description, createWhen } =

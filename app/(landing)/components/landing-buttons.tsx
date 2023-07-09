@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/config/authOptions"
 import { Button } from "@/components/ui/button"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
 export const LandingButtons = async () => {
   const session = await getServerSession(authOptions)

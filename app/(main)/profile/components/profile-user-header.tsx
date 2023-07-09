@@ -1,10 +1,6 @@
 import { concatStrings } from "@/lib/concatStrings"
 
-interface ProfileUserHeaderProps {
-  name: string
-  surname: string
-  email: string
-}
+import { UserContext } from "../context/UserContext"
 
 export function ProfileUserHeader({
   name,

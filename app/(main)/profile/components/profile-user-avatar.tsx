@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
+import { UserContext } from "../context/UserContext"
 import { DeleteAccountDialog } from "./delete-account-dialog"
 
 interface ProfileUserAvatarProps extends HTMLAttributes<HTMLElement> {
