@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
 
 import { MainResumeCarousel } from "./main-resume-carousel"
@@ -10,31 +12,15 @@ export function MainResumes() {
           Недавние Резюме
         </h2>
         <div className="space-x-3">
-          <Button variant={"main"}>Создать резюме</Button>
-          <Button variant={"secondary"}>Смотреть все</Button>
+          <Button variant={"main"} asChild>
+            <Link href={"/createResume"}>Создать резюме</Link>
+          </Button>
+          <Button variant={"secondary"} asChild>
+            <Link href={"/searchResume"}>Смотреть все резюме</Link>
+          </Button>
         </div>
       </div>
-      {/* BUG next 13 bug */}
       <MainResumeCarousel />
-      {/* <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
-        {resumesMockMany.map(
-          ({ description, direction, skills, createWhen, id }) => (
-            <ResumeCardSmall
-              className="max-w-sm shrink-0 snap-center"
-              direction={direction}
-              createWhen={createWhen}
-              description={description}
-              skills={skills}
-              id={id}
-            />
-          )
-        )}
-        <Link href={"/searchResume"} className="w-full max-w-sm shrink-0">
-          <div className="flex h-full items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground">
-            <p className="font-semibold">Смотреть все резюме</p>
-          </div>
-        </Link>
-      </div> */}
     </section>
   )
 }

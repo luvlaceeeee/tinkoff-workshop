@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
 
 import { MainVacancyCarousel } from "./main-vacancy-carousel"
@@ -12,30 +14,15 @@ export function MainVacancies() {
           Недавние Вакансии
         </h2>
         <div className="space-x-3">
-          <Button variant={"main"}>Создать вакансию</Button>
-          <Button variant={"secondary"}>Смотреть все</Button>
+          <Button variant={"main"} asChild>
+            <Link href={"/createVacancy"}>Создать вакансию</Link>
+          </Button>
+          <Button variant={"secondary"} asChild>
+            <Link href={"/searchVacancy"}>Смотреть все вакансию</Link>
+          </Button>
         </div>
       </div>
       <MainVacancyCarousel />
-      {/* <div className="scrollbar flex snap-x gap-5 overflow-x-auto pb-3">
-        {vacanciesMockMany.map(
-          ({ description, direction, skills, createWhen, id }) => (
-            <VacancyCardSmall
-              className="max-w-sm shrink-0 snap-center"
-              direction={direction}
-              createWhen={createWhen}
-              description={description}
-              skills={skills}
-              id={id}
-            />
-          )
-        )}
-        <Link href={"/searchResume"} className="w-full max-w-sm shrink-0">
-          <div className="flex h-full items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground">
-            <p className="font-semibold">Смотреть все резюме</p>
-          </div>
-        </Link>
-      </div> */}
     </section>
   )
 }

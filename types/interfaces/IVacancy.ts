@@ -1,7 +1,9 @@
+import { IProject } from "./IProject"
+
 export interface IVacancy {
   id: number
-  projectId: number
-  direction: string
+  project: IProject
+  direction: { directionName: string; description: string }
   userId: number
   description: string
   skills: string[]

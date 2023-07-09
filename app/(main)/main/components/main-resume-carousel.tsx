@@ -9,13 +9,21 @@ import { generateKey } from "@/lib/generateKey"
 import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 
 import { resumesMockMany } from "../../profile/config/mock"
+import { CarouselLoader } from "./carousel-loader"
 
 export function MainResumeCarousel() {
   const { data, isLoading } = useQuery(
-    ["10-resume"],
-    () => $api.get("/requests"),
+    ["10-vacancy"],
+    () =>
+      $api
+        .get("/positions/vacancies", {
+          params: { page: 0, size: 10, dateSort: "DESC" },
+        })
+        .then((res) => res.data),
     { refetchOnMount: true, refetchInterval: 10000 }
   )
+
+  if (isLoading) return <CarouselLoader />
 
   return (
     <Carousel

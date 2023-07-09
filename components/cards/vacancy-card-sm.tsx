@@ -17,38 +17,61 @@ import {
 } from "../ui/card"
 
 type VacancyCardSmallProps = Omit<HTMLAttributes<HTMLDivElement>, "id"> &
-  Pick<IVacancy, "description" | "direction" | "skills" | "createWhen" | "id">
+  Pick<
+    IVacancy,
+    "description" | "direction" | "id" | "project" | "skills" | "createWhen"
+  >
 
 export function VacancyCardSmall(props: VacancyCardSmallProps) {
-  const { createWhen, description, direction, skills, id, className, ...rest } =
-    props
+  const {
+    createWhen,
+    description,
+    direction,
+    skills,
+    id,
+    project,
+    className,
+    ...rest
+  } = props
+
   const skillsString = skills.slice(0, 4).join(", ")
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader>
+      <CardHeader className="pb-3">
         <div>
           <CardTitle>
             <Link
-              href={`/resume/${id}`}
+              href={`/vacancy/${id}`}
               className={cn(
                 buttonVariants({ variant: "link" }),
                 "h-fit p-0 text-2xl"
               )}
             >
-              {direction}
+              {direction.description}
             </Link>
           </CardTitle>
           <CardDescription>
-            {dayjs.unix(createWhen).format("DD.MM.YYYY")}
+            {dayjs(createWhen).format("DD.MM.YYYY")}
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
+        <label className="text-xs text-muted-foreground">Навыки:</label>
+        <p>{trimLine(skillsString, 30)}</p>
+        <label className="text-xs text-muted-foreground">Описание:</label>
         <p>{trimLine(description, 60)}</p>
       </CardContent>
       <CardFooter>
-        <p>{trimLine(skillsString, 30)}</p>
+        <Link
+          href={`/project/${project.id}`}
+          className={cn(
+            buttonVariants({ variant: "link" }),
+            "h-fit p-0 text-2xl"
+          )}
+        >
+          <p className="text-sm">{project.title}</p>
+        </Link>
       </CardFooter>
     </Card>
   )
