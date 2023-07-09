@@ -3,7 +3,7 @@ import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 
-import { MainPagesHeader } from "../shared/components/main-pages-header"
+import { MainPagesHeader } from "../../../components/header/main-pages-header"
 
 function SettingsLayout({ children }: { children: ReactNode }) {
   return (

@@ -1,6 +1,6 @@
 "use client"
 
-import { useUser } from "../shared/hooks/useUser"
+import { useUser } from "../../../hooks/useUser"
 import {
   ProfileUserAbout,
   ProfileUserAvatar,

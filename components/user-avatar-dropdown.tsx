@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react"
 
 import { concatStrings } from "@/lib/concatStrings"
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
-import { useUser } from "@/app/(main)/shared/hooks/useUser"
+import { useUser } from "@/hooks/useUser"
 
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
