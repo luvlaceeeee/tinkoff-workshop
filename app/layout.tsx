@@ -38,10 +38,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <Providers attribute="class" defaultTheme="system" enableSystem>
-            {/* <LoaderScreen> */}
+            {/* <LoaderScreenScreen> */}
             {children}
             <Toaster />
-            {/* </LoaderScreen> */}
+            {/* </LoaderScreenScreen> */}
           </Providers>
         </body>
       </html>

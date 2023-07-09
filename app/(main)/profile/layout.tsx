@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import { MainPagesHeader } from "../shared/components/main-pages-header"
+import { MainPagesHeader } from "../../../components/header/main-pages-header"
 
 function ProfileLayout({ children }: { children: ReactNode }) {
   return (
