@@ -2,7 +2,7 @@ import { useContext } from "react"
 
 import { concatStrings } from "@/lib/concatStrings"
 
-import { UserContext } from "../page"
+import { UserContext } from "../context/UserContext"
 
 export function ProfileUserHeader() {
   const { name, surname, email } = useContext(UserContext)

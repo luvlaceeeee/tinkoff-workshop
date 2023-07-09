@@ -1,9 +1,5 @@
 "use client"
 
-import { createContext } from "react"
-
-import { IUser } from "@/types/interfaces/IUser"
-
 import { useUser } from "../shared/hooks/useUser"
 import {
   ProfileUserAbout,
@@ -14,20 +10,7 @@ import {
   ProfileUserResume,
 } from "./components"
 import { projectsMock, resumesMock, userMock } from "./config/mock"
-
-const initialContextValue: IUser = {
-  id: 0,
-  email: "",
-  password: "",
-  name: "",
-  surname: "",
-  picture: "",
-  description: "",
-  contacts: [],
-  createWhen: 0,
-}
-
-export const UserContext = createContext<IUser>(initialContextValue)
+import { UserContext } from "./context/UserContext"
 
 function ProfilePage() {
   const { contacts, description } = userMock

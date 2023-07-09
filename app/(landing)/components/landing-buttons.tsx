@@ -2,9 +2,10 @@ import Link from "next/link"
 import { getServerSession } from "next-auth"
 
 import { Button } from "@/components/ui/button"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
-export const LandingButtons = () => {
-  const session = getServerSession()
+export const LandingButtons = async () => {
+  const session = await getServerSession(authOptions)
   const redirectLink = !session ? "/searchTeam" : "/login"
 
   return (

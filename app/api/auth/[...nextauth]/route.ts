@@ -42,6 +42,7 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (!!user) {
         return { ...user }
+        //@ts-ignore
       } else if (Date.now() < token.expires_in) {
         return token
       } else {
