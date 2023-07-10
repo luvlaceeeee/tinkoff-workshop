@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export const LandingButtons = async () => {
   const session = await getServerSession(authOptions)
-  const redirectLink = !session ? "/searchTeam" : "/login"
+  const redirectLink = !session ? "/login" : "/searchTeam"
 
   return (
     <div className="space-x-4">

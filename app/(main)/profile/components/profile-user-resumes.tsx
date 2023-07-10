@@ -1,4 +1,9 @@
+"use client"
+
+import { useQuery } from "@tanstack/react-query"
+
 import { IResume } from "@/types/interfaces/IResume"
+import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 
@@ -7,6 +12,12 @@ interface ProfileUserResumeProps {
 }
 
 export function ProfileUserResume({ resumes }: ProfileUserResumeProps) {
+  const { data, isLoading } = useQuery(["user-resumes"], () =>
+    $api.get("/resumes/users").then((res) => res.data)
+  )
+
+  if (isLoading) return <div>Loading</div>
+
   return (
     <div>
       <h2 className="text-3xl font-semibold transition-colors">

@@ -13,7 +13,7 @@ export function MainResumes() {
         </h2>
         <div className="space-x-3">
           <Button variant={"main"} asChild>
-            <Link href={"/createResume"}>Создать резюме</Link>
+            <Link href={"/create/resume"}>Создать резюме</Link>
           </Button>
           <Button variant={"secondary"} asChild>
             <Link href={"/searchResume"}>Смотреть все резюме</Link>

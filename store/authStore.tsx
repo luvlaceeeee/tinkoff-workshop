@@ -10,7 +10,7 @@ const mockUser: IUser = {
   surname: "Doe",
   picture:
     "https://sun9-31.userapi.com/impg/isjEmyfk5Q2x-oPznsh5pDiktKy8WXSCzKYwfw/cejg6hJfz5A.jpg?size=736x736&quality=95&sign=f9c18865eed5d6aa2182344ee6248cbd&type=album",
-  description: "Experienced software engineer with a passion for coding.",
+  mainInformation: "Experienced software engineer with a passion for coding.",
   contacts: ["https://github.com/luvlaceeeee", "https://t.me/luv044"],
   createWhen: 1678924800, // Example epoch timestamp (March 17, 2023)
 }

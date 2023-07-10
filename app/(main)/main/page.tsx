@@ -1,3 +1,5 @@
+"use client"
+
 import { MainResumes } from "./components/main-resume"
 import { MainVacancies } from "./components/main-vacancies"
 

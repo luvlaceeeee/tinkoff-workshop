@@ -42,7 +42,7 @@ export function HeaderNavigationMenu() {
           <NavigationMenuTrigger>Создать</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <ListItem href="/createResume" title="Резюме">
+              <ListItem href="/create/resume" title="Резюме">
                 Найдите подходящую команду, создав новое резюме
               </ListItem>
               <ListItem href="/createVacancy" title="Вакансию">

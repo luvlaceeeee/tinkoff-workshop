@@ -39,7 +39,9 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
     resolver: zodResolver(userProfileSchema),
     defaultValues: {
       mainInformation: user.mainInformation ?? "",
-      contacts: user.contacts.map((contact) => ({ value: contact })) ?? [],
+      contacts: user.contacts
+        ? user.contacts.map((contact) => ({ value: contact }))
+        : [],
       name: user.name,
       surname: user.surname,
     },
