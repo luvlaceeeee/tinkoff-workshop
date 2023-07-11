@@ -1,8 +1,11 @@
+import { IUser } from "./IUser"
+
 export interface IResume {
   id: number
-  direction: string
+  direction: { directionName: string; description: string }
   description: string
   isActive: boolean
   skills: string[]
-  createWhen: EpochTimeStamp
+  createdWhen: EpochTimeStamp
+  user: IUser[]
 }

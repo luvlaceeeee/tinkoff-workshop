@@ -7,5 +7,5 @@ export interface IUser {
   picture: string
   mainInformation: string
   contacts: string[]
-  createWhen: EpochTimeStamp
+  createdWhen: EpochTimeStamp
 }

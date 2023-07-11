@@ -19,12 +19,12 @@ import {
 type VacancyCardSmallProps = Omit<HTMLAttributes<HTMLDivElement>, "id"> &
   Pick<
     IVacancy,
-    "description" | "direction" | "id" | "project" | "skills" | "createWhen"
+    "description" | "direction" | "id" | "project" | "skills" | "createdWhen"
   >
 
 export function VacancyCardSmall(props: VacancyCardSmallProps) {
   const {
-    createWhen,
+    createdWhen,
     description,
     direction,
     skills,
@@ -52,7 +52,7 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
             </Link>
           </CardTitle>
           <CardDescription>
-            {dayjs(createWhen).format("DD.MM.YYYY")}
+            {dayjs.unix(createdWhen).format("DD.MM.YYYY в HH:mm")}
           </CardDescription>
         </div>
       </CardHeader>

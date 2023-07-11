@@ -8,5 +8,5 @@ export interface IVacancy {
   description: string
   skills: string[]
   isVisible: boolean
-  createWhen: EpochTimeStamp
+  createdWhen: EpochTimeStamp
 }

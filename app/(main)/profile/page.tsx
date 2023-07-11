@@ -11,7 +11,7 @@ import {
   ProfileUserResume,
 } from "./components"
 import { ProfileLoading } from "./components/profile-loader"
-import { projectsMock, resumesMock } from "./config/mock"
+import { projectsMock } from "./config/mock"
 import { UserContext } from "./context/UserContext"
 
 function ProfilePage() {
@@ -30,7 +30,7 @@ function ProfilePage() {
           <ProfileUserContacts className="flex-1" />
           <ProfileUserAbout className="flex-1" />
         </section>
-        <ProfileUserResume resumes={resumesMock} />
+        <ProfileUserResume />
         <ProfileUserProjects projects={projectsMock} />
       </section>
     </UserContext.Provider>

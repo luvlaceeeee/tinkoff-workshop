@@ -12,7 +12,7 @@ function ResumesLayout({ children }: { children: ReactNode }) {
           <Link href={"/create/resume"}>Создать резюме</Link>
         </Button>
       </MainPagesHeader>
-      <div className="flex-col gap-5 pt-5">{children}</div>
+      <div className="pt-5">{children}</div>
     </div>
   )
 }

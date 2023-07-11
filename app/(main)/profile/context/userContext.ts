@@ -11,7 +11,7 @@ const initialContextValue: IUser = {
   picture: "",
   mainInformation: "",
   contacts: [],
-  createWhen: 0,
+  createdWhen: 0,
 }
 
 export const UserContext = createContext<IUser>(initialContextValue)

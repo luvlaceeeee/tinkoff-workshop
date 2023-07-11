@@ -5,5 +5,5 @@ export interface IProject {
   theme: string
   description: string
   status: "In Progress" | "Completed" | "On Hold"
-  createWhen: EpochTimeStamp
+  createdWhen: EpochTimeStamp
 }

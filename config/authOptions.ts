@@ -1,7 +1,7 @@
+import { redirect } from "next/navigation"
 import axios from "axios"
 import { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { signIn, signOut } from "next-auth/react"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -56,8 +56,7 @@ export const authOptions: AuthOptions = {
             refresh_token: tokens.refresh_token ?? token.refresh_token,
           }
         } catch (e) {
-          signOut()
-          signIn()
+          redirect("/")
           return { ...token, error: "RefreshAccessTokenError" as const }
         }
       }
