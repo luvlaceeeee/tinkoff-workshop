@@ -31,7 +31,7 @@ import {
 } from "../types/userProfileSchema"
 
 interface ProfileEditFormProps {
-  user: IUser
+  user: Omit<IUser, "resumes" | "projects">
 }
 
 export function ProfileEditForm({ user }: ProfileEditFormProps) {

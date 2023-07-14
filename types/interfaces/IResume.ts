@@ -7,5 +7,5 @@ export interface IResume {
   isActive: boolean
   skills: string[]
   createdWhen: EpochTimeStamp
-  user: IUser[]
+  user: Omit<IUser, "resumes" | "projects">
 }

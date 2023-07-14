@@ -4,19 +4,19 @@ import Link from "next/link"
 import { Carousel } from "@mantine/carousel"
 import { useQuery } from "@tanstack/react-query"
 
-import { IResume } from "@/types/interfaces/IResume"
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 
+import { IResumesSearchResponse } from "../../search/resumes/types/IResumesSearchResponse"
 import { CarouselLoader } from "./carousel-loader"
 
 export function MainResumeCarousel() {
-  const { data: resumes = [], isLoading } = useQuery(
+  const { data: resumes = { content: [] }, isLoading } = useQuery(
     ["10-resumes"],
     () =>
       $api
-        .get<IResume[]>("resumes/search", {
+        .get<IResumesSearchResponse>("resumes/search", {
           params: { page: 0, size: 10, dateSort: "DESC" },
         })
         .then((res) => res.data),
@@ -46,20 +46,22 @@ export function MainResumeCarousel() {
         { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
       ]}
     >
-      {resumes.map(({ description, direction, skills, createdWhen, id }) => (
-        <Carousel.Slide key={generateKey("resume-card")}>
-          <ResumeCardSmall
-            className="h-[250px]"
-            direction={direction}
-            createdWhen={createdWhen}
-            description={description}
-            skills={skills}
-            id={id}
-          />
-        </Carousel.Slide>
-      ))}
+      {resumes.content.map(
+        ({ description, direction, skills, createdWhen, id }) => (
+          <Carousel.Slide key={generateKey("resume-card")}>
+            <ResumeCardSmall
+              className="h-[250px]"
+              direction={direction}
+              createdWhen={createdWhen}
+              description={description}
+              skills={skills}
+              id={id}
+            />
+          </Carousel.Slide>
+        )
+      )}
       <Carousel.Slide>
-        <Link href={"/searchResume"}>
+        <Link href={"/search/resumes"}>
           <div className="flex h-full items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground">
             <p className="font-semibold">Смотреть все резюме</p>
           </div>

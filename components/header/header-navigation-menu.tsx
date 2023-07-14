@@ -29,10 +29,10 @@ export function HeaderNavigationMenu() {
           <NavigationMenuTrigger>Найти</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <ListItem href="/searchVacancy" title="Команду">
+              <ListItem href="/search/vacancies" title="Команду">
                 Список активных вакансий
               </ListItem>
-              <ListItem href="/searchResume" title="Разработчика">
+              <ListItem href="/search/resumes" title="Разработчика">
                 Список активных резюме
               </ListItem>
             </ul>

@@ -1,9 +1,11 @@
 "use client"
 
+import { Fragment } from "react"
 import { useQuery } from "@tanstack/react-query"
 
 import { IResume } from "@/types/interfaces/IResume"
 import $api from "@/config/axios"
+import { generateKey } from "@/lib/generateKey"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { ResumeCard } from "./components/resume-card"
@@ -16,8 +18,11 @@ function ResumesPage() {
   if (isLoading)
     return (
       <div className="space-y-4">
-        {[...new Array(3)].map(() => (
-          <Skeleton className="h-60 w-full rounded-2xl" />
+        {[...new Array(2)].map(() => (
+          <Skeleton
+            key={generateKey("skeleton")}
+            className="h-60 w-full rounded-2xl"
+          />
         ))}
       </div>
     )
@@ -25,7 +30,9 @@ function ResumesPage() {
   return resumes.length ? (
     <div className="space-y-4">
       {resumes.map((resume) => (
-        <ResumeCard {...resume} />
+        <Fragment key={resume.id}>
+          <ResumeCard {...resume} />
+        </Fragment>
       ))}
     </div>
   ) : (

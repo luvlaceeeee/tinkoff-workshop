@@ -6,7 +6,7 @@ type Direction = { directionName: string; description: string }
 
 export const useDirection = (options?: UseQueryOptions<Direction[]>) => {
   return useQuery<Direction[]>(
-    ["directions"],
+    ["resume-directions"],
     () =>
       $api
         .get<Direction[]>("dictionaries/directions/resumes")

@@ -58,7 +58,7 @@ export function MainVacancyCarousel() {
         </Carousel.Slide>
       ))}
       <Carousel.Slide>
-        <Link href={"/searchVacancy"}>
+        <Link href={"/search/vacancies"}>
           <div className="flex h-full items-center justify-center rounded-2xl bg-muted/50 text-muted-foreground/50 transition-colors hover:bg-muted hover:text-muted-foreground">
             <p className="font-semibold">Смотреть все резюме</p>
           </div>

@@ -16,7 +16,7 @@ export function MainResumes() {
             <Link href={"/create/resume"}>Создать резюме</Link>
           </Button>
           <Button variant={"secondary"} asChild>
-            <Link href={"/searchResume"}>Смотреть все резюме</Link>
+            <Link href={"/search/resumes"}>Смотреть все резюме</Link>
           </Button>
         </div>
       </div>

@@ -11,11 +11,11 @@ export const siteConfig = {
     },
     {
       title: "Поиск команды",
-      href: "/searchTeam",
+      href: "/search/vacancies",
     },
     {
       title: "Создать команду",
-      href: "/createTeam",
+      href: "/create/project",
     },
   ],
 }

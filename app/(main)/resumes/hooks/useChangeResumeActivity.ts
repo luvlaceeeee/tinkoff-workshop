@@ -14,6 +14,7 @@ export const useChangeResumeActivity = (id: number, directionName: string) => {
         toast({
           variant: "accept",
           title: `Резюме ${directionName} обновлено`,
+          description: "",
         })
       },
     }

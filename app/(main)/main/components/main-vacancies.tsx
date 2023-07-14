@@ -15,10 +15,10 @@ export function MainVacancies() {
         </h2>
         <div className="space-x-3">
           <Button variant={"main"} asChild>
-            <Link href={"/createVacancy"}>Создать вакансию</Link>
+            <Link href={"/create/vacancy"}>Создать вакансию</Link>
           </Button>
           <Button variant={"secondary"} asChild>
-            <Link href={"/searchVacancy"}>Смотреть все вакансию</Link>
+            <Link href={"/search/vacancies"}>Смотреть все вакансию</Link>
           </Button>
         </div>
       </div>

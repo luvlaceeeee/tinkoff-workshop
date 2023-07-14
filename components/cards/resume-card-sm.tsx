@@ -3,6 +3,7 @@ import Link from "next/link"
 import dayjs from "dayjs"
 
 import { IResume } from "@/types/interfaces/IResume"
+import { skillMap } from "@/lib/skillMap"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
@@ -33,7 +34,7 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
   const skillsString = skills
     ? skills
         .slice(0, 4)
-        .map((skill) => skill[0].toUpperCase() + skill.slice(1))
+        .map((skill) => skillMap(skill))
         .join(", ")
     : ""
 
@@ -60,7 +61,7 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
       <CardContent>
         <label className="text-xs text-muted-foreground">Описание:</label>
         {description && description.trim() ? (
-          <p>{trimLine(description.trim(), 60)}</p>
+          <p>{trimLine(description.trim(), 100)}</p>
         ) : (
           <p className="text-sm">Отсутствует</p>
         )}

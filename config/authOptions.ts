@@ -56,6 +56,7 @@ export const authOptions: AuthOptions = {
             refresh_token: tokens.refresh_token ?? token.refresh_token,
           }
         } catch (e) {
+          console.log("error")
           redirect("/")
           return { ...token, error: "RefreshAccessTokenError" as const }
         }

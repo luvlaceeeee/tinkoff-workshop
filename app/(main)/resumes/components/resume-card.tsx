@@ -2,6 +2,8 @@ import Link from "next/link"
 import dayjs from "dayjs"
 
 import { IResume } from "@/types/interfaces/IResume"
+import { generateKey } from "@/lib/generateKey"
+import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 
@@ -47,8 +49,11 @@ export function ResumeCard(props: IResume) {
         </h2>
         <div className="flex gap-2 pt-1">
           {skills.map((skill) => (
-            <p className="rounded-xl border p-2 px-3 text-sm">
-              {skill[0].toUpperCase() + skill.slice(1)}
+            <p
+              key={generateKey(skill)}
+              className="rounded-xl border p-2 px-3 text-sm"
+            >
+              {skillMap(skill)}
             </p>
           ))}
         </div>

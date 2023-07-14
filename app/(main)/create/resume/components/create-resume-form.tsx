@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
 
 import { skills } from "@/config/skills"
+import { generateKey } from "@/lib/generateKey"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -32,8 +33,8 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 
+import { useDirection } from "../../../../../hooks/useDirection"
 import { useCreateResume } from "../hooks/useCreateResume"
-import { useDirection } from "../hooks/useDirection"
 import { ResumeSchema, resumeSchema } from "../types/resumeSchema"
 
 export function CreateResumeForm() {
@@ -103,6 +104,7 @@ export function CreateResumeForm() {
                   ) : directions.length ? (
                     directions.map((direction) => (
                       <SelectItem
+                        key={generateKey(direction.directionName)}
                         className="rounded-xl"
                         value={direction.directionName}
                       >

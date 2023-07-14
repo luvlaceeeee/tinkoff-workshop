@@ -12,7 +12,7 @@ export const useRegister = () => {
   //TODO Вынести как-то юрл бека
   return useMutation({
     mutationFn: (initial: IRegisterRequest) =>
-      axios.post("http://localhost:8080/register", initial),
+      axios.post("http://localhost:8080/api/v1/users/register", initial),
     onSuccess: () => {
       toast({
         variant: "accept",

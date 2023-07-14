@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { Dispatch, SetStateAction } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 
@@ -7,21 +7,22 @@ import $api from "@/config/axios"
 import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/components/providers"
 
-import { ICreateResumeRequest } from "../types/ICreateResumeRequest"
+import { ICreateResumeRequest } from "../../create/resume/types/ICreateResumeRequest"
 
-export const useCreateResume = () => {
-  const router = useRouter()
+export const useUpdateResume = (
+  id: number,
+  setOpen: Dispatch<SetStateAction<boolean>>
+) => {
   return useMutation({
     mutationFn: (initial: ICreateResumeRequest) =>
-      $api.post("/resumes", initial),
+      $api.patch(`/resumes/${id}`, initial),
     onSuccess: () => {
       toast({
         variant: "accept",
-        title: "Резюме создано!",
-        description: "Теперь оно видно в поиске",
+        title: "Резюме обновлено",
       })
       queryClient.invalidateQueries(["user-resumes"])
-      router.push("/resumes")
+      setOpen(false)
     },
     onError: (error: AxiosError<IErrorResponse>) =>
       toast({

@@ -5,6 +5,7 @@ import { useFieldArray, useForm } from "react-hook-form"
 
 import { IResume } from "@/types/interfaces/IResume"
 import { skills } from "@/config/skills"
+import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
@@ -40,21 +41,16 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 
-import { useDirection } from "../../create/resume/hooks/useDirection"
+import { useDirection } from "../../../../hooks/useDirection"
 import {
   ResumeSchema,
   resumeSchema,
 } from "../../create/resume/types/resumeSchema"
+import { useUpdateResume } from "../hooks/useUpdateResume"
 
 export function ChangeResumeDialog(props: IResume) {
-  const {
-    direction,
-    isActive,
-    createdWhen,
-    skills: initialSkills,
-    description,
-    id,
-  } = props
+  const { direction, skills: initialSkills, description, id } = props
+
   const [open, setOpen] = useState(false)
 
   const form = useForm<ResumeSchema>({
@@ -62,10 +58,10 @@ export function ChangeResumeDialog(props: IResume) {
     defaultValues: {
       addSkills: "",
       description: description,
-      direction: direction.directionName,
       skills: initialSkills.map((skill) => ({
         value: skill,
       })),
+      direction: direction.directionName,
     },
     mode: "onSubmit",
   })
@@ -81,17 +77,20 @@ export function ChangeResumeDialog(props: IResume) {
     refetch,
   } = useDirection({ enabled: false })
 
+  const { mutate, isLoading } = useUpdateResume(id, setOpen)
+
   function onSubmit(values: ResumeSchema) {
     const queryData = {
       skills: values.skills?.map((skill) => skill.value.toLowerCase()),
       description: values.description,
       direction: values.direction,
     }
-    console.log(queryData)
+    mutate(queryData)
   }
 
   //For popover
   const [skillsSearch, setSkillsSearch] = useState(skills)
+
   useEffect(() => {
     const searchValue = form.watch("addSkills")
     setSkillsSearch(
@@ -107,7 +106,7 @@ export function ChangeResumeDialog(props: IResume) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className={cn(buttonVariants({ variant: "outline" }))}>
-        Редактировать
+        Редактировать информацию
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -129,11 +128,13 @@ export function ChangeResumeDialog(props: IResume) {
                   <FormLabel>Направление</FormLabel>
                   <Select
                     onValueChange={field.onChange}
-                    onOpenChange={() => !directions.length && refetch()}
+                    onOpenChange={() => refetch()}
                   >
                     <FormControl>
                       <SelectTrigger className="rounded-2xl">
-                        <SelectValue placeholder="Выберите ваше направление" />
+                        <SelectValue
+                          placeholder={"Выберите новое направление"}
+                        />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="rounded-2xl">
@@ -239,7 +240,7 @@ export function ChangeResumeDialog(props: IResume) {
                 </FormItem>
               )}
             />
-            <div className="flex flex-wrap gap-3">
+            <div className="scrollbar flex max-h-56 flex-wrap gap-3 overflow-y-auto">
               {fields.map((field, index) => (
                 <FormField
                   control={form.control}
@@ -251,7 +252,7 @@ export function ChangeResumeDialog(props: IResume) {
                         <FormControl>
                           {/* <Input placeholder="Навык" {...field} disabled={true} /> */}
                           <p className="rounded-xl border p-2 px-3 text-sm">
-                            {field.value}
+                            {skillMap(field.value)}
                           </p>
                         </FormControl>
                         <Button
@@ -287,13 +288,19 @@ export function ChangeResumeDialog(props: IResume) {
                 </FormItem>
               )}
             />
+            <DialogFooter>
+              <Button
+                className="w-full"
+                type="submit"
+                variant={"main"}
+                loading={isLoading}
+                disabled={isLoading || !form.formState.isDirty}
+              >
+                Обновить резюме
+              </Button>
+            </DialogFooter>
           </form>
         </Form>
-        <DialogFooter>
-          <Button className="w-full" type="submit" variant={"main"}>
-            Обновить резюме
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
