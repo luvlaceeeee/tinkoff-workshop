@@ -1,7 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { useUserStore } from "@/store/userStore"
+import { useMutation } from "@tanstack/react-query"
 
+import $api from "@/config/axios"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
@@ -16,9 +19,19 @@ import {
 import { Input } from "@/components/ui/input"
 
 export function ChangeAvatarDialog() {
+  const { id } = useUserStore((state) => state.user)
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState("")
-  console.log(file)
+  const { mutate, isLoading } = useMutation(
+    ["change-avatar"],
+    () => $api.post(`/avatar/${id}`, { file }),
+    {
+      onSuccess: () => {
+        setOpen(false)
+        setFile("")
+      },
+    }
+  )
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className={cn(buttonVariants({ variant: "main" }))}>
@@ -37,9 +50,10 @@ export function ChangeAvatarDialog() {
         <DialogFooter>
           <Button
             onClick={() => {
-              setOpen(false)
-              setFile("")
+              mutate()
             }}
+            loading={isLoading}
+            disabled={isLoading}
           >
             Сохранить фото
           </Button>

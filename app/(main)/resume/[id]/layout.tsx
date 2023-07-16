@@ -11,7 +11,7 @@ import { BackButton } from "@/components/back-button"
 import { MainPagesHeader } from "@/components/header/main-pages-header"
 import { Icons } from "@/components/icons"
 
-import { useResume } from "../hooks/useResume"
+import { useResumeById } from "../hooks/useResumeById"
 
 export default function ResumeLayout({
   params,
@@ -20,7 +20,7 @@ export default function ResumeLayout({
   params: { id: string }
   children: ReactNode
 }) {
-  const { data: resume = {} as IResume, isLoading } = useResume(+params.id)
+  const { data: resume = {} as IResume, isLoading } = useResumeById(+params.id)
   const user = useUserStore((state) => state.user)
 
   if (isLoading)
@@ -38,7 +38,7 @@ export default function ResumeLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          {user.resumes.some((resume) => resume.id !== +params.id) ? (
+          {user.id !== resume.user.id ? (
             <Button variant={"main"}>Отправить запрос</Button>
           ) : (
             <Button variant={"main"} asChild>

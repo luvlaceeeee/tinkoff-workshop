@@ -9,16 +9,13 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 
-import { UserContext } from "../context/UserContext"
+import { ProfileContext } from "../context/ProfileContext"
 import { DeleteAccountDialog } from "./delete-account-dialog"
 
 type ProfileUserAvatarProps = HTMLAttributes<HTMLElement>
 
-export function ProfileUserAvatar({
-  className,
-  ...props
-}: ProfileUserAvatarProps) {
-  const { name, surname, picture } = useContext(UserContext)
+export function ProfileAvatar({ className, ...props }: ProfileUserAvatarProps) {
+  const { name, surname, picture } = useContext(ProfileContext)
   return (
     <section
       className={cn("flex flex-col items-center gap-3", className)}

@@ -4,10 +4,10 @@ import { useContext } from "react"
 
 import { concatStrings } from "@/lib/concatStrings"
 
-import { UserContext } from "../context/UserContext"
+import { ProfileContext } from "../context/ProfileContext"
 
-export function ProfileUserHeader() {
-  const { name, surname, email } = useContext(UserContext)
+export function ProfileHeader() {
+  const { name, surname, email } = useContext(ProfileContext)
   return (
     <header className="space-y-1">
       <h1 className="text-4xl font-bold transition-colors">

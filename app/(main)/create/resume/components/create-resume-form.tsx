@@ -7,6 +7,7 @@ import { useFieldArray, useForm } from "react-hook-form"
 
 import { skills } from "@/config/skills"
 import { generateKey } from "@/lib/generateKey"
+import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -33,7 +34,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 
-import { useDirection } from "../../../../../hooks/useDirection"
+import { useResumeDirection } from "../../../../../hooks/useResumeDirection"
 import { useCreateResume } from "../hooks/useCreateResume"
 import { ResumeSchema, resumeSchema } from "../types/resumeSchema"
 
@@ -53,7 +54,7 @@ export function CreateResumeForm() {
     data: directions = [],
     isLoading: isDirectionLoading,
     refetch,
-  } = useDirection({ enabled: false })
+  } = useResumeDirection({ enabled: false })
 
   const { mutate, isLoading } = useCreateResume()
 
@@ -63,6 +64,7 @@ export function CreateResumeForm() {
       description: values.description,
       direction: values.direction,
     }
+    console.log(queryData)
     mutate(queryData)
   }
 
@@ -163,7 +165,7 @@ export function CreateResumeForm() {
                                 form.resetField("addSkills")
                               }}
                             >
-                              {skill}
+                              {skillMap(skill)}
                             </Button>
                           </li>
                         ))}
@@ -208,7 +210,7 @@ export function CreateResumeForm() {
                     <FormControl>
                       {/* <Input placeholder="Навык" {...field} disabled={true} /> */}
                       <p className="rounded-xl border p-2 px-3 text-sm">
-                        {field.value}
+                        {skillMap(field.value)}
                       </p>
                     </FormControl>
                     <Button

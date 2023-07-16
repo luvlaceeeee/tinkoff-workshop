@@ -1,4 +1,4 @@
-const noUpperSkills = ["java", "go", "dart"]
+const noUpperSkills = ["java", "go", "dart", "ruby", "rust"]
 
 export const skillMap = (value: string) => {
   if (value.length < 5 && !noUpperSkills.includes(value))

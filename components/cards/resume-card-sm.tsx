@@ -1,8 +1,8 @@
 import { HTMLAttributes } from "react"
 import Link from "next/link"
-import dayjs from "dayjs"
 
 import { IResume } from "@/types/interfaces/IResume"
+import { convertDate } from "@/lib/convertDate"
 import { skillMap } from "@/lib/skillMap"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
@@ -53,9 +53,7 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
               {direction.description}
             </Link>
           </CardTitle>
-          <CardDescription>
-            {dayjs.unix(createdWhen).format("DD.MM.YYYY в HH:mm")}
-          </CardDescription>
+          <CardDescription>{convertDate(createdWhen)}</CardDescription>
         </div>
       </CardHeader>
       <CardContent>

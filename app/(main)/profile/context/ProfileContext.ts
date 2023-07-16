@@ -2,7 +2,7 @@ import { createContext } from "react"
 
 import { IUser } from "@/types/interfaces/IUser"
 
-const initialContextValue: Omit<IUser, "resumes" | "projects"> = {
+const initialContextValue: Omit<IUser, "projects"> = {
   id: 0,
   email: "",
   name: "",
@@ -11,7 +11,8 @@ const initialContextValue: Omit<IUser, "resumes" | "projects"> = {
   mainInformation: "",
   contacts: [],
   createdWhen: 0,
+  resumes: [],
 }
 
-export const UserContext =
-  createContext<Omit<IUser, "resumes" | "projects">>(initialContextValue)
+export const ProfileContext =
+  createContext<Omit<IUser, "projects">>(initialContextValue)

@@ -1,18 +1,18 @@
 "use client"
 
 import { useUser } from "@/hooks/useUser"
-
 import {
-  ProfileUserAbout,
-  ProfileUserAvatar,
-  ProfileUserContacts,
-  ProfileUserHeader,
-  ProfileUserProjects,
-  ProfileUserResume,
-} from "./components"
+  ProfileAbout,
+  ProfileAvatar,
+  ProfileContacts,
+  ProfileHeader,
+  ProfileProjects,
+  ProfileResume,
+} from "@/app/(main)/profile/components"
+import { projectsMock } from "@/app/(main)/profile/config/mock"
+import { ProfileContext } from "@/app/(main)/profile/context/ProfileContext"
+
 import { ProfileLoading } from "./components/profile-loader"
-import { projectsMock } from "./config/mock"
-import { UserContext } from "./context/UserContext"
 
 function ProfilePage() {
   const { data: user, isLoading, error } = useUser()
@@ -22,18 +22,18 @@ function ProfilePage() {
   if (!user) return <div>{error.response?.data.message}</div>
 
   return (
-    <UserContext.Provider value={user}>
-      <ProfileUserAvatar />
+    <ProfileContext.Provider value={user}>
+      <ProfileAvatar />
       <section className="flex w-full flex-col gap-5">
-        <ProfileUserHeader />
+        <ProfileHeader />
         <section className="flex justify-between gap-6 border-b pb-4">
-          <ProfileUserContacts className="flex-1" />
-          <ProfileUserAbout className="flex-1" />
+          <ProfileContacts className="flex-1" />
+          <ProfileAbout className="flex-1" />
         </section>
-        <ProfileUserResume />
-        <ProfileUserProjects projects={projectsMock} />
+        <ProfileResume />
+        <ProfileProjects projects={projectsMock} />
       </section>
-    </UserContext.Provider>
+    </ProfileContext.Provider>
   )
 }
 

@@ -5,15 +5,15 @@ import { generateKey } from "@/lib/generateKey"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
-import { UserContext } from "../context/UserContext"
+import { ProfileContext } from "../context/ProfileContext"
 
 type ProfileUserContactsProps = HTMLAttributes<HTMLDivElement>
 
-export function ProfileUserContacts({
+export function ProfileContacts({
   className,
   ...props
 }: ProfileUserContactsProps) {
-  const { contacts = [] } = useContext(UserContext)
+  const { contacts = [] } = useContext(ProfileContext)
   return (
     <div className={cn("space-y-2", className)} {...props}>
       <h2 className="text-3xl font-semibold transition-colors">Контакты</h2>

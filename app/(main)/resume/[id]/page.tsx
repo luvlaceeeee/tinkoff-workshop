@@ -5,10 +5,10 @@ import { skillMap } from "@/lib/skillMap"
 import { Separator } from "@/components/ui/separator"
 import { UserProfileSmall } from "@/components/user-profile-sm"
 
-import { useResume } from "../hooks/useResume"
+import { useResumeById } from "../hooks/useResumeById"
 
 export default function ResumePage({ params }: { params: { id: string } }) {
-  const { data: resume = {} as IResume } = useResume(+params.id)
+  const { data: resume = {} as IResume } = useResumeById(+params.id)
   return (
     <div className="flex justify-between gap-5">
       <div className="flex flex-1 flex-col gap-5 border-r">

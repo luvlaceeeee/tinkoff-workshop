@@ -48,7 +48,7 @@ export function UserProfileSmall(props: UserProfileSmall) {
         </section>
         <section>
           <h2 className="text-2xl font-semibold transition-colors">Контакты</h2>
-          {contacts.length ? (
+          {contacts ? (
             contacts.map((contact) => (
               <ul className="ml-6 list-disc [&>li]:mt-2">
                 <li key={generateKey("li")}>
@@ -69,7 +69,7 @@ export function UserProfileSmall(props: UserProfileSmall) {
             <p className="text-sm text-muted-foreground">Отсутствуют</p>
           )}
         </section>
-        <section className="space-y-2">
+        <section>
           <h2 className="text-2xl font-semibold transition-colors">О себе</h2>
           {mainInformation ? (
             <p className="text-sm">{mainInformation}</p>

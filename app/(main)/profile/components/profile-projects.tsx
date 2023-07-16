@@ -6,7 +6,7 @@ interface ProfileUserResumeProps {
   projects: IProject[]
 }
 
-export function ProfileUserProjects({ projects }: ProfileUserResumeProps) {
+export function ProfileProjects({ projects }: ProfileUserResumeProps) {
   return (
     <div>
       <h2 className="text-3xl font-semibold transition-colors">

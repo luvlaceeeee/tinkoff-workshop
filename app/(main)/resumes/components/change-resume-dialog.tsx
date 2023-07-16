@@ -41,7 +41,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 
-import { useDirection } from "../../../../hooks/useDirection"
+import { useResumeDirection } from "../../../../hooks/useResumeDirection"
 import {
   ResumeSchema,
   resumeSchema,
@@ -75,7 +75,7 @@ export function ChangeResumeDialog(props: IResume) {
     data: directions = [],
     isLoading: isDirectionLoading,
     refetch,
-  } = useDirection({ enabled: false })
+  } = useResumeDirection({ enabled: false })
 
   const { mutate, isLoading } = useUpdateResume(id, setOpen)
 

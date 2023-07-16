@@ -5,13 +5,14 @@ import { IUser } from "@/types/interfaces/IUser"
 const initialContextValue: IUser = {
   id: 0,
   email: "",
-  password: "",
   name: "",
   surname: "",
   picture: "",
-  description: "",
+  mainInformation: "",
   contacts: [],
-  createWhen: 0,
+  createdWhen: 0,
+  resumes: [],
+  projects: [],
 }
 
-export const UserContext = createContext<IUser>(initialContextValue)
+export const UserProfileContext = createContext<IUser>(initialContextValue)
