@@ -3,9 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
 
-import { IResume } from "@/types/interfaces/IResume"
+import { IVacancy } from "@/types/interfaces/IVacancy"
+import { generateKey } from "@/lib/generateKey"
+import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
-import { useResumeDirection } from "@/hooks/useResumeDirection"
+import { useDirection } from "@/hooks/useDirection"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
@@ -34,21 +36,20 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 import { MultiSelectSkillsForm } from "@/components/multi-select-skills-form"
-import { SkillBadge } from "@/components/skill-badge"
 
 import {
-  ResumeSchema,
-  resumeSchema,
-} from "../../create/resume/types/resumeSchema"
-import { useUpdateResume } from "../hooks/useUpdateResume"
+  CreateVacancySchema,
+  createVacancySchema,
+} from "../create/types/createVacancySchema"
+import { useUpdateVacancy } from "../hooks/useUpdateVacancy"
 
-export function ChangeResumeDialog(props: IResume) {
+export function ChangeVacancyDialog(props: IVacancy) {
   const { direction, skills, description, id } = props
 
   const [open, setOpen] = useState(false)
 
-  const form = useForm<ResumeSchema>({
-    resolver: zodResolver(resumeSchema),
+  const form = useForm<CreateVacancySchema>({
+    resolver: zodResolver(createVacancySchema),
     defaultValues: {
       description: description,
       skills: skills.map((skill) => ({
@@ -65,11 +66,15 @@ export function ChangeResumeDialog(props: IResume) {
   })
 
   const { data: directions = [], isLoading: isDirectionLoading } =
-    useResumeDirection()
+    useDirection()
 
-  const { mutate, isLoading } = useUpdateResume(id, setOpen)
+  const { mutate, isLoading } = useUpdateVacancy(
+    id,
+    direction.directionName,
+    setOpen
+  )
 
-  function onSubmit(values: ResumeSchema) {
+  function onSubmit(values: CreateVacancySchema) {
     const queryData = {
       skills: values.skills?.map((skill) => skill.value.toLowerCase()),
       description: values.description,
@@ -104,41 +109,22 @@ export function ChangeResumeDialog(props: IResume) {
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="rounded-2xl">
-                        <SelectValue
-                          placeholder={"Выберите новое направление"}
-                        />
+                        <SelectValue placeholder="Выберите направление вакансии" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="rounded-2xl">
                       {isDirectionLoading ? (
                         <Icons.loader className="mx-auto h-7 w-7 fill-main" />
-                      ) : directions.length ? (
-                        <>
+                      ) : (
+                        directions.map((direction) => (
                           <SelectItem
+                            key={generateKey(direction.directionName)}
                             className="rounded-xl"
                             value={direction.directionName}
                           >
                             {direction.description}
                           </SelectItem>
-                          {directions.map((direction) => (
-                            <SelectItem
-                              className="rounded-xl"
-                              value={direction.directionName}
-                            >
-                              {direction.description}
-                            </SelectItem>
-                          ))}
-                        </>
-                      ) : (
-                        <span className="text-center text-sm">
-                          <p className="text-muted-foreground">
-                            Все направления заняты.
-                          </p>
-                          <p className="text-muted">
-                            Удалите прошлое резюме с желаемым направлением,
-                            чтобы создать новое.
-                          </p>
-                        </span>
+                        ))
                       )}
                     </SelectContent>
                   </Select>
@@ -146,16 +132,15 @@ export function ChangeResumeDialog(props: IResume) {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Об опыте разработки</FormLabel>
+                  <FormLabel>Описание вакансии</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Расскажите немного о опыте разработки в выбранном направлении"
+                      placeholder="Расскажите немного о том, чем предстоит заниматься"
                       className="resize-none rounded-2xl"
                       {...field}
                     />
@@ -165,7 +150,7 @@ export function ChangeResumeDialog(props: IResume) {
               )}
             />
 
-            <div className="scrollbar flex max-h-56 flex-wrap gap-3 overflow-y-auto">
+            <div className="flex flex-wrap gap-3">
               {fields.map((field, index) => (
                 <FormField
                   control={form.control}
@@ -175,16 +160,16 @@ export function ChangeResumeDialog(props: IResume) {
                     <FormItem>
                       <div className="flex items-center gap-1">
                         <FormControl>
-                          <SkillBadge skill={field.value} />
+                          <p className="rounded-xl border p-2 px-3 text-sm">
+                            {skillMap(field.value)}
+                          </p>
                         </FormControl>
                         <Button
                           type="button"
                           variant="outline"
                           className="shrink-0 border-destructive/50"
                           size="icon"
-                          onClick={() => {
-                            remove(index)
-                          }}
+                          onClick={() => remove(index)}
                         >
                           <X />
                         </Button>
@@ -215,9 +200,9 @@ export function ChangeResumeDialog(props: IResume) {
                 type="submit"
                 variant={"main"}
                 loading={isLoading}
-                disabled={isLoading || !form.formState.isDirty}
+                disabled={isLoading}
               >
-                Обновить резюме
+                {"Обновить вакансию"}
               </Button>
             </DialogFooter>
           </form>

@@ -17,7 +17,7 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <div className="scrollbar relative flex min-h-screen flex-col overflow-visible">
       <SiteHeader />
       <div className="container flex-1 pb-5 pt-5">{children}</div>
     </div>

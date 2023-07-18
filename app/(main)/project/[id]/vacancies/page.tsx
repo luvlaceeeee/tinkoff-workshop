@@ -1,11 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 
 import { VacancyCard } from "./components/vacancy-card"
 
@@ -14,28 +16,51 @@ export default function ProjectVacanciesPage({
 }: {
   params: { id: string }
 }) {
+  const [isVisible, setIsVisible] = useState(true)
+
   const { data: vacancies = [], isLoading } = useQuery(
-    ["project-vacancies", +params.id],
+    ["project-vacancies", +params.id, isVisible],
     () =>
       $api
         .get<IVacancy[]>(`positions/projects`, {
-          params: { projectId: params.id, isVisible: true },
+          params: { projectId: params.id, isVisible: isVisible },
         })
         .then((res) => res.data)
   )
 
-  if (isLoading) return <div>Loading</div>
-
   return (
     <div className="flex flex-col gap-5">
-      <Button variant={"main"}>
-        <Link href={`/project/${params.id}/vacancies/create`}>
-          Создать новую вакансию
-        </Link>
-      </Button>
-      {vacancies.map((vacancy) => (
-        <VacancyCard {...vacancy} />
-      ))}
+      <div className="flex items-center justify-between">
+        <div className="space-x-2">
+          <Button
+            variant={"outline"}
+            onClick={() => setIsVisible(true)}
+            disabled={isVisible}
+          >
+            Только активные
+          </Button>
+          <Button
+            variant={"outline"}
+            onClick={() => setIsVisible(false)}
+            disabled={!isVisible}
+          >
+            Только выключенные
+          </Button>
+        </div>
+        <Button variant={"main"}>
+          <Link href={`/project/${params.id}/vacancies/create`}>
+            Создать новую вакансию
+          </Link>
+        </Button>
+      </div>
+      {isLoading ? (
+        <>
+          <Separator className="h-64 rounded-2xl" />
+          <Separator className="h-64 rounded-2xl" />
+        </>
+      ) : (
+        vacancies.map((vacancy) => <VacancyCard {...vacancy} />)
+      )}
     </div>
   )
 }

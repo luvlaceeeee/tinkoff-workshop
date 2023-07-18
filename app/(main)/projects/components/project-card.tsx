@@ -6,6 +6,7 @@ import { statusMap } from "@/lib/statusMap"
 import { trimLine } from "@/lib/trimLine"
 import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
+import { AboutSection } from "@/components/sections/about-section"
 
 export function ProjectCard(
   props: Omit<
@@ -14,6 +15,7 @@ export function ProjectCard(
   >
 ) {
   const { title, theme, membersCount, status, createdWhen, id } = props
+
   return (
     <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
       <section className="flex items-center justify-between border-b pb-3">
@@ -27,16 +29,12 @@ export function ProjectCard(
         </div>
       </section>
 
-      <section>
-        <h2 className="text-xl font-semibold tracking-tight transition-colors">
-          Тема проекта
-        </h2>
-        {true ? (
-          <p className="pt-1">{trimLine(theme, 80)}</p>
-        ) : (
-          <p className="text-sm text-muted-foreground">Отсутствует</p>
-        )}
-      </section>
+      <AboutSection
+        title="Тема проекта"
+        description={trimLine(theme, 80)!}
+        titleSize="text-xl"
+        className="space-y-0"
+      />
 
       <section className="space-x-2">
         <h2 className="inline-block text-xl font-semibold tracking-tight transition-colors">

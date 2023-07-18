@@ -12,11 +12,9 @@ import { Button } from "./ui/button"
 export function MultiSelectSkillsForm({
   append,
   selected,
-  setSelected,
 }: {
   append: (value: { value: string }) => void
   selected: string[]
-  setSelected: React.Dispatch<React.SetStateAction<string[]>>
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null)
   const [open, setOpen] = React.useState(false)
@@ -26,16 +24,8 @@ export function MultiSelectSkillsForm({
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       const input = inputRef.current
       if (input) {
-        if (e.key === "Delete" || e.key === "Backspace") {
-          if (input.value === "") {
-            setSelected((prev) => {
-              const newSelected = [...prev]
-              newSelected.pop()
-              return newSelected
-            })
-          }
-        }
         if (e.key === "Escape") {
+          e.stopPropagation()
           input.blur()
         }
       }
@@ -70,7 +60,6 @@ export function MultiSelectSkillsForm({
               setInputValue("")
               if (!selected.includes(inputValue.toLocaleLowerCase()))
                 append({ value: inputValue.toLowerCase() })
-              setSelected((prev) => [...prev, inputValue])
             }}
           >
             Добавить
@@ -92,7 +81,6 @@ export function MultiSelectSkillsForm({
                     onSelect={(value) => {
                       setInputValue("")
                       if (!selected.includes(skill)) append({ value: skill })
-                      setSelected((prev) => [...prev, skill])
                     }}
                     className={`cursor-pointer `}
                   >

@@ -1,25 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { useQuery } from "@tanstack/react-query"
 import { Check } from "lucide-react"
 
-import { IProject } from "@/types/interfaces/IProject"
-import $api from "@/config/axios"
 import { Separator } from "@/components/ui/separator"
 import { Toggle } from "@/components/ui/toggle"
 
 import { ProjectCard } from "./components/project-card"
+import { useUserProjects } from "./hooks/useUserProjects"
 
 export default function ProjectsPage() {
   const [isLead, setIsLead] = useState(false)
-  const { data: projects = [], isLoading } = useQuery(
-    ["user-projects", isLead],
-    () =>
-      $api
-        .get<IProject[]>(`/projects`, { params: { lead: isLead } })
-        .then((res) => res.data)
-  )
+  const { data: projects = [], isLoading } = useUserProjects(isLead)
 
   const Loader = () => (
     <div className="grid h-72 grid-cols-2 gap-4">

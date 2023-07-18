@@ -3,6 +3,7 @@
 import { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useUserStore } from "@/store/userStore"
 
 import { IProject } from "@/types/interfaces/IProject"
 import { convertDate } from "@/lib/convertDate"
@@ -26,6 +27,8 @@ export default function ProjectLayout({
   )
   const pathname = usePathname()
 
+  const { id } = useUserStore((state) => state.user)
+
   if (isLoading)
     return (
       <div className="flex h-full w-full flex-col items-center justify-center gap-6 animate-in fade-in duration-500">
@@ -41,7 +44,9 @@ export default function ProjectLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          <LeaveProjectDialog title={project.title} projectId={project.id} />
+          {project.members.find((member) => member.userId === id) && (
+            <LeaveProjectDialog title={project.title} projectId={project.id} />
+          )}
           {project.isLeader && (
             <>
               <Button disabled={pathname === `/project/${params.id}/vacancies`}>

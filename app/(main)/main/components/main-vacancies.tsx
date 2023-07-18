@@ -15,7 +15,7 @@ export function MainVacancies() {
         </h2>
         <div className="space-x-3">
           <Button variant={"main"} asChild>
-            <Link href={"/create/vacancy"}>Создать вакансию</Link>
+            <Link href={"/projects/choose"}>Создать вакансию</Link>
           </Button>
           <Button variant={"secondary"} asChild>
             <Link href={"/search/vacancies"}>Смотреть все вакансию</Link>

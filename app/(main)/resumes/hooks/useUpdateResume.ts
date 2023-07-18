@@ -22,8 +22,9 @@ export const useUpdateResume = (
           variant: "accept",
           title: "Резюме обновлено",
         })
-        queryClient.invalidateQueries(["user-resumes"])
-        setOpen(false)
+        queryClient
+          .invalidateQueries(["user-resumes"])
+          .then(() => setOpen(false))
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

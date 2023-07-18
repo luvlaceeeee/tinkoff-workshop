@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 import { IResume } from "@/types/interfaces/IResume"
 import { convertDate } from "@/lib/convertDate"
 import { Button } from "@/components/ui/button"
@@ -11,6 +13,10 @@ import { DeleteResumeDialog } from "./delete-resume-dialog"
 
 export function ResumeCard(props: IResume) {
   const { direction, isActive, createdWhen, skills, description, id } = props
+
+  const queries = new URLSearchParams()
+  queries.set("skills", [...skills].join(","))
+  queries.set("direction", direction.directionName)
 
   const { mutate, isLoading } = useChangeResumeActivity(
     id,
@@ -51,7 +57,11 @@ export function ResumeCard(props: IResume) {
 
       <section className="flex justify-end gap-3 border-t pt-3">
         <DeleteResumeDialog id={id} direction={direction.description} />
-        <Button variant={"outline"}>Найти подходящие вакансии</Button>
+        <Button variant={"outline"}>
+          <Link href={"/search/vacancies" + `?${queries.toString()}`}>
+            Найти подходящие вакансии
+          </Link>
+        </Button>
         <Button
           variant={"outline"}
           loading={isLoading}

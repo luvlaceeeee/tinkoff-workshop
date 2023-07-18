@@ -10,7 +10,7 @@ import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 
-import { IVacancySearchResponse } from "../../search/resumes/types/IVacancySearchResponse"
+import { IVacancySearchResponse } from "../../search/vacancies/types/IVacancySearchResponse"
 import { CarouselLoader } from "./carousel-loader"
 
 export function MainVacancyCarousel() {

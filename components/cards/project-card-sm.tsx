@@ -47,7 +47,9 @@ export function ProjectCardSmall(props: ProjectCardSmallProps): JSX.Element {
             </CardTitle>
             <CardDescription>{convertDate(createdWhen)}</CardDescription>
           </div>
-          <Badge>{statusMap(status.description)}</Badge>
+          <Badge status={status.statusName}>
+            {statusMap(status.description)}
+          </Badge>
         </div>
       </CardHeader>
       <CardContent>

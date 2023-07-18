@@ -1,1 +1,4 @@
-export type ProjectStatus = { statusName: string; description: string }
+export type ProjectStatus = {
+  statusName: "FROZEN" | "CLOSED" | "IN_PROGRESS" | "PREPARING"
+  description: string
+}

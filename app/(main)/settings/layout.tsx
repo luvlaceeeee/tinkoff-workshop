@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { BackButton } from "@/components/back-button"
 
 import { MainPagesHeader } from "../../../components/header/main-pages-header"
 
@@ -14,7 +15,9 @@ function SettingsLayout({ children }: { children: ReactNode }) {
       <MainPagesHeader
         title="Настройки"
         description="Управляйте настройками своей учетной записи и настройками сайта"
-      />
+      >
+        <BackButton />
+      </MainPagesHeader>
       <div className="flex gap-10 pt-5">
         <section className="flex h-full w-60 flex-shrink-0 flex-col gap-3 border-r pr-5">
           <Button variant={"secondary"} disabled={true} asChild>

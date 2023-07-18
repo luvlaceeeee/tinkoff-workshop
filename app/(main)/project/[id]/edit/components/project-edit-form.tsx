@@ -121,11 +121,7 @@ export function ProjectEditForm(props: IProject) {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Статус проекта</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                onOpenChange={() => !statuses.length && refetchStatuses()}
-                value={field.value}
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
                   <SelectTrigger className="rounded-2xl">
                     <SelectValue placeholder="Выберите статус проекта" />
@@ -156,13 +152,13 @@ export function ProjectEditForm(props: IProject) {
           <div className="space-y-3">
             <FormLabel>Инфраструктура</FormLabel>
             {fields.map((field, index) => (
-              <div className="flex flex-col gap-3" key={field.id}>
+              <div className="flex flex-col gap-1" key={field.id}>
                 <FormField
                   control={form.control}
                   name={`contacts.${index}.link`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Ссылка</FormLabel>
+                      <FormLabel className="text-xs">Ссылка</FormLabel>
                       <FormControl>
                         <Input placeholder="URL" {...field} />
                       </FormControl>
@@ -175,7 +171,7 @@ export function ProjectEditForm(props: IProject) {
                   name={`contacts.${index}.description`}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Описание</FormLabel>
+                      <FormLabel className="text-xs">Описание</FormLabel>
                       <FormControl>
                         <Input placeholder="URL" {...field} />
                       </FormControl>
@@ -186,7 +182,7 @@ export function ProjectEditForm(props: IProject) {
                 <Button
                   type="button"
                   variant="outline"
-                  className="shrink-0 border-destructive/50"
+                  className="mt-2 shrink-0 border-destructive/50"
                   size="icon"
                   onClick={() => remove(index)}
                 >

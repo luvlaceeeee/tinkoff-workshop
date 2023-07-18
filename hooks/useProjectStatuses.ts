@@ -1,8 +1,7 @@
 import { UseQueryOptions, useQuery } from "@tanstack/react-query"
 
+import { ProjectStatus } from "@/types/ProjectStatus"
 import $api from "@/config/axios"
-
-type ProjectStatus = { statusName: string; description: string }
 
 export const useProjectStatuses = (
   options?: UseQueryOptions<ProjectStatus[]>

@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
@@ -43,9 +42,6 @@ export function CreateResumeForm() {
     name: "skills",
     control: form.control,
   })
-
-  //for multi-select
-  const [selected, setSelected] = useState<string[]>([])
 
   const { data: directions = [], isLoading: isDirectionLoading } =
     useResumeDirection()
@@ -144,9 +140,6 @@ export function CreateResumeForm() {
                       size="icon"
                       onClick={() => {
                         remove(index)
-                        setSelected((prev) =>
-                          prev.filter((s) => s !== field.value)
-                        )
                       }}
                     >
                       <X />
@@ -157,12 +150,14 @@ export function CreateResumeForm() {
             />
           ))}
         </div>
-
         <div>
           <MultiSelectSkillsForm
             append={append}
-            selected={selected}
-            setSelected={setSelected}
+            selected={
+              form.watch("skills")
+                ? form.watch("skills").map((skill) => skill.value)
+                : []
+            }
           />
           <p className={cn("text-sm font-medium text-destructive")}>
             {form.getFieldState("skills").error?.message}

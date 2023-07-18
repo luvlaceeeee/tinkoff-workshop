@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 
@@ -9,6 +10,7 @@ import { queryClient } from "@/components/providers"
 import { EditProjectSchema } from "../types/editProjectSchema"
 
 export const useUpdateProject = (id: number) => {
+  const router = useRouter()
   return useMutation(
     ["update-project"],
     (initial: EditProjectSchema) =>
@@ -20,6 +22,8 @@ export const useUpdateProject = (id: number) => {
           title: "Проект обновлен",
         })
         queryClient.invalidateQueries(["project", id])
+        queryClient.invalidateQueries(["user"])
+        router.replace(`/project/${id}`)
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

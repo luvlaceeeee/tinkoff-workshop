@@ -11,16 +11,17 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { useRouting } from "../../hooks/useRouting"
-import { IResumesSearchResponse } from "../types/IResumesSearchResponse"
-import { ResumeSearchCard } from "./resume-search-card"
+import { IVacancySearchResponse } from "../types/IVacancySearchResponse"
+import { VacancySearchCard } from "./vacancy-seacrh-card"
 
-export function SearchResumesContent() {
+export function SearchVacanciesContent() {
   const [router, pathname, searchParams] = useRouting()
 
   const [page, setPage] = useState(0)
   const [direction, setDirection] = useState<string | null>(null)
   const [dateSort, setDateSort] = useState<"ASC" | "DESC" | null>(null)
   const [skills, setSkills] = useState([])
+  const [status, setStatus] = useState(null)
 
   useEffect(() => {
     //@ts-ignore
@@ -37,23 +38,26 @@ export function SearchResumesContent() {
     setDateSort(searchParams.get("dateSort"))
     //@ts-ignore
     setSkills(searchParams.get("skills"))
+    //@ts-ignore
+    setStatus(searchParams.get("status"))
   }, [searchParams])
 
   const {
-    data: resumes = { content: [], pageCount: 0 },
+    data: vacancies = { content: [], pageCount: 0 },
     isLoading,
     isPreviousData,
   } = useQuery(
-    ["resumes", page, direction, dateSort, skills],
+    ["vacancies", page, direction, dateSort, skills, status],
     () =>
       $api
-        .get<IResumesSearchResponse>("resumes/search", {
+        .get<IVacancySearchResponse>("positions/search", {
           params: {
             page,
             size: 4,
             direction,
             dateSort,
             skills,
+            status,
           },
         })
         .then((res) => res.data),
@@ -97,21 +101,12 @@ export function SearchResumesContent() {
       </div>
     )
 
-  if (!resumes.content.length) {
-    return (
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-muted-foreground">Ничего не найдено</p>
-        <Button onClick={() => router.back()}>Назад</Button>
-      </div>
-    )
-  }
-
   return (
     <>
       <div className="grid grid-cols-2 gap-5">
-        {resumes.content.map((resume) => (
+        {vacancies.content.map((resume) => (
           <Fragment key={resume.id}>
-            <ResumeSearchCard {...resume} />
+            <VacancySearchCard {...resume} />
           </Fragment>
         ))}
       </div>
@@ -133,8 +128,8 @@ export function SearchResumesContent() {
           >
             {1}
           </Button>
-          {[...new Array(resumes.pageCount)].map((_, i) => {
-            if (i === 0 || i === resumes.pageCount - 1) return
+          {[...new Array(vacancies.pageCount)].map((_, i) => {
+            if (i === 0 || i === vacancies.pageCount - 1) return
             return (
               <Button
                 size={"icon"}
@@ -149,16 +144,16 @@ export function SearchResumesContent() {
           <Button
             size={"icon"}
             variant={"outline"}
-            onClick={() => handleCurrentPage(resumes.pageCount)}
-            className={page === resumes.pageCount - 1 ? "bg-secondary" : ""}
+            onClick={() => handleCurrentPage(vacancies.pageCount)}
+            className={page === vacancies.pageCount - 1 ? "bg-secondary" : ""}
           >
-            {resumes.pageCount}
+            {vacancies.pageCount}
           </Button>
         </div>
         <Button
           size={"icon"}
           onClick={handleNextPage}
-          disabled={isPreviousData || page + 1 === resumes.pageCount}
+          disabled={isPreviousData || page + 1 === vacancies.pageCount}
         >
           <ChevronRight />
         </Button>

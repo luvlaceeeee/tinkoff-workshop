@@ -49,7 +49,7 @@ export function SortSelect() {
         open={open}
         onOpenChange={setOpen}
       >
-        <SelectTrigger className=" rounded-2xl">
+        <SelectTrigger className="rounded-2xl">
           <SelectValue placeholder="Сортировать по" />
         </SelectTrigger>
         <SelectContent className="rounded-2xl">
