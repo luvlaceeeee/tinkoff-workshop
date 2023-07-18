@@ -1,8 +1,3 @@
-import { redirect } from "next/navigation"
-import { useMutation } from "@tanstack/react-query"
-import { signOut } from "next-auth/react"
-
-import $api from "@/config/axios"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,25 +11,15 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 
+import { useDeleteUser } from "../hooks/useDeleteUser"
+
 export function DeleteAccountDialog() {
-  const { mutate, isLoading } = useMutation(
-    ["user-delete"],
-    () => $api.delete("/users"),
-    {
-      onSuccess: () => {
-        signOut()
-        redirect("/")
-      },
-    }
-  )
+  const { mutate, isLoading } = useDeleteUser()
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          variant={"outline"}
-          className="w-full border-destructive/30 hover:bg-destructive/20"
-        >
+        <Button variant={"destructive"} className="w-full">
           Удалить аккаунт
         </Button>
       </AlertDialogTrigger>
@@ -52,8 +37,8 @@ export function DeleteAccountDialog() {
           <AlertDialogAction asChild>
             <Button
               variant={"destructive"}
-              loading={isLoading}
               onClick={() => mutate()}
+              loading={isLoading}
               disabled={isLoading}
             >
               Удалить

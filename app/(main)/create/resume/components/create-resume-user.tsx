@@ -26,9 +26,7 @@ export default function CreateResumeUser() {
   return (
     <div className="flex-1">
       <div className="flex items-center justify-between">
-        <Label className="font-light">
-          Эта информация будет видна на странице резюме
-        </Label>
+        <Label>Эта информация будет видна на странице резюме</Label>
         <Button variant={"ghost"} asChild>
           <Link href={"/settings/profile"}>Редактировать профиль</Link>
         </Button>

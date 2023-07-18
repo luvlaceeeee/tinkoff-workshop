@@ -4,23 +4,23 @@ import { IProject } from "@/types/interfaces/IProject"
 import { convertDate } from "@/lib/convertDate"
 import { statusMap } from "@/lib/statusMap"
 import { trimLine } from "@/lib/trimLine"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
+import { LinkTitle } from "@/components/link-title"
 
-export function ProjectCard(props: Omit<IProject, "isLeader" | "members">) {
+export function ProjectCard(
+  props: Omit<
+    IProject,
+    "isLeader" | "members" | "vacanciesCount" | "contacts" | "description"
+  >
+) {
   const { title, theme, membersCount, status, createdWhen, id } = props
   return (
     <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
       <section className="flex items-center justify-between border-b pb-3">
         <div>
-          <h1
-            className={cn(
-              buttonVariants({ variant: "link" }),
-              "h-fit p-0 text-2xl font-semibold"
-            )}
-          >
-            <Link href={`/project/${id}`}>{title}</Link>
-          </h1>
+          <LinkTitle href={`/project/${id}`} className="text-2xl">
+            {title}
+          </LinkTitle>
           <p className="text-sm text-muted-foreground">
             Создан: {convertDate(createdWhen)}
           </p>

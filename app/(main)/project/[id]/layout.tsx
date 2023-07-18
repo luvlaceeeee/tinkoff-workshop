@@ -44,7 +44,11 @@ export default function ProjectLayout({
           <LeaveProjectDialog title={project.title} projectId={project.id} />
           {project.isLeader && (
             <>
-              <Button>Вакансии проекта</Button>
+              <Button disabled={pathname === `/project/${params.id}/vacancies`}>
+                <Link href={`/project/${params.id}/vacancies`}>
+                  Вакансии проекта
+                </Link>
+              </Button>
               <Button
                 variant={"main"}
                 disabled={pathname === `/project/${params.id}/edit`}

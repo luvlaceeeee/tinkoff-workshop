@@ -1,9 +1,7 @@
 import axios from "axios"
 import { getSession } from "next-auth/react"
 
-//TODO Перенести в env
-
-export const API_URL = "http://localhost:8080/api/v1"
+export const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL
 
 const $api = axios.create({
   baseURL: API_URL,

@@ -15,6 +15,7 @@ export default function NotFound() {
           <p className="text-7xl font-bold">Такой страницы не существует :(</p>
           <Button variant={"main"} asChild>
             <Link href={"/"}>Вернуться на главную</Link>
+            {/* <BackButton /> */}
           </Button>
         </div>
       </div>

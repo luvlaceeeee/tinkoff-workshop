@@ -2,14 +2,10 @@
 
 //BUG: Можно добавит много ссылок на интерфейсе, но на бек они не прилетят
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
-import { AxiosError } from "axios"
 import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
 
-import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import { IUser } from "@/types/interfaces/IUser"
-import $api from "@/config/axios"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -22,16 +18,15 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { toast } from "@/components/ui/use-toast"
-import { queryClient } from "@/components/providers"
 
+import { useUpdateProfile } from "../hooks/useUpdateProfile"
 import {
   UserProfileSchema,
   userProfileSchema,
 } from "../types/userProfileSchema"
 
 interface ProfileEditFormProps {
-  user: Omit<IUser, "resumes" | "projects">
+  user: Omit<IUser, "resumes" | "projects" | "createdWhen" | "email">
 }
 
 export function ProfileEditForm({ user }: ProfileEditFormProps) {
@@ -45,7 +40,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
       name: user.name,
       surname: user.surname,
     },
-    mode: "onChange",
+    mode: "onSubmit",
   })
 
   const { fields, append, remove } = useFieldArray({
@@ -53,36 +48,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
     control: form.control,
   })
 
-  const { mutate, isLoading } = useMutation(
-    ["user-change"],
-    (
-      values: Omit<UserProfileSchema, "contacts"> & {
-        contacts: string[] | undefined
-      }
-    ) => $api.patch<IUser>("/users", values).then((res) => res.data),
-    {
-      onSuccess: (data) => {
-        toast({
-          variant: "accept",
-          title: "Профиль обновлен",
-        })
-        queryClient.invalidateQueries({ queryKey: ["user"] })
-        form.reset({
-          mainInformation: data.mainInformation,
-          name: data.name,
-          surname: data.surname,
-          contacts: data.contacts.map((contact) => ({ value: contact })),
-        })
-      },
-      onError: (error: AxiosError<IErrorResponse>) => {
-        toast({
-          variant: "destructive",
-          title: "Ошибка",
-          description: `${error.response?.data.message}`,
-        })
-      },
-    }
-  )
+  const { mutate, isLoading } = useUpdateProfile()
 
   function onSubmit(values: UserProfileSchema) {
     const queryData = {
@@ -99,7 +65,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
         className="flex w-full flex-col items-start gap-6"
       >
         <div className="flex w-full justify-between gap-6">
-          <section className="flex flex-1 flex-col gap-5">
+          <section className="flex flex-1 flex-col gap-6">
             <FormField
               control={form.control}
               name="name"
@@ -126,20 +92,15 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Почта</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
+            <Button
+              type="submit"
+              loading={isLoading}
+              disabled={!form.formState.isDirty || isLoading}
+            >
+              Обновить профиль
+            </Button>
           </section>
+
           <section className="flex flex-1 flex-col gap-5">
             <FormField
               control={form.control}
@@ -193,6 +154,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                 variant="outline"
                 size="sm"
                 className="mt-2"
+                disabled={form.getValues("contacts")?.length! > 5}
                 onClick={() => append({ value: "" })}
               >
                 Добавить контакт
@@ -200,13 +162,6 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
             </div>
           </section>
         </div>
-        <Button
-          type="submit"
-          loading={isLoading}
-          disabled={!form.formState.isDirty || isLoading}
-        >
-          Обновить профиль
-        </Button>
       </form>
     </Form>
   )

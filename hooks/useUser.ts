@@ -8,6 +8,7 @@ import $api from "@/config/axios"
 
 export const useUser = () => {
   const setUser = useUserStore((state) => state.setUser)
+
   return useQuery<IUser, AxiosError<IErrorResponse>>(
     ["user"],
     () => $api.get<IUser>("/users").then((res) => res.data),

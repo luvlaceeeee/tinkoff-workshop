@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useQuery } from "@tanstack/react-query"
 
-import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
+import { useDirection } from "@/hooks/useDirection"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import {
@@ -15,22 +13,16 @@ import {
 } from "@/components/ui/select"
 import { Icons } from "@/components/icons"
 
-type Direction = { directionName: string; description: string }
+import { useRouting } from "../hooks/useRouting"
 
 export function DirectionSelect() {
-  const {
-    data: directions = [],
-    isLoading: isDirectionLoading,
-    refetch,
-  } = useQuery<Direction[]>(["directions"], () =>
-    $api.get<Direction[]>("dictionaries/directions").then((res) => res.data)
-  )
+  const { data: directions = [], isLoading: isDirectionLoading } =
+    useDirection()
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const [router, pathname, searchParams] = useRouting()
 
   const [open, setOpen] = useState(false)
+
   const [direction, setDirection] = useState("")
 
   useEffect(() => {
@@ -59,18 +51,12 @@ export function DirectionSelect() {
         open={open}
         onOpenChange={() => {
           setOpen(!open)
-          !directions.length && refetch()
         }}
         onValueChange={handleOnValueChange}
         value={direction}
       >
         <SelectTrigger className="w-full rounded-2xl">
-          <SelectValue
-            placeholder={
-              directions.find((dir) => dir.directionName === direction)
-                ?.description
-            }
-          />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent className="rounded-2xl">
           {isDirectionLoading ? (

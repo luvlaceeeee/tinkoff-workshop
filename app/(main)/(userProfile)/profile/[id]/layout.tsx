@@ -10,8 +10,8 @@ import { convertDate } from "@/lib/convertDate"
 import { Button } from "@/components/ui/button"
 import { BackButton } from "@/components/back-button"
 import { MainPagesHeader } from "@/components/header/main-pages-header"
-import { Icons } from "@/components/icons"
 
+import { UserProfileLoading } from "../../components/user-profile-loader"
 import { UserProfileContext } from "../../context/UserProfileContext"
 import { useUserById } from "../../hooks/useUserById"
 
@@ -25,12 +25,7 @@ export default function UserProfileLayout({
   const { data: user = {} as IUser, isLoading } = useUserById(+params.id)
   const currentUser = useUserStore((state) => state.user)
 
-  if (isLoading)
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-6 animate-in fade-in duration-500">
-        <Icons.loader className="h-14 w-14 fill-main" />
-      </div>
-    )
+  if (isLoading) return <UserProfileLoading />
 
   return (
     <div className="flex flex-col">

@@ -1,11 +1,9 @@
-import Link from "next/link"
-import dayjs from "dayjs"
-
 import { IResume } from "@/types/interfaces/IResume"
-import { generateKey } from "@/lib/generateKey"
-import { skillMap } from "@/lib/skillMap"
-import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { convertDate } from "@/lib/convertDate"
+import { Button } from "@/components/ui/button"
+import { LinkTitle } from "@/components/link-title"
+import { AboutSection } from "@/components/sections/about-section"
+import { SkillsSection } from "@/components/sections/skills-section"
 
 import { useChangeResumeActivity } from "../hooks/useChangeResumeActivity"
 import { ChangeResumeDialog } from "./change-resume-dialog"
@@ -21,18 +19,13 @@ export function ResumeCard(props: IResume) {
 
   return (
     <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
-      <section className="flex items-center justify-between border-b pb-3">
+      <header className="flex items-center justify-between border-b pb-3">
         <div>
-          <h1
-            className={cn(
-              buttonVariants({ variant: "link" }),
-              "h-fit p-0 text-2xl font-semibold"
-            )}
-          >
-            <Link href={`/resume/${id}`}>{direction.description}</Link>
-          </h1>
+          <LinkTitle href={`/resume/${id}`} className="text-2xl font-semibold">
+            {direction.description}
+          </LinkTitle>
           <p className="ml-3 inline-block text-sm text-muted-foreground">
-            Создан: {dayjs.unix(createdWhen).format("DD.MM.YYYY в HH:mm")}
+            Создан: {convertDate(createdWhen)}
           </p>
         </div>
 
@@ -41,37 +34,22 @@ export function ResumeCard(props: IResume) {
         ) : (
           <span className="text-xl text-destructive">Отключено</span>
         )}
-      </section>
+      </header>
 
-      <section>
-        <h2 className="text-xl font-semibold tracking-tight transition-colors">
-          Навыки
-        </h2>
-        <div className="flex gap-2 pt-1">
-          {skills.map((skill) => (
-            <p
-              key={generateKey(skill)}
-              className="rounded-xl border p-2 px-3 text-sm"
-            >
-              {skillMap(skill)}
-            </p>
-          ))}
-        </div>
-      </section>
+      <SkillsSection
+        skills={skills}
+        titleSize="text-xl"
+        className="space-y-1"
+      />
 
-      <section>
-        <h2 className="text-xl font-semibold tracking-tight transition-colors">
-          Описание
-        </h2>
-        {description ? (
-          <p className="pt-1">{description}</p>
-        ) : (
-          <p className="text-sm text-muted-foreground">Отсутствует</p>
-        )}
-      </section>
+      <AboutSection
+        title="Описание"
+        description={description}
+        titleSize="text-xl"
+        className="space-y-1"
+      />
 
       <section className="flex justify-end gap-3 border-t pt-3">
-        {/* <Button variant={"destructive"}>Удалить резюме</Button> */}
         <DeleteResumeDialog id={id} direction={direction.description} />
         <Button variant={"outline"}>Найти подходящие вакансии</Button>
         <Button

@@ -1,4 +1,4 @@
-export const skills = [
+const skillsInitial = [
   // Backend
   "java",
   "python",
@@ -27,7 +27,6 @@ export const skills = [
   "react",
   "angular",
   "vue.js",
-  "typescript",
   "bootstrap",
   "sass",
   "redux",
@@ -153,18 +152,12 @@ export const skills = [
   "ruby",
   "swift",
   "objective-c",
-  "typescript",
-  "html",
-  "css",
   "sass",
   "less",
-  "react",
-  "angular",
   "vue.js",
   "node.js",
   "express.js",
   "django",
-  "flask",
   "laravel",
   "spring",
   "asp.net",
@@ -250,3 +243,6 @@ export const skills = [
   // Additional technologies (continued)...
   // Вставьте сюда еще 100 технологий по вашему выбору
 ]
+
+// @ts-ignore
+export const SKILLS = [...new Set(skillsInitial)].sort()

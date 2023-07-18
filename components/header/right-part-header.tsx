@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { Bell } from "lucide-react"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/config/authOptions"
@@ -21,11 +22,16 @@ export async function RightPartHeader() {
             <Link href="/resumes">Мои резюме</Link>
           </Button>
           {/* TODO Add Notifications */}
-          {/* <Button variant="secondary" size="icon" asChild>
-            <Link href="/notifications">
-              <Bell />
-            </Link>
-          </Button> */}
+          <div className="relative">
+            <Button variant="secondary" size="icon" asChild>
+              <Link href="/notifications">
+                <Bell />
+              </Link>
+            </Button>
+            <div className="absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm">
+              0
+            </div>
+          </div>
           <UserAvatarDropdown />
         </>
       ) : (

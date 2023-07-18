@@ -3,7 +3,7 @@ import { X } from "lucide-react"
 import { IProjectMember } from "@/types/interfaces/IProjectMember"
 import { Button } from "@/components/ui/button"
 
-import { MembersCard } from "./members-card"
+import { MembersCard } from "../../../components/members-card"
 
 export function ProjectEditMembers({
   members,

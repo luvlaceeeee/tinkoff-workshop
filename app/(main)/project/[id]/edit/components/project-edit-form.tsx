@@ -28,11 +28,11 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 
+import { useUpdateProject } from "../hooks/useUpdateProject"
 import {
   EditProjectSchema,
   editProjectSchema,
-} from "../[id]/types/editProfileSchema"
-import { useUpdateProject } from "../hooks/useUpdateProject"
+} from "../types/editProjectSchema"
 
 export function ProjectEditForm(props: IProject) {
   const { title, theme, description, status, contacts, id } = props

@@ -7,7 +7,6 @@ const initialContextValue: IUser = {
   email: "",
   name: "",
   surname: "",
-  picture: "",
   mainInformation: "",
   contacts: [],
   createdWhen: 0,

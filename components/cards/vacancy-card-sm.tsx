@@ -1,13 +1,13 @@
 import { HTMLAttributes } from "react"
-import Link from "next/link"
-import dayjs from "dayjs"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
+import { convertDate } from "@/lib/convertDate"
 import { skillMap } from "@/lib/skillMap"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
-import { buttonVariants } from "../ui/button"
+import { LinkTitle } from "../link-title"
+import { SkillBadge } from "../skill-badge"
 import {
   Card,
   CardContent,
@@ -42,40 +42,41 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2">
         <div>
           <CardTitle>
-            <Link
-              href={`/vacancy/${id}`}
-              className={cn(
-                buttonVariants({ variant: "link" }),
-                "h-fit p-0 text-2xl"
-              )}
-            >
+            <LinkTitle href={`/vacancy/${id}`} className="text-2xl">
+              {" "}
               {direction.description}
-            </Link>
+            </LinkTitle>
           </CardTitle>
-          <CardDescription>
-            {dayjs.unix(createdWhen).format("DD.MM.YYYY в HH:mm")}
-          </CardDescription>
+          <CardDescription>{convertDate(createdWhen)}</CardDescription>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pb-3">
         <label className="text-xs text-muted-foreground">Навыки:</label>
-        <p>{trimLine(skillsString, 30)}</p>
-        <label className="text-xs text-muted-foreground">Описание:</label>
-        <p>{trimLine(description, 60)}</p>
+        {skills.length ? (
+          <div className="flex flex-wrap items-center gap-2">
+            {skills.slice(0, 4).map((skill) => (
+              <SkillBadge skill={skill} />
+            ))}
+            {skills.length - 5 > 0 && (
+              <p className="rounded-xl border p-2 px-3 text-sm text-muted-foreground">
+                +{skills.length - 5}
+              </p>
+            )}
+          </div>
+        ) : (
+          <p className="text-sm">Отсутствуют</p>
+        )}
       </CardContent>
-      <CardFooter>
-        <Link
-          href={`/project/${project.id}`}
-          className={cn(
-            buttonVariants({ variant: "link" }),
-            "h-fit p-0 text-2xl"
-          )}
-        >
-          <p className="text-sm">{project.title}</p>
-        </Link>
+      <CardFooter className="flex flex-col items-start">
+        <label className="text-xs text-muted-foreground">Описание:</label>
+        {description && description.trim() ? (
+          <p className="break-normal">{trimLine(description.trim(), 60)}</p>
+        ) : (
+          <p className="text-sm">Отсутствует</p>
+        )}
       </CardFooter>
     </Card>
   )

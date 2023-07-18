@@ -45,8 +45,11 @@ export function HeaderNavigationMenu() {
               <ListItem href="/create/resume" title="Резюме">
                 Найдите подходящую команду, создав новое резюме
               </ListItem>
-              <ListItem href="/createVacancy" title="Вакансию">
+              <ListItem href="/create/vacancy" title="Вакансию">
                 Найдите подходящего разработчика, создав новую вакансию
+              </ListItem>
+              <ListItem href="/create/project" title="Проект">
+                Создайте проект со своей уникальной идей
               </ListItem>
             </ul>
           </NavigationMenuContent>

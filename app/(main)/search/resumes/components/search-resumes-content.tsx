@@ -1,12 +1,7 @@
 "use client"
 
 import { Fragment, useEffect, useState } from "react"
-import {
-  notFound,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation"
+import { notFound } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -15,13 +10,12 @@ import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
+import { useRouting } from "../../hooks/useRouting"
 import { IResumesSearchResponse } from "../types/IResumesSearchResponse"
 import { ResumeSearchCard } from "./resume-search-card"
 
 export function SearchResumesContent() {
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const pathname = usePathname()
+  const [router, pathname, searchParams] = useRouting()
 
   const [page, setPage] = useState(0)
   const [direction, setDirection] = useState<string | null>(null)
@@ -49,7 +43,6 @@ export function SearchResumesContent() {
     data: resumes = { content: [], pageCount: 0 },
     isLoading,
     isPreviousData,
-    isFetching,
   } = useQuery(
     ["resumes", page, direction, dateSort, skills],
     () =>
@@ -104,7 +97,7 @@ export function SearchResumesContent() {
       </div>
     )
 
-  if (!resumes.content) {
+  if (!resumes.content.length) {
     return (
       <div className="flex flex-col items-center gap-2">
         <p className="text-muted-foreground">Ничего не найдено</p>
@@ -149,7 +142,6 @@ export function SearchResumesContent() {
           size={"icon"}
           onClick={handleNextPage}
           disabled={isPreviousData || page + 1 === resumes.pageCount}
-          loading={isFetching}
         >
           <ChevronRight />
         </Button>

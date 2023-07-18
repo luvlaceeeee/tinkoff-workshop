@@ -28,7 +28,7 @@ export function MainResumeCarousel() {
   return (
     <Carousel
       height={250}
-      slideSize="25%"
+      slideSize="32.5%"
       slideGap="md"
       align="start"
       styles={{
@@ -42,7 +42,7 @@ export function MainResumeCarousel() {
         },
       }}
       breakpoints={[
-        { maxWidth: "md", slideSize: "50%" },
+        { maxWidth: "md", slideSize: "32.5%" },
         { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
       ]}
     >

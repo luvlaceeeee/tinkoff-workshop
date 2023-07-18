@@ -4,14 +4,20 @@ import { cn } from "@/lib/utils"
 
 import { ProfileContext } from "../context/ProfileContext"
 
-type ProfileUserAboutProps = HTMLAttributes<HTMLDivElement>
+type ProfileUserAboutProps = HTMLAttributes<HTMLDivElement> & {
+  // mainInformation: string
+}
 
 export function ProfileAbout({ className, ...props }: ProfileUserAboutProps) {
   const { mainInformation = "" } = useContext(ProfileContext)
   return (
-    <div className={cn(className)} {...props}>
+    <div className={cn(className, "space-y-2")} {...props}>
       <h2 className="text-3xl font-semibold transition-colors">О себе</h2>
-      <span className="mt-2 inline-block text-sm">{mainInformation}</span>
+      {mainInformation ? (
+        <span className="inline-block text-sm">{mainInformation}</span>
+      ) : (
+        <p className="text-sm text-muted-foreground">Отсутствует</p>
+      )}
     </div>
   )
 }

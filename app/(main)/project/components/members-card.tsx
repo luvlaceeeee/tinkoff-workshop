@@ -20,7 +20,9 @@ export function MembersCard(props: IProjectMember) {
     >
       <div className="flex items-center gap-3">
         <Avatar className="h-10 w-10 select-none">
-          <AvatarImage src={""} />
+          <AvatarImage
+            src={`${process.env.NEXT_PUBLIC_BASE_API_URL}/files/${id}`}
+          />
           <AvatarFallback>
             {getNameAbbreviation(concatStrings(" ", name, surname)!)}
           </AvatarFallback>

@@ -10,18 +10,18 @@ import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 
-import { IVacancyResponse } from "../types/IVacancyResponse"
+import { IVacancySearchResponse } from "../../search/resumes/types/IVacancySearchResponse"
 import { CarouselLoader } from "./carousel-loader"
 
 export function MainVacancyCarousel() {
   const { data: vacancies, isLoading } = useQuery<
-    IVacancyResponse,
+    IVacancySearchResponse,
     AxiosError<IErrorResponse>
   >(
     ["10-vacancy"],
     () =>
       $api
-        .get<IVacancyResponse>("/positions/vacancies", {
+        .get<IVacancySearchResponse>("/positions/search", {
           params: { page: 0, size: 10, dateSort: "DESC" },
         })
         .then((res) => res.data),
@@ -34,7 +34,7 @@ export function MainVacancyCarousel() {
   return (
     <Carousel
       height={250}
-      slideSize="25%"
+      slideSize="32.9%"
       slideGap="md"
       align="start"
       styles={{
@@ -48,11 +48,11 @@ export function MainVacancyCarousel() {
         },
       }}
       breakpoints={[
-        { maxWidth: "md", slideSize: "50%" },
+        { maxWidth: "md", slideSize: "32.9%" },
         { maxWidth: "sm", slideSize: "100%", slideGap: 0 },
       ]}
     >
-      {vacancies.map((vacancy) => (
+      {vacancies.content.map((vacancy) => (
         <Carousel.Slide key={generateKey("vacancy-card")}>
           <VacancyCardSmall className="h-[250px]" {...vacancy} />
         </Carousel.Slide>

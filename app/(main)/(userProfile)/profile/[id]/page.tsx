@@ -3,9 +3,9 @@
 import { UserProfileAbout } from "../../components/user-profile-about"
 import { UserProfileAvatar } from "../../components/user-profile-avatar"
 import { UserProfileContacts } from "../../components/user-profile-contacts"
+import { UserProfileProjects } from "../../components/user-profile-projects"
 import { UserProfileResume } from "../../components/user-profile-resume"
 
-//TODO Добавить проекты
 export default function UserProfilePage({
   params,
 }: {
@@ -21,6 +21,7 @@ export default function UserProfilePage({
         </div>
       </div>
       <UserProfileResume />
+      <UserProfileProjects />
     </div>
   )
 }

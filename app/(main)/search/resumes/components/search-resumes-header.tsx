@@ -1,8 +1,8 @@
 "use client"
 
-import { DirectionSelect } from "./direction-select"
+import { DirectionSelect } from "../../components/direction-select"
+import { SortSelect } from "../../components/sort-select"
 import { SkillsSelect } from "./skills-select"
-import { SortSelect } from "./sort-select"
 
 export function SearchResumesHeader() {
   return (

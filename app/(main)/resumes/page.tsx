@@ -1,19 +1,15 @@
 "use client"
 
 import { Fragment } from "react"
-import { useQuery } from "@tanstack/react-query"
 
-import { IResume } from "@/types/interfaces/IResume"
-import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { ResumeCard } from "./components/resume-card"
+import { useUserResumes } from "./hooks/useUserResumes"
 
 function ResumesPage() {
-  const { data: resumes = [], isLoading } = useQuery(["user-resumes"], () =>
-    $api.get<IResume[]>("/resumes").then((res) => res.data)
-  )
+  const { data: resumes = [], isLoading } = useUserResumes()
 
   if (isLoading)
     return (

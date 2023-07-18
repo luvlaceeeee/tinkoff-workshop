@@ -1,11 +1,13 @@
 "use client"
 
+import { notFound } from "next/navigation"
+
 import { IProject } from "@/types/interfaces/IProject"
 import { Separator } from "@/components/ui/separator"
 
-import { ProjectEditForm } from "../../components/project-edit-form"
-import { ProjectEditMembers } from "../../components/project-edit-members"
 import { useProjectById } from "../../hooks/useProjectById"
+import { ProjectEditForm } from "./components/project-edit-form"
+import { ProjectEditMembers } from "./components/project-edit-members"
 
 export default function EditProjectPage({
   params,
@@ -17,6 +19,7 @@ export default function EditProjectPage({
   )
 
   if (isLoading) return <div>Loading</div>
+  if (!project.isLeader) notFound()
 
   return (
     <div className="flex justify-between gap-5">

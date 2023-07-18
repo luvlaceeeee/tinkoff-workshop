@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -11,12 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+import { useRouting } from "../hooks/useRouting"
+
 export function SortSelect() {
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const [router, pathname, searchParams] = useRouting()
 
   const [open, setOpen] = useState(false)
+
   const [dateSort, setDateSort] = useState<string | null>(null)
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export function SortSelect() {
 
   const handleOnValueChange = (value: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()))
+    current.delete("page")
     current.set("dateSort", value)
     router.push(pathname + `?${current.toString()}`)
   }

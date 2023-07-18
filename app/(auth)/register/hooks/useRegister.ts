@@ -9,10 +9,12 @@ import { IRegisterRequest } from "../types/IRegisterRequest"
 
 export const useRegister = () => {
   const router = useRouter()
-  //TODO Вынести как-то юрл бека
   return useMutation({
     mutationFn: (initial: IRegisterRequest) =>
-      axios.post("http://localhost:8080/api/v1/users/register", initial),
+      axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/users/register`,
+        initial
+      ),
     onSuccess: () => {
       toast({
         variant: "accept",

@@ -6,7 +6,7 @@ import $api from "@/config/axios"
 import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/components/providers"
 
-import { EditProjectSchema } from "../[id]/types/editProfileSchema"
+import { EditProjectSchema } from "../types/editProjectSchema"
 
 export const useUpdateProject = (id: number) => {
   return useMutation(

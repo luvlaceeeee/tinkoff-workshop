@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { X } from "lucide-react"
 
-import { skills } from "@/config/skills"
+import { SKILLS } from "@/config/skills"
 import { generateKey } from "@/lib/generateKey"
 import { skillMap } from "@/lib/skillMap"
 import { Badge } from "@/components/ui/badge"
@@ -14,21 +13,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
+import { useRouting } from "../../hooks/useRouting"
+
 export function SkillsSelect() {
   const [inputValue, setInputValue] = useState("")
   const [activeSkills, setActiveSkills] = useState<string[]>([])
 
-  const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const [router, pathname, searchParams] = useRouting()
 
-  const [skillsSearch, setSkillsSearch] = useState(skills)
+  const [skillsSearch, setSkillsSearch] = useState(SKILLS)
   useEffect(() => {
     setSkillsSearch(
-      skills.filter((skill) => skill.includes(inputValue.toLowerCase()))
+      SKILLS.filter((skill) => skill.includes(inputValue.toLowerCase()))
     )
     return () => {
-      setSkillsSearch(skills)
+      setSkillsSearch(SKILLS)
     }
   }, [inputValue])
 

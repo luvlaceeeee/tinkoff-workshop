@@ -1,4 +1,5 @@
 import { ProjectContact } from "../ProjectContact"
+import { ProjectStatus } from "../ProjectStatus"
 import { IProjectMember } from "./IProjectMember"
 
 export interface IProject {

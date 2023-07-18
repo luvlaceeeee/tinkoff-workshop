@@ -3,7 +3,8 @@ import { z } from "zod"
 export const resumeSchema = z
   .object({
     description: z
-      .string({ required_error: "Обязательное поле" })
+      .string()
+      .min(1, "Обязательное поле")
       .max(200, "Не больше 200 символов"),
     direction: z.string({ required_error: "Обязательное поле" }),
     skills: z
@@ -13,7 +14,6 @@ export const resumeSchema = z
         })
       )
       .min(1, { message: "Необходимо добавить хотя бы 1 навык" }),
-    addSkills: z.string().max(30).optional(),
   })
   .refine(
     ({ skills }) => {

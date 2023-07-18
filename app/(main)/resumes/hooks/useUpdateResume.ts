@@ -13,22 +13,24 @@ export const useUpdateResume = (
   id: number,
   setOpen: Dispatch<SetStateAction<boolean>>
 ) => {
-  return useMutation({
-    mutationFn: (initial: ICreateResumeRequest) =>
-      $api.patch(`/resumes/${id}`, initial),
-    onSuccess: () => {
-      toast({
-        variant: "accept",
-        title: "Резюме обновлено",
-      })
-      queryClient.invalidateQueries(["user-resumes"])
-      setOpen(false)
-    },
-    onError: (error: AxiosError<IErrorResponse>) =>
-      toast({
-        variant: "destructive",
-        title: "Ошибка",
-        description: `${error.response?.data.message}`,
-      }),
-  })
+  return useMutation(
+    ["update-resume"],
+    (initial: ICreateResumeRequest) => $api.patch(`/resumes/${id}`, initial),
+    {
+      onSuccess: () => {
+        toast({
+          variant: "accept",
+          title: "Резюме обновлено",
+        })
+        queryClient.invalidateQueries(["user-resumes"])
+        setOpen(false)
+      },
+      onError: (error: AxiosError<IErrorResponse>) =>
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: `${error.response?.data.message}`,
+        }),
+    }
+  )
 }

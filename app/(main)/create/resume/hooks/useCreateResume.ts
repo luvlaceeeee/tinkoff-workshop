@@ -12,23 +12,31 @@ import { ICreateResumeRequest } from "../types/ICreateResumeRequest"
 
 export const useCreateResume = () => {
   const router = useRouter()
-  return useMutation({
-    mutationFn: (initial: ICreateResumeRequest) =>
+
+  return useMutation(
+    ["create-resume"],
+    (initial: ICreateResumeRequest) =>
       $api.post<IResume>("/resumes", initial).then((res) => res.data),
-    onSuccess: (resume) => {
-      toast({
-        variant: "accept",
-        title: "Резюме создано!",
-        description: "Теперь оно видно в поиске",
-      })
-      queryClient.invalidateQueries(["user-resumes"])
-      router.push(`/resume/${resume.id}`)
-    },
-    onError: (error: AxiosError<IErrorResponse>) =>
-      toast({
-        variant: "destructive",
-        title: "Ошибка",
-        description: `${error.response?.data.message}`,
-      }),
-  })
+    {
+      onSuccess: (resume) => {
+        toast({
+          variant: "accept",
+          title: "Резюме создано!",
+          description: "Теперь оно видно в поиске",
+        })
+        queryClient.invalidateQueries([
+          "user-resumes",
+          "user",
+          "resume-directions",
+        ])
+        router.push(`/resume/${resume.id}`)
+      },
+      onError: (error: AxiosError<IErrorResponse>) =>
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: `${error.response?.data.message}`,
+        }),
+    }
+  )
 }

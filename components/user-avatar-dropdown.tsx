@@ -1,14 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 
+import { IUser } from "@/types/interfaces/IUser"
 import { concatStrings } from "@/lib/concatStrings"
-import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
 import { useUser } from "@/hooks/useUser"
 
+import { Icons } from "./icons"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import {
   DropdownMenu,
@@ -18,42 +20,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
+import { UserAvatar } from "./user-avatar"
 
 export function UserAvatarDropdown() {
-  const { data: user, isLoading } = useUser()
-
+  const { data: user = {} as IUser, isLoading } = useUser()
+  const [open, setOpen] = useState(false)
   //TODO Добавить запрос на /logout
-
-  // const { mutate, isLoading: isMutateLoading } = useMutation(
-  //   ["user-logout"],
-  //   () => $api.delete("/users"),
-  //   {
-  //     onSuccess: () => {
-  //       signOut()
-  //       redirect("/")
-  //     },
-  //   }
-  // )
 
   if (isLoading)
     return (
       <Avatar>
         <AvatarImage src={""} />
-        <AvatarFallback></AvatarFallback>
+        <AvatarFallback>
+          <Icons.loader className="ml-3 h-7 w-7 fill-foreground" />
+        </AvatarFallback>
       </Avatar>
     )
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger className="select-none rounded-full">
-        <Avatar>
-          <AvatarImage src={user?.picture} />
-          <AvatarFallback>
-            {getNameAbbreviation(
-              concatStrings(" ", user?.name, user?.surname)!
-            )}
-          </AvatarFallback>
-        </Avatar>
+        <UserAvatar userId={user.id} name={user.name} surname={user.surname} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-60" align="end">
         <DropdownMenuLabel>
@@ -61,17 +48,12 @@ export function UserAvatarDropdown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/profile"}>
-          <DropdownMenuItem>
-            {/* <User className="mr-2 h-4 w-4" /> */}
-            Профиль
-          </DropdownMenuItem>
+          <DropdownMenuItem>Профиль</DropdownMenuItem>
         </Link>
         <DropdownMenuItem>
-          {/* <Users className="mr-2 h-4 w-4" /> */}
-          Мои команды
+          <Link href={"/settings/profile"}>Настройки</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        {/* Add request to /logout */}
         <DropdownMenuItem
           className="text-destructive"
           onClick={() => {

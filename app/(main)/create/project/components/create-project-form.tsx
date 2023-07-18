@@ -165,7 +165,7 @@ export function CreateProjectForm() {
                 <SelectContent className="rounded-2xl">
                   {isDirectionLoading ? (
                     <Icons.loader className="mx-auto h-7 w-7 fill-main" />
-                  ) : directions.length ? (
+                  ) : (
                     directions.map((direction) => (
                       <SelectItem
                         key={generateKey(direction.directionName)}
@@ -175,16 +175,6 @@ export function CreateProjectForm() {
                         {direction.description}
                       </SelectItem>
                     ))
-                  ) : (
-                    <span className="text-center text-sm">
-                      <p className="text-muted-foreground">
-                        Все направления заняты.
-                      </p>
-                      <p className="text-muted">
-                        Удалите прошлое резюме с желаемым направлением, чтобы
-                        создать новое.
-                      </p>
-                    </span>
                   )}
                 </SelectContent>
               </Select>
@@ -192,11 +182,12 @@ export function CreateProjectForm() {
             </FormItem>
           )}
         />
+
         <section className="flex flex-1 flex-col gap-5">
           <div className="space-y-3">
             <FormLabel>Инфраструктура</FormLabel>
             {fields.map((field, index) => (
-              <div className="flex flex-col gap-3" key={field.id}>
+              <div className="flex flex-col gap-1" key={field.id}>
                 <FormField
                   control={form.control}
                   name={`contacts.${index}.link`}
@@ -226,7 +217,7 @@ export function CreateProjectForm() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="shrink-0 border-destructive/50"
+                  className="mt-2 shrink-0 border-destructive/50"
                   size="icon"
                   onClick={() => remove(index)}
                 >
@@ -245,6 +236,7 @@ export function CreateProjectForm() {
             </Button>
           </div>
         </section>
+
         <Button
           className="w-full"
           type="submit"
