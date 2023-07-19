@@ -1,1 +1,4 @@
-export type RequestStatus = { statusName: string; description: string }
+export type RequestStatus = {
+  statusName: "ACCEPTED" | "DECLINED" | "IN_CONSIDERATION"
+  description: string
+}

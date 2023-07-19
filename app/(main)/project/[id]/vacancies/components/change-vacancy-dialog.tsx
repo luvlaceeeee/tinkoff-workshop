@@ -65,8 +65,11 @@ export function ChangeVacancyDialog(props: IVacancy) {
     control: form.control,
   })
 
-  const { data: directions = [], isLoading: isDirectionLoading } =
-    useDirection()
+  const {
+    data: directions = [],
+    isLoading: isDirectionLoading,
+    refetch,
+  } = useDirection({ enabled: false })
 
   const { mutate, isLoading } = useUpdateVacancy(
     id,
@@ -106,7 +109,11 @@ export function ChangeVacancyDialog(props: IVacancy) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Направление</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    onOpenChange={() => refetch()}
+                  >
                     <FormControl>
                       <SelectTrigger className="rounded-2xl">
                         <SelectValue placeholder="Выберите направление вакансии" />

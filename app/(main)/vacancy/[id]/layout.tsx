@@ -1,13 +1,14 @@
 "use client"
 
 import { ReactNode } from "react"
+import { notFound, useRouter } from "next/navigation"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import { convertDate } from "@/lib/convertDate"
-import { Button } from "@/components/ui/button"
 import { BackButton } from "@/components/back-button"
 import { MainPagesHeader } from "@/components/header/main-pages-header"
 import { Icons } from "@/components/icons"
+import { SendRequestToVacancyDialog } from "@/components/send-request-to-vacancy-dialog"
 
 import { useVacancyById } from "../hooks/useVacancyById"
 
@@ -18,9 +19,20 @@ export default function VacancyLayout({
   params: { id: string }
   children: ReactNode
 }) {
-  const { data: vacancy = {} as IVacancy, isLoading } = useVacancyById(
-    +params.id
-  )
+  const router = useRouter()
+  const {
+    data: vacancy = {} as IVacancy,
+    isLoading,
+    error,
+  } = useVacancyById(+params.id)
+
+  if (error?.status === 406) {
+    router.back()
+  }
+
+  if (error) {
+    notFound()
+  }
 
   if (isLoading)
     return (
@@ -37,7 +49,7 @@ export default function VacancyLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          <Button variant={"main"}>Отправить запрос</Button>
+          <SendRequestToVacancyDialog vacancyId={+params.id} />
         </div>
       </MainPagesHeader>
       <div className="pt-5">{children}</div>

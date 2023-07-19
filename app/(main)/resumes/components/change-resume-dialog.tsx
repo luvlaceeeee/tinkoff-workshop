@@ -64,8 +64,11 @@ export function ChangeResumeDialog(props: IResume) {
     control: form.control,
   })
 
-  const { data: directions = [], isLoading: isDirectionLoading } =
-    useResumeDirection()
+  const {
+    data: directions = [],
+    isLoading: isDirectionLoading,
+    refetch,
+  } = useResumeDirection({ enabled: false })
 
   const { mutate, isLoading } = useUpdateResume(id, setOpen)
 
@@ -101,7 +104,11 @@ export function ChangeResumeDialog(props: IResume) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Направление</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    onOpenChange={() => refetch()}
+                  >
                     <FormControl>
                       <SelectTrigger className="rounded-2xl">
                         <SelectValue

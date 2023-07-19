@@ -10,6 +10,7 @@ import { SkillsSection } from "@/components/sections/skills-section"
 import { useChangeVacancyVisibility } from "../hooks/useChangeVacancyVisibility"
 import { ChangeVacancyDialog } from "./change-vacancy-dialog"
 import { DeleteVacancyDialog } from "./delete-vacancy-dialog"
+import { VacancyRequestsDialog } from "./vacancy-requests-dialog"
 
 export function VacancyCard(props: IVacancy) {
   const { createdWhen, description, direction, id, isVisible, skills } = props
@@ -75,7 +76,7 @@ export function VacancyCard(props: IVacancy) {
           {isVisible ? "Отключить вакансию" : "Сделать активной"}
         </Button>
         <ChangeVacancyDialog {...props} />
-        <Button variant={"main"}>Посмотреть запросы</Button>
+        <VacancyRequestsDialog {...props} />
       </section>
     </div>
   )

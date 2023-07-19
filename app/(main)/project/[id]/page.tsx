@@ -38,23 +38,27 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
             <h2 className="text-3xl font-semibold transition-colors">
               Инфраструктура
             </h2>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-              {project.contacts.map((contact) => (
-                <li key={generateKey("li")}>
-                  <p>{contact.description}</p>
-                  <Link
-                    className={cn(
-                      buttonVariants({ variant: "link" }),
-                      "h-fit p-0"
-                    )}
-                    target="_blank"
-                    href={contact.link}
-                  >
-                    {contact.link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {project.contacts.length ? (
+              <ul className="ml-6 list-disc [&>li]:mt-2">
+                {project.contacts.map((contact) => (
+                  <li key={generateKey("li")}>
+                    <p>{contact.description}</p>
+                    <Link
+                      className={cn(
+                        buttonVariants({ variant: "link" }),
+                        "h-fit p-0"
+                      )}
+                      target="_blank"
+                      href={contact.link}
+                    >
+                      {contact.link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-muted-foreground">Отсутствуют</p>
+            )}
           </section>
         )}
 

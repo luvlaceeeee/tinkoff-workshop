@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
 import { AboutSection } from "@/components/sections/about-section"
 import { SkillsSection } from "@/components/sections/skills-section"
+import { SendRequestToVacancyDialog } from "@/components/send-request-to-vacancy-dialog"
 
 export function VacancySearchCard(props: Omit<IVacancy, "isActive">) {
   const { direction, createdWhen, skills, description, id, project } = props
@@ -46,7 +47,7 @@ export function VacancySearchCard(props: Omit<IVacancy, "isActive">) {
         <Button variant={"outline"}>
           <Link href={`/vacancy/${id}`}>Узнать подробнее</Link>
         </Button>
-        <Button variant={"main"}>Отправить запрос</Button>
+        <SendRequestToVacancyDialog vacancyId={id} />
       </section>
     </div>
   )

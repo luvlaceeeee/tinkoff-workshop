@@ -164,7 +164,7 @@ export function CreateVacancyForm({ projectId }: { projectId: number }) {
           loading={isLoading}
           disabled={isLoading}
         >
-          {"Создать резюме"}
+          {"Создать вакансию"}
         </Button>
       </form>
     </Form>

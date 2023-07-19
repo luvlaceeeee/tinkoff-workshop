@@ -18,7 +18,7 @@ export function MainVacancies() {
             <Link href={"/projects/choose"}>Создать вакансию</Link>
           </Button>
           <Button variant={"secondary"} asChild>
-            <Link href={"/search/vacancies"}>Смотреть все вакансию</Link>
+            <Link href={"/search/vacancies"}>Смотреть все вакансии</Link>
           </Button>
         </div>
       </div>
