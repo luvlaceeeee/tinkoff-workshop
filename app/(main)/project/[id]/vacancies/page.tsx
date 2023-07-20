@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query"
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import $api from "@/config/axios"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 
 import { VacancyCard } from "./components/vacancy-card"
 
@@ -55,11 +55,15 @@ export default function ProjectVacanciesPage({
       </div>
       {isLoading ? (
         <>
-          <Separator className="h-64 rounded-2xl" />
-          <Separator className="h-64 rounded-2xl" />
+          <Skeleton className="h-64 rounded-2xl" />
+          <Skeleton className="h-64 rounded-2xl" />
         </>
-      ) : (
+      ) : vacancies.length ? (
         vacancies.map((vacancy) => <VacancyCard {...vacancy} />)
+      ) : (
+        <p>
+          {isVisible ? "Нет активных вакансий" : "Нет отключенных вакансий"}
+        </p>
       )}
     </div>
   )

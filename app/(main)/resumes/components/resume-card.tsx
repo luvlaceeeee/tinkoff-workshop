@@ -71,7 +71,11 @@ export function ResumeCard(props: IResume) {
           {isActive ? "Отключить резюме" : "Сделать активным"}
         </Button>
         <ChangeResumeDialog {...props} />
-        <Button variant={"main"}>Посмотреть запросы</Button>
+        {isActive && (
+          <Button variant={"main"}>
+            <Link href={`resumes/${id}/requests`}>Посмотреть запросы</Link>
+          </Button>
+        )}
       </section>
     </div>
   )

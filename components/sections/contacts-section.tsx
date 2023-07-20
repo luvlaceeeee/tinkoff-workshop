@@ -12,7 +12,7 @@ interface ContactSectionProps extends HTMLAttributes<HTMLElement> {
 }
 
 export function ContactSection({
-  contacts,
+  contacts = [],
   titleSize,
   className,
   ...props

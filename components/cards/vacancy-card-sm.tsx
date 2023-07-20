@@ -2,7 +2,6 @@ import { HTMLAttributes } from "react"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import { convertDate } from "@/lib/convertDate"
-import { skillMap } from "@/lib/skillMap"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
@@ -34,11 +33,6 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
     className,
     ...rest
   } = props
-
-  const skillsString = skills
-    .slice(0, 4)
-    .map((skill) => skillMap(skill))
-    .join(", ")
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>

@@ -45,6 +45,7 @@ export function ChangeAvatarDialog() {
           title: "Фото обновлено",
           description: "Обновите страницу",
         })
+        window.location.reload()
       },
     }
   )

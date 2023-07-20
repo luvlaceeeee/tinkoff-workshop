@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { BackButton } from "@/components/back-button"
 import { MainPagesHeader } from "@/components/header/main-pages-header"
 import { Icons } from "@/components/icons"
+import { SendRequestToResumeDialog } from "@/components/send-request-to-resume-dialog"
 
 import { useResumeById } from "../hooks/useResumeById"
 
@@ -39,7 +40,7 @@ export default function ResumeLayout({
         <div className="flex items-center gap-2">
           <BackButton />
           {user.id !== resume.user.id ? (
-            <Button variant={"main"}>Отправить запрос</Button>
+            <SendRequestToResumeDialog resumeId={resume.id} />
           ) : (
             <Button variant={"main"} asChild>
               <Link href={"/resumes"}>Редактировать резюме</Link>

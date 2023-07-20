@@ -24,12 +24,10 @@ export const useCreateResume = () => {
           title: "Резюме создано!",
           description: "Теперь оно видно в поиске",
         })
-        queryClient.invalidateQueries([
-          "user-resumes",
-          "user",
-          "resume-directions",
-        ])
-        router.push(`/resume/${resume.id}`)
+
+        queryClient
+          .invalidateQueries(["user-resumes", "user", "resume-directions"])
+          .then(() => router.push(`/resume/${resume.id}`))
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

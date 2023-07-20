@@ -1,9 +1,6 @@
-import { X } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-
 import { MembersCard } from "../../../components/members-card"
 import { useProjectMembersById } from "../../../hooks/useProjectMembersById"
+import { DeleteMemberDialog } from "./delete-member-dialog"
 
 export function ProjectEditMembers({
   // members,
@@ -19,6 +16,8 @@ export function ProjectEditMembers({
 
   const { data: members = [], isLoading } = useProjectMembersById(projectId)
 
+  if (isLoading) return <div>Loading</div>
+
   return (
     <div className="flex w-1/3 shrink-0 flex-col gap-3">
       <h1 className="text-3xl font-semibold transition-colors">
@@ -29,14 +28,6 @@ export function ProjectEditMembers({
         <h2 className="text-lg transition-colors">Создатель</h2>
         <div className="flex w-full items-center gap-2">
           <MembersCard {...members[0]} />
-          <Button
-            type="button"
-            variant="outline"
-            className="border-destructive/50"
-            size="icon"
-          >
-            <X />
-          </Button>
         </div>
       </div>
 
@@ -45,14 +36,13 @@ export function ProjectEditMembers({
         {members.slice(1).map((member) => (
           <div className="flex w-full items-center gap-2">
             <MembersCard {...member} />
-            <Button
-              type="button"
-              variant="outline"
-              className="border-destructive/50"
-              size="icon"
-            >
-              <X />
-            </Button>
+            <DeleteMemberDialog
+              projectId={projectId}
+              userId={member.userId}
+              direction={member.direction.directionName}
+              name={member.name}
+              surname={member.surname}
+            />
           </div>
         ))}
       </div>

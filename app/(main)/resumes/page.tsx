@@ -1,42 +1,48 @@
 "use client"
 
-import { Fragment } from "react"
+import { useState } from "react"
 
-import { generateKey } from "@/lib/generateKey"
+import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { ResumeCard } from "./components/resume-card"
 import { useUserResumes } from "./hooks/useUserResumes"
 
 function ResumesPage() {
-  const { data: resumes = [], isLoading } = useUserResumes()
+  const [isActive, setIsActive] = useState(true)
 
-  if (isLoading)
-    return (
-      <div className="space-y-4">
-        {[...new Array(2)].map(() => (
-          <Skeleton
-            key={generateKey("skeleton")}
-            className="h-60 w-full rounded-2xl"
-          />
-        ))}
+  const { data: resumes = [], isLoading } = useUserResumes(isActive)
+
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex items-center justify-between">
+        <div className="space-x-2">
+          <Button
+            variant={"outline"}
+            onClick={() => setIsActive(true)}
+            disabled={isActive}
+          >
+            Только активные
+          </Button>
+          <Button
+            variant={"outline"}
+            onClick={() => setIsActive(false)}
+            disabled={!isActive}
+          >
+            Только выключенные
+          </Button>
+        </div>
       </div>
-    )
-
-  return resumes.length ? (
-    <div className="space-y-4">
-      {resumes.map((resume) => (
-        <Fragment key={resume.id}>
-          <ResumeCard {...resume} />
-        </Fragment>
-      ))}
-    </div>
-  ) : (
-    <div className="flex flex-col items-center gap-3">
-      <p className="text-muted-foreground">У вас нет ни одного резюме</p>
-      {/* <Button variant={"secondary"} asChild className="text-xl">
-        <Link href={"/create/resume"}>Создать резюме</Link>
-      </Button> */}
+      {isLoading ? (
+        <>
+          <Skeleton className="h-64 rounded-2xl" />
+          <Skeleton className="h-64 rounded-2xl" />
+        </>
+      ) : resumes.length ? (
+        resumes.map((resume) => <ResumeCard {...resume} />)
+      ) : (
+        <p>{isActive ? "Нет активных резюме" : "Нет отключенных резюме"}</p>
+      )}
     </div>
   )
 }

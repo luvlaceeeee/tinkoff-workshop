@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
 import { AboutSection } from "@/components/sections/about-section"
 import { SkillsSection } from "@/components/sections/skills-section"
+import { SendRequestToResumeDialog } from "@/components/send-request-to-resume-dialog"
 
 export function ResumeSearchCard(props: Omit<IResume, "isActive">) {
   const { direction, createdWhen, skills, description, id, user } = props
@@ -47,7 +48,7 @@ export function ResumeSearchCard(props: Omit<IResume, "isActive">) {
         <Button variant={"outline"}>
           <Link href={`/resume/${id}`}>Узнать подробнее</Link>
         </Button>
-        <Button variant={"main"}>Отправить запрос</Button>
+        <SendRequestToResumeDialog resumeId={id} />
       </section>
     </div>
   )
