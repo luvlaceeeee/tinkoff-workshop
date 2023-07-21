@@ -4,9 +4,11 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import { IResume } from "@/types/interfaces/IResume"
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
@@ -75,6 +77,13 @@ export function SendRequestToVacancyDialog({
           description: "Ждите ответа от создателя",
         })
         setOpen(false)
+      },
+      onError: (error: AxiosError<IErrorResponse>) => {
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: error.response?.data.message,
+        })
       },
     }
   )

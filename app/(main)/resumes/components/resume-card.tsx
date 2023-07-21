@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-import { IResume } from "@/types/interfaces/IResume"
-import { convertDate } from "@/lib/convertDate"
-import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
 import { AboutSection } from "@/components/sections/about-section"
 import { SkillsSection } from "@/components/sections/skills-section"
+import { Button } from "@/components/ui/button"
+import { convertDate } from "@/lib/convertDate"
+import { IResume } from "@/types/interfaces/IResume"
 
 import { useChangeResumeActivity } from "../hooks/useChangeResumeActivity"
 import { ChangeResumeDialog } from "./change-resume-dialog"
@@ -71,11 +71,11 @@ export function ResumeCard(props: IResume) {
           {isActive ? "Отключить резюме" : "Сделать активным"}
         </Button>
         <ChangeResumeDialog {...props} />
-        {isActive && (
+        {/* {isActive && ( */}
           <Button variant={"main"}>
             <Link href={`resumes/${id}/requests`}>Посмотреть запросы</Link>
           </Button>
-        )}
+        {/* )} */}
       </section>
     </div>
   )

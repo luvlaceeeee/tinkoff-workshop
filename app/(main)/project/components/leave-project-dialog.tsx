@@ -65,7 +65,7 @@ export function LeaveProjectDialog(props: {
               onClick={() => mutate()}
               disabled={isLoading}
             >
-              Удалить
+              Покинуть
             </Button>
           </AlertDialogAction>
         </AlertDialogFooter>

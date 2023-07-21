@@ -4,6 +4,7 @@ import { IProject } from "@/types/interfaces/IProject"
 import { convertDate } from "@/lib/convertDate"
 import { statusMap } from "@/lib/statusMap"
 import { trimLine } from "@/lib/trimLine"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
 import { AboutSection } from "@/components/sections/about-section"
@@ -33,7 +34,7 @@ export function ProjectCard(
         title="Тема проекта"
         description={trimLine(theme, 80)!}
         titleSize="text-xl"
-        className="space-y-0"
+        className="space-y-0 text-base"
       />
 
       <section className="space-x-2">
@@ -47,7 +48,11 @@ export function ProjectCard(
         <h2 className="inline-block text-xl font-semibold tracking-tight transition-colors">
           Статус:
         </h2>
-        <p className="inline-block pt-1">{statusMap(status.description)}</p>
+        <p className="inline-block pt-1">
+          <Badge status={status.statusName}>
+            {statusMap(status.description)}
+          </Badge>
+        </p>
       </section>
 
       <section className="mx-auto">

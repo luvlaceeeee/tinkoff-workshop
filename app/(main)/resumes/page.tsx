@@ -19,6 +19,7 @@ function ResumesPage() {
         <div className="space-x-2">
           <Button
             variant={"outline"}
+            size={"sm"}
             onClick={() => setIsActive(true)}
             disabled={isActive}
           >
@@ -26,10 +27,11 @@ function ResumesPage() {
           </Button>
           <Button
             variant={"outline"}
+            size={"sm"}
             onClick={() => setIsActive(false)}
             disabled={!isActive}
           >
-            Только выключенные
+            Только отключенные
           </Button>
         </div>
       </div>

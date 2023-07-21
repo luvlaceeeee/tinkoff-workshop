@@ -4,9 +4,11 @@ import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { useMutation, useQuery } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import { IProject } from "@/types/interfaces/IProject"
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import $api from "@/config/axios"
@@ -90,6 +92,13 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
           description: "Ждите ответа от пользователя",
         })
         setOpen(false)
+      },
+      onError: (error: AxiosError<IErrorResponse>) => {
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: error.response?.data.message,
+        })
       },
     }
   )

@@ -1,10 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Check } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { Toggle } from "@/components/ui/toggle"
 
 import { ProjectCard } from "./components/project-card"
 import { useUserProjects } from "./hooks/useUserProjects"
@@ -29,10 +28,24 @@ export default function ProjectsPage() {
 
   return (
     <div className="space-y-3">
-      <Toggle variant="outline" pressed={isLead} onPressedChange={setIsLead}>
-        <Check className="mr-2 h-4 w-4" />
-        Созданные мной
-      </Toggle>
+      <div className="space-x-2">
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          disabled={!isLead}
+          onClick={() => setIsLead(false)}
+        >
+          Все проекты
+        </Button>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          disabled={isLead}
+          onClick={() => setIsLead(true)}
+        >
+          Созданные мной
+        </Button>
+      </div>
 
       {isLoading ? (
         <Loader />

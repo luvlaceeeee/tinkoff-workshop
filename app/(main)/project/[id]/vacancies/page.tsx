@@ -34,6 +34,7 @@ export default function ProjectVacanciesPage({
         <div className="space-x-2">
           <Button
             variant={"outline"}
+            size={"sm"}
             onClick={() => setIsVisible(true)}
             disabled={isVisible}
           >
@@ -41,6 +42,7 @@ export default function ProjectVacanciesPage({
           </Button>
           <Button
             variant={"outline"}
+            size={"sm"}
             onClick={() => setIsVisible(false)}
             disabled={!isVisible}
           >

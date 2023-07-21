@@ -159,7 +159,7 @@ export function SkillsMultiSelect() {
       </div>
       <div className="relative mt-2">
         {open ? (
-          <div className="absolute top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
+          <div className="absolute top-0 z-10 w-full rounded-xl border bg-popover text-popover-foreground shadow-md outline-none animate-in">
             <CommandGroup className="scrollbar h-fit max-h-32 overflow-auto">
               {SKILLS.map((skill) => {
                 return (

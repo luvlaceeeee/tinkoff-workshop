@@ -75,11 +75,11 @@ export function VacancyCard(props: IVacancy) {
           {isVisible ? "Отключить вакансию" : "Сделать активной"}
         </Button>
         <ChangeVacancyDialog {...props} />
-        {isVisible && (
-          <Button variant={"main"} asChild>
-            <Link href={`vacancies/${id}/requests`}>Посмотреть запросы</Link>
-          </Button>
-        )}
+        {/* {isVisible && ( */}
+        <Button variant={"main"} asChild>
+          <Link href={`vacancies/${id}/requests`}>Посмотреть запросы</Link>
+        </Button>
+        {/* )} */}
       </section>
     </div>
   )

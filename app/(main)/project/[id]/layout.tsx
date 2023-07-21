@@ -12,6 +12,7 @@ import { BackButton } from "@/components/back-button"
 import { MainPagesHeader } from "@/components/header/main-pages-header"
 import { Icons } from "@/components/icons"
 
+import { LeaveLeadDialog } from "../components/leave-lead-dialog"
 import { LeaveProjectDialog } from "../components/leave-project-dialog"
 import { useProjectById } from "../hooks/useProjectById"
 
@@ -44,9 +45,16 @@ export default function ProjectLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          {project.members.find((member) => member.userId === id) && (
-            <LeaveProjectDialog title={project.title} projectId={project.id} />
-          )}
+          {project.members.find((member) => member.userId === id) &&
+            (project.isLeader ? (
+              <LeaveLeadDialog title={project.title} projectId={project.id} />
+            ) : (
+              <LeaveProjectDialog
+                title={project.title}
+                projectId={project.id}
+              />
+            ))}
+
           {project.isLeader && (
             <>
               <Button disabled={pathname === `/project/${params.id}/vacancies`}>
