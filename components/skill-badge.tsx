@@ -10,7 +10,10 @@ interface SkillBadgeProps extends HTMLAttributes<HTMLParagraphElement> {
 export function SkillBadge({ skill, className, ...props }: SkillBadgeProps) {
   return (
     <p
-      className={cn("rounded-xl border p-2 px-3 text-sm", className)}
+      className={cn(
+        "rounded-lg border p-1 px-1.5 text-xs md:rounded-xl md:p-2 md:px-3 md:text-sm ",
+        className
+      )}
       {...props}
     >
       {skillMap(skill)}

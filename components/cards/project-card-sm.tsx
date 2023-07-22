@@ -37,11 +37,14 @@ export function ProjectCardSmall(props: ProjectCardSmallProps): JSX.Element {
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-1 md:pb-2">
         <div className="flex items-center justify-between">
-          <div>
+          <div className="flex-1">
             <CardTitle>
-              <LinkTitle href={`/project/${id}`} className="text-2xl">
+              <LinkTitle
+                href={`/project/${id}`}
+                className="text-xl md:text-2xl"
+              >
                 {title}
               </LinkTitle>
             </CardTitle>
@@ -52,7 +55,7 @@ export function ProjectCardSmall(props: ProjectCardSmallProps): JSX.Element {
           </Badge>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="pb-2 md:pb-3">
         <label className="text-xs text-muted-foreground">Тема: </label>
         {theme ? (
           <p>{trimLine(theme, 50)}</p>
@@ -63,7 +66,7 @@ export function ProjectCardSmall(props: ProjectCardSmallProps): JSX.Element {
       <CardFooter className="flex flex-col items-start">
         <label className="text-xs text-muted-foreground">Описание: </label>
         {description ? (
-          <p>{trimLine(description, 100)}</p>
+          <p>{trimLine(description, 60)}</p>
         ) : (
           <p className="text-sm">Отсутствует</p>
         )}

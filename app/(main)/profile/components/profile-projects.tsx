@@ -13,11 +13,11 @@ export function ProfileProjects() {
     <div>
       {!!projects.length && (
         <>
-          <h1 className="text-3xl font-semibold transition-colors">
+          <h1 className="text-2xl font-semibold transition-colors md:text-3xl">
             Проекты ({projects.length})
           </h1>
           <Carousel
-            className="max-w-[1120px] pt-5"
+            className="max-w-[1120px] pt-3 md:pt-5"
             height={250}
             slideSize="50%"
             slideGap="md"

@@ -18,13 +18,16 @@ export function ProjectCard(
   const { title, theme, membersCount, status, createdWhen, id } = props
 
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
+    <div className="flex w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:gap-3 md:px-5">
       <section className="flex items-center justify-between border-b pb-3">
         <div>
-          <LinkTitle href={`/project/${id}`} className="text-2xl">
+          <LinkTitle
+            href={`/project/${id}`}
+            className="text-xl font-semibold md:text-2xl"
+          >
             {title}
           </LinkTitle>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground md:text-sm">
             Создан: {convertDate(createdWhen)}
           </p>
         </div>
@@ -33,30 +36,30 @@ export function ProjectCard(
       <AboutSection
         title="Тема проекта"
         description={trimLine(theme, 80)!}
-        titleSize="text-xl"
-        className="space-y-0 text-base"
+        titleSize="text-lg md:text-xl"
+        className="space-y-0 md:space-y-1"
       />
 
-      <section className="space-x-2">
-        <h2 className="inline-block text-xl font-semibold tracking-tight transition-colors">
+      <section className="space-x-1 md:space-x-2">
+        <h2 className="inline-block text-lg font-semibold tracking-tight transition-colors md:text-xl">
           Количество участников:
         </h2>
-        <p className="inline-block pt-1">{membersCount}</p>
+        <p className="inline-block">{membersCount}</p>
       </section>
 
       <section className="space-x-2">
-        <h2 className="inline-block text-xl font-semibold tracking-tight transition-colors">
+        <h2 className="inline-block text-lg font-semibold tracking-tight transition-colors md:text-xl">
           Статус:
         </h2>
-        <p className="inline-block pt-1">
+        <p className="inline-block">
           <Badge status={status.statusName}>
             {statusMap(status.description)}
           </Badge>
         </p>
       </section>
 
-      <section className="mx-auto">
-        <Button variant={"main"}>
+      <section>
+        <Button variant={"main"} className="w-full">
           <Link href={`/project/${id}`}>Открыть</Link>
         </Button>
       </section>

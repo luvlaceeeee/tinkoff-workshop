@@ -36,10 +36,10 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader className="pb-1.5">
+      <CardHeader className="pb-1 md:pb-2">
         <div>
           <CardTitle>
-            <LinkTitle href={`/resume/${id}`} className="text-2xl">
+            <LinkTitle href={`/resume/${id}`} className="text-xl md:text-2xl">
               {direction.description}
             </LinkTitle>
           </CardTitle>
@@ -47,7 +47,7 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
         </div>
       </CardHeader>
 
-      <CardContent className="pb-2">
+      <CardContent className="pb-2 md:pb-3">
         <label className="text-xs text-muted-foreground">Описание:</label>
         {description && description.trim() ? (
           <p className="break-normal">
@@ -59,14 +59,16 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
       </CardContent>
 
       <CardFooter className="flex-col flex-wrap items-start gap-1">
-        <label className="text-xs text-muted-foreground">Навыки: </label>
+        <label className="text-xs text-muted-foreground">Навыки:</label>
         {skills.length ? (
           <div className="flex flex-wrap items-center gap-2">
             {skills.slice(0, 3).map((skill) => (
               <SkillBadge skill={skill} />
             ))}
+
             {skills.length - 3 > 0 && (
-              <p className="rounded-xl border p-2 px-3 text-sm text-muted-foreground">
+              <p className="rounded-lg border p-1 px-1.5 text-xs text-muted-foreground md:rounded-xl md:p-2 md:px-3 md:text-sm">
+                {" "}
                 +{skills.length - 3}
               </p>
             )}

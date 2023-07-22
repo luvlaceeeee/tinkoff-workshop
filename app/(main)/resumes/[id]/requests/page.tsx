@@ -1,6 +1,7 @@
 "use client"
 
-import { IResume } from "@/types/interfaces/IResume"
+import { useResumeById } from "@/app/(main)/resume/hooks/useResumeById"
+import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 import {
   Accordion,
   AccordionContent,
@@ -8,10 +9,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Skeleton } from "@/components/ui/skeleton"
-import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
-import { useResumeById } from "@/app/(main)/resume/hooks/useResumeById"
+import { IResume } from "@/types/interfaces/IResume"
 
-import { ResumeRequestCard } from "./components/ResumeRequestCard"
+import { ResumeRequestCard } from "./components/resume-request-card"
 import { useResumeRequests } from "./hooks/useResumeRequests"
 
 export default function ResumeRequestsPage({

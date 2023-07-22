@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const { data: projects = [], isLoading } = useUserProjects(isLead)
 
   const Loader = () => (
-    <div className="grid h-72 grid-cols-2 gap-4">
+    <div className="grid h-72 gap-4 md:grid-cols-2">
       <Separator className="h-full w-full rounded-2xl" />
       <Separator className="h-full w-full rounded-2xl" />
     </div>
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
 
   return (
     <div className="space-y-3">
-      <div className="space-x-2">
+      <div className="flex items-center justify-between gap-2 space-x-2 md:justify-start">
         <Button
           variant={"outline"}
           size={"sm"}
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid gap-4 md:grid-cols-2">
           {projects.map((project) => (
             <ProjectCard {...project} />
           ))}

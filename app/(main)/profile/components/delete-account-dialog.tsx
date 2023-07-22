@@ -19,7 +19,7 @@ export function DeleteAccountDialog() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant={"destructive"} className="w-full">
+        <Button variant={"destructive"} className="w-full text-sm" size={"sm"}>
           Удалить аккаунт
         </Button>
       </AlertDialogTrigger>

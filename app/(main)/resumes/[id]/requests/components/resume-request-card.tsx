@@ -120,6 +120,7 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
         skills={position.skills}
         titleSize="text-lg"
         className="space-y-1"
+        isCard
       />
 
       <AboutSection

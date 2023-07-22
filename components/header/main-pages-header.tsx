@@ -13,11 +13,11 @@ export function MainPagesHeader({
 }: MainPagesHeaderProps) {
   return (
     <header className="relative flex items-center justify-between border-b pb-3">
-      <div className="space-y-2">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight transition-colors lg:text-5xl">
+      <div className="space-y-0 sm:space-y-2">
+        <h1 className="scroll-m-20 text-2xl font-extrabold tracking-tight transition-colors md:text-4xl">
           {title}
         </h1>
-        <h2 className="text-base font-light text-muted-foreground transition-colors">
+        <h2 className="text-sm font-light text-muted-foreground transition-colors md:text-base">
           {description}
         </h2>
       </div>

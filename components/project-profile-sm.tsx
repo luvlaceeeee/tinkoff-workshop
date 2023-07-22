@@ -1,8 +1,10 @@
 import { IProject } from "@/types/interfaces/IProject"
 import { convertDate } from "@/lib/convertDate"
+import { statusMap } from "@/lib/statusMap"
 
 import { LinkTitle } from "./link-title"
 import { AboutSection } from "./sections/about-section"
+import { Badge } from "./ui/badge"
 
 type ProjectProfileSmallProps = IProject
 
@@ -16,7 +18,7 @@ export function ProjectProfileSmall(props: ProjectProfileSmallProps) {
             {title}
           </LinkTitle>
           <p className="text-sm text-muted-foreground">
-            {convertDate(createdWhen)}
+            Создан {convertDate(createdWhen)}
           </p>
         </section>
 
@@ -24,7 +26,9 @@ export function ProjectProfileSmall(props: ProjectProfileSmallProps) {
           <h2 className="text-2xl font-semibold transition-colors">
             Статус проекта
           </h2>
-          <p>{status.description}</p>
+          <Badge status={status.statusName}>
+            {statusMap(status.description)}
+          </Badge>
         </section>
 
         <AboutSection

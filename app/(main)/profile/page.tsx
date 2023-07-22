@@ -25,9 +25,9 @@ function ProfilePage() {
   return (
     <ProfileContext.Provider value={user}>
       <ProfileAvatar />
-      <div className="flex w-full flex-col gap-5">
+      <div className="flex w-full flex-col gap-3 md:gap-5">
         <ProfileHeader />
-        <section className="flex justify-between gap-6 border-b pb-4">
+        <section className="flex flex-col justify-between gap-3 border-b pb-4 md:flex-row md:gap-6">
           <ProfileContacts className="flex-1" />
           <ProfileAbout className="flex-1" />
         </section>

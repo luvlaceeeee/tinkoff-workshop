@@ -62,10 +62,10 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col items-start gap-6"
+        className="flex w-full flex-col justify-between gap-6"
       >
-        <div className="flex w-full justify-between gap-6">
-          <section className="flex flex-1 flex-col gap-6">
+        <div className="space-y-3 md:flex md:w-full md:justify-between md:gap-6 md:space-y-0">
+          <section className="flex flex-col gap-3 md:flex-1 md:gap-6">
             <FormField
               control={form.control}
               name="name"
@@ -79,6 +79,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="surname"
@@ -92,16 +93,9 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                 </FormItem>
               )}
             />
-            <Button
-              type="submit"
-              loading={isLoading}
-              disabled={!form.formState.isDirty || isLoading}
-            >
-              Обновить профиль
-            </Button>
           </section>
 
-          <section className="flex flex-1 flex-col gap-5">
+          <section className="flex flex-col gap-5 md:flex-1">
             <FormField
               control={form.control}
               name="mainInformation"
@@ -111,7 +105,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="Расскажите немного о себе"
-                      className="resize-none"
+                      className="scrollbar resize-none"
                       {...field}
                     />
                   </FormControl>
@@ -162,6 +156,15 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
             </div>
           </section>
         </div>
+
+        <Button
+          type="submit"
+          loading={isLoading}
+          className="w-full md:w-fit"
+          disabled={!form.formState.isDirty || isLoading}
+        >
+          Обновить профиль
+        </Button>
       </form>
     </Form>
   )

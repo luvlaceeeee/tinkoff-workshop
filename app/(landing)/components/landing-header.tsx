@@ -1,38 +1,63 @@
+"use client"
+
+import { ReactNode, useState } from "react"
 import Link from "next/link"
+import { AlignJustify, X } from "lucide-react"
 
-import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
-import { RightPartHeader } from "@/components/header/right-part-header"
 import { Icons } from "@/components/icons"
+import { ThemeToggle } from "@/components/theme-toggle"
 
-import { landingConfig } from "../config/landing"
+import { MobileHeader } from "../../../components/header/mobile-header"
 
-const LandingHeader = () => {
+export const LandingHeader = ({ children }: { children: ReactNode }) => {
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-background/70 backdrop-blur-lg">
-      <div className="container flex h-20 items-center justify-between">
-        <div className="flex gap-6">
-          <Link href="/">
-            <Icons.logo />
-          </Link>
-          <nav className="flex gap-2">
-            {landingConfig.navButton.map((item, index) => (
-              <Button
-                asChild
-                variant={"text"}
-                key={generateKey("head-btn")}
-                className="text-base font-semibold"
-              >
-                <Link href={item.href}>{item.title}</Link>
-              </Button>
-            ))}
-          </nav>
+    <>
+      <header className="sticky top-0 z-40 hidden w-full bg-background/70 backdrop-blur-lg md:flex ">
+        <div className="container flex h-20 items-center justify-between">
+          <div className="flex gap-6">
+            <Link href="/">
+              <Icons.logo />
+            </Link>
+            {/* <nav className="flex gap-2">
+              {landingConfig.navButton.map((item, index) => (
+                <Button
+                  asChild
+                  variant={"text"}
+                  key={generateKey("head-btn")}
+                  className="text-base font-semibold"
+                >
+                  <Link href={item.href}>{item.title}</Link>
+                </Button>
+              ))}
+            </nav> */}
+          </div>
+          {children}
         </div>
-        {/* @ts-expect-error Server Component */}
-        <RightPartHeader />
-      </div>
-    </header>
+      </header>
+
+      <header className="sticky top-0 z-40 w-full bg-background/70 px-7 backdrop-blur-lg md:hidden">
+        <div className="flex h-20 items-center justify-between">
+          <div className="flex gap-6">
+            <Link href="/">
+              <Icons.logo className="w-40" />
+            </Link>
+          </div>
+          <div className="space-x-2">
+            <ThemeToggle />
+            <Button
+              size={"icon"}
+              variant={"ghost"}
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              {showMobileMenu ? <X /> : <AlignJustify />}
+            </Button>
+          </div>
+        </div>
+      </header>
+      {showMobileMenu && <MobileHeader>{children}</MobileHeader>}
+    </>
   )
 }
-
-export default LandingHeader

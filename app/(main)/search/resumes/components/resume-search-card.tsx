@@ -35,6 +35,7 @@ export function ResumeSearchCard(props: Omit<IResume, "isActive">) {
         skills={skills}
         titleSize="text-xl"
         className="space-y-1"
+        isCard
       />
 
       <AboutSection

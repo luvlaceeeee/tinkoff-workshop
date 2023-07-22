@@ -51,7 +51,9 @@ export function ChangeAvatarDialog() {
   )
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className={cn(buttonVariants({ variant: "main" }))}>
+      <DialogTrigger
+        className={cn(buttonVariants({ variant: "main" }), "w-full")}
+      >
         Обновить фото
       </DialogTrigger>
       <DialogContent>
@@ -66,7 +68,7 @@ export function ChangeAvatarDialog() {
               mutate()
             }}
             loading={isLoading}
-            disabled={isLoading}
+            disabled={isLoading || !file}
           >
             Сохранить фото
           </Button>

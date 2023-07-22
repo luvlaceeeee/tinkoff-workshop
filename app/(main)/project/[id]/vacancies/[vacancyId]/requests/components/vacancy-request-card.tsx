@@ -36,7 +36,11 @@ export function VacancyRequestCard({
           description: "Пользователь теперь в проекте, вакансия удалена",
         })
         queryClient
-          .invalidateQueries(["project-members", projectId])
+          .invalidateQueries([
+            "project-members",
+            "project-vacancies",
+            projectId,
+          ])
           .then(() => router.replace(`/project/${projectId}`))
       },
       onError: (error: AxiosError<IErrorResponse>) => {
@@ -126,6 +130,7 @@ export function VacancyRequestCard({
         skills={resume.skills}
         titleSize="text-lg"
         className="space-y-1"
+        isCard
       />
 
       <AboutSection

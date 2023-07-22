@@ -34,6 +34,7 @@ export function VacancySearchCard(props: Omit<IVacancy, "isActive">) {
         skills={skills}
         titleSize="text-xl"
         className="space-y-1"
+        isCard
       />
 
       <AboutSection

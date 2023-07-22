@@ -15,25 +15,23 @@ function ResumesPage() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center justify-between">
-        <div className="space-x-2">
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            onClick={() => setIsActive(true)}
-            disabled={isActive}
-          >
-            Только активные
-          </Button>
-          <Button
-            variant={"outline"}
-            size={"sm"}
-            onClick={() => setIsActive(false)}
-            disabled={!isActive}
-          >
-            Только отключенные
-          </Button>
-        </div>
+      <div className="flex items-center justify-between gap-2 md:justify-start">
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          onClick={() => setIsActive(true)}
+          disabled={isActive}
+        >
+          Только активные
+        </Button>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          onClick={() => setIsActive(false)}
+          disabled={!isActive}
+        >
+          Только отключенные
+        </Button>
       </div>
       {isLoading ? (
         <>

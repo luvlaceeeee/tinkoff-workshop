@@ -218,9 +218,9 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                     <FormItem>
                       <div className="space-y-2">
                         <p className="text-xs font-medium leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                          Можете рассказать, почему вы хотите попасть в команду
-                          или указать контакты, по которым с вами лучше
-                          связаться
+                          Можете рассказать, почему желаете видеть этого
+                          разработчика в проекте, или указать контакты, по
+                          которым с вами лучше связаться
                         </p>
                         <FormControl>
                           <Textarea {...field} className="resize-none" />

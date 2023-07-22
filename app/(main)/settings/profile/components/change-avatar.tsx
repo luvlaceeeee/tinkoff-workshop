@@ -20,14 +20,14 @@ export function ChangeAvatar({
 }: ChangeAvatarProps) {
   return (
     <section
-      className={cn("flex flex-col items-center gap-3", className)}
+      className={cn("flex flex-row items-center gap-6 md:flex-col", className)}
       {...props}
     >
       <UserAvatar
         userId={userId}
         name={name}
         surname={surname}
-        className="h-44 w-44"
+        className="h-28 w-28 md:h-44 md:w-44"
       />
       <ChangeAvatarDialog />
     </section>

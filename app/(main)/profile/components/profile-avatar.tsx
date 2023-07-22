@@ -16,19 +16,21 @@ export function ProfileAvatar({ className, ...props }: ProfileUserAvatarProps) {
   const { name, surname, id } = useContext(ProfileContext)
   return (
     <section
-      className={cn("flex flex-col items-center gap-3", className)}
+      className={cn("flex flex-row items-center gap-6 md:flex-col", className)}
       {...props}
     >
       <UserAvatar
         userId={id}
         name={name}
         surname={surname}
-        className="h-44 w-44"
+        className="h-28 w-28 md:h-44 md:w-44"
       />
-      <Button variant={"main"} className="w-full" asChild>
-        <Link href={"/settings/profile"}>Изменить профиль</Link>
-      </Button>
-      <DeleteAccountDialog />
+      <div className="flex w-full flex-col gap-3">
+        <Button variant={"main"} className="w-full text-sm" size={"sm"}>
+          <Link href={"/settings/profile"}>Изменить профиль</Link>
+        </Button>
+        <DeleteAccountDialog />
+      </div>
     </section>
   )
 }

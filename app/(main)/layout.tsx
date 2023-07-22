@@ -2,6 +2,7 @@ import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/config/authOptions"
+import { RightPartHeader } from "@/components/header/right-part-header"
 import { SiteHeader } from "@/components/header/site-header"
 
 interface MainLayoutProps {
@@ -18,7 +19,10 @@ const MainLayout = async ({ children }: MainLayoutProps) => {
 
   return (
     <div className="scrollbar relative flex min-h-screen flex-col overflow-visible">
-      <SiteHeader />
+      <SiteHeader>
+        {/* @ts-expect-error Server Component */}
+        <RightPartHeader />
+      </SiteHeader>
       <div className="container flex-1 pb-5 pt-5">{children}</div>
     </div>
   )

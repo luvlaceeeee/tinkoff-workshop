@@ -15,12 +15,12 @@ export function ProfileResume() {
     <div>
       {!!resumes.length && (
         <>
-          <h1 className="text-3xl font-semibold transition-colors">
+          <h1 className="text-2xl font-semibold transition-colors md:text-3xl">
             Активные резюме ({resumes.length})
           </h1>
           <Carousel
-            className="max-w-[1120px] pt-5"
-            height={250}
+            className="max-w-[1120px] pt-3 md:pt-5"
+            height={260}
             slideSize="50%"
             slideGap="md"
             align="start"

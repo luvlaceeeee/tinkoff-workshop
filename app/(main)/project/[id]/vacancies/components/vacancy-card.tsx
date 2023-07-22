@@ -46,6 +46,7 @@ export function VacancyCard(props: IVacancy) {
         skills={skills}
         titleSize="text-xl"
         className="space-y-1"
+        isCard
       />
 
       <AboutSection

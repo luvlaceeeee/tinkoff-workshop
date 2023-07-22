@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 import { useRouting } from "../../hooks/useRouting"
 import { IVacancySearchResponse } from "../types/IVacancySearchResponse"
-import { VacancySearchCard } from "./vacancy-seacrh-card"
+import { VacancySearchCard } from "./vacancy-search-card"
 
 export function SearchVacanciesContent() {
   const [router, pathname, searchParams] = useRouting()
@@ -101,6 +101,15 @@ export function SearchVacanciesContent() {
       </div>
     )
 
+  if (!vacancies.content.length) {
+    return (
+      <div className="flex flex-col items-center gap-2">
+        <p className="text-muted-foreground">Ничего не найдено</p>
+        <Button onClick={() => router.back()}>Назад</Button>
+      </div>
+    )
+  }
+
   return (
     <>
       <div className="grid grid-cols-2 gap-5">
@@ -128,6 +137,7 @@ export function SearchVacanciesContent() {
           >
             {1}
           </Button>
+
           {[...new Array(vacancies.pageCount)].map((_, i) => {
             if (i === 0 || i === vacancies.pageCount - 1) return
             return (
@@ -141,14 +151,16 @@ export function SearchVacanciesContent() {
               </Button>
             )
           })}
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => handleCurrentPage(vacancies.pageCount)}
-            className={page === vacancies.pageCount - 1 ? "bg-secondary" : ""}
-          >
-            {vacancies.pageCount}
-          </Button>
+          {vacancies.pageCount !== 1 && (
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              onClick={() => handleCurrentPage(vacancies.pageCount)}
+              className={page === vacancies.pageCount - 1 ? "bg-secondary" : ""}
+            >
+              {vacancies.pageCount}
+            </Button>
+          )}
         </div>
         <Button
           size={"icon"}

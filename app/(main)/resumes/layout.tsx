@@ -11,7 +11,7 @@ function ResumesLayout({ children }: { children: ReactNode }) {
       <MainPagesHeader title={"Ваши резюме"}>
         <div className=" flex items-center gap-2">
           <BackButton />
-          <Button variant="main" asChild>
+          <Button variant="main" size={"sm"}>
             <Link href={"/create/resume"}>Создать резюме</Link>
           </Button>
         </div>

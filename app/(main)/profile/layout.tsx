@@ -9,7 +9,9 @@ function ProfileLayout({ children }: { children: ReactNode }) {
         title="Ваш профиль"
         description="Именно так другие будут видеть вас на сайте"
       />
-      <div className="flex gap-10 pt-5">{children}</div>
+      <div className="flex flex-col gap-3 pt-5 md:flex-row md:gap-10">
+        {children}
+      </div>
     </div>
   )
 }

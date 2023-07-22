@@ -36,10 +36,10 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
 
   return (
     <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-1 md:pb-2">
         <div>
           <CardTitle>
-            <LinkTitle href={`/vacancy/${id}`} className="text-2xl">
+            <LinkTitle href={`/vacancy/${id}`} className="text-xl md:text-2xl">
               {" "}
               {direction.description}
             </LinkTitle>
@@ -47,7 +47,7 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
           <CardDescription>{convertDate(createdWhen)}</CardDescription>
         </div>
       </CardHeader>
-      <CardContent className="pb-3">
+      <CardContent className="pb-2 md:pb-3">
         <label className="text-xs text-muted-foreground">Навыки:</label>
         {skills.length ? (
           <div className="flex flex-wrap items-center gap-2">
@@ -55,13 +55,13 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
               <SkillBadge skill={skill} />
             ))}
             {skills.length - 5 > 0 && (
-              <p className="rounded-xl border p-2 px-3 text-sm text-muted-foreground">
+              <p className="rounded-lg border p-1 px-1.5 text-xs text-muted-foreground md:rounded-xl md:p-2 md:px-3 md:text-sm">
                 +{skills.length - 5}
               </p>
             )}
           </div>
         ) : (
-          <p className="text-sm">Отсутствуют</p>
+          <p className="text-xs md:text-sm">Отсутствуют</p>
         )}
       </CardContent>
       <CardFooter className="flex flex-col items-start">

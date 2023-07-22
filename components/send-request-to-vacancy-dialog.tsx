@@ -172,8 +172,8 @@ export function SendRequestToVacancyDialog({
                     <FormItem>
                       <div className="space-y-2">
                         <p className="text-xs font-medium leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                          Можете рассказать, почему вы хотите попасть в команду
-                          или указать контакты, по которым с вами лучше
+                          Можете рассказать, почему вы желаете попасть в
+                          команду, или указать контакты, по которым с вами лучше
                           связаться
                         </p>
                         <FormControl>
