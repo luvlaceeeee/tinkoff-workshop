@@ -12,7 +12,7 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await axios.post(`${process.env.AUTH_URL}/login`, {
+        const res = await axios.post(`http://31.129.100.122:80/auth/login`, {
           username: credentials?.username,
           password: credentials?.password,
         })
@@ -40,7 +40,7 @@ export const authOptions: AuthOptions = {
       } else {
         try {
           const res = await axios.post(
-            `${process.env.AUTH_URL}/access_token`,
+            `http://31.129.100.122:80/auth/access_token`,
             new URLSearchParams({
               grant_type: "refresh_token",
               refresh_token: `${token.refresh_token}`,

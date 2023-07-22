@@ -11,10 +11,7 @@ export const useRegister = () => {
   const router = useRouter()
   return useMutation({
     mutationFn: (initial: IRegisterRequest) =>
-      axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_API_URL}/users/register`,
-        initial
-      ),
+      axios.post(`http://31.129.100.122:80/users/register`, initial),
     onSuccess: () => {
       toast({
         variant: "accept",
