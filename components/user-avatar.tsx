@@ -15,7 +15,7 @@ export function UserAvatar(props: UserAvatarProps) {
   const { userId, name, surname, className } = props
   return (
     <Avatar className={cn("select-none", className)}>
-      <AvatarImage src={`http://31.129.100.122:80/files/${userId}`} />
+      <AvatarImage src={`http://31.129.100.122:80/api/v1/files/${userId}`} />
       <AvatarFallback className="text-xl">
         {getNameAbbreviation(concatStrings(" ", name, surname)!)}
       </AvatarFallback>

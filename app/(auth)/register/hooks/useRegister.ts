@@ -11,7 +11,7 @@ export const useRegister = () => {
   const router = useRouter()
   return useMutation({
     mutationFn: (initial: IRegisterRequest) =>
-      axios.post(`http://31.129.100.122:80/users/register`, initial),
+      axios.post(`http://31.129.100.122:80/api/v1/users/register`, initial),
     onSuccess: () => {
       toast({
         variant: "accept",
