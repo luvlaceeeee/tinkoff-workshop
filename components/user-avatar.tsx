@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/config/URL"
 import { concatStrings } from "@/lib/concatStrings"
 import { getNameAbbreviation } from "@/lib/getNameAbbreviation"
 import { cn } from "@/lib/utils"
@@ -15,7 +16,7 @@ export function UserAvatar(props: UserAvatarProps) {
   const { userId, name, surname, className } = props
   return (
     <Avatar className={cn("select-none", className)}>
-      <AvatarImage src={`http://31.129.100.122:80/api/v1/files/${userId}`} />
+      <AvatarImage src={`${BASE_API_URL}/files/${userId}`} />
       <AvatarFallback className="text-xl">
         {getNameAbbreviation(concatStrings(" ", name, surname)!)}
       </AvatarFallback>

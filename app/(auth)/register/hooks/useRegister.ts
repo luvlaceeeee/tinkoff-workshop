@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
 
 import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
+import { BASE_API_URL } from "@/config/URL"
 import { toast } from "@/components/ui/use-toast"
 
 import { IRegisterRequest } from "../types/IRegisterRequest"
@@ -11,7 +12,7 @@ export const useRegister = () => {
   const router = useRouter()
   return useMutation({
     mutationFn: (initial: IRegisterRequest) =>
-      axios.post(`http://31.129.100.122:80/api/v1/users/register`, initial),
+      axios.post(`${BASE_API_URL}/users/register`, initial),
     onSuccess: () => {
       toast({
         variant: "accept",
