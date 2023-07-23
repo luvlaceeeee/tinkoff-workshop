@@ -13,12 +13,16 @@ export default function NotFound() {
       </SiteHeader>
       <div className="container flex h-[calc(100vh-6rem)] items-center text-center animate-in fade-in duration-700 md:text-left">
         <div className="space-y-6">
-          <span className="relative text-7xl font-extrabold tracking-tighter text-main before:absolute before:-inset-0 before:bg-main/30 before:blur-2xl">
+          <span className="relative text-5xl font-extrabold tracking-tighter text-main before:absolute before:-inset-0 before:bg-main/30 before:blur-2xl md:text-7xl">
             404
           </span>
-          <p className="text-7xl font-bold">Такой страницы не существует :(</p>
+          <p className=" text-4xl font-bold md:text-7xl">
+            Такой страницы не существует :(
+          </p>
           <Link href={"/"}>
-            <Button variant={"main"}>Вернуться на главную</Button>
+            <Button variant={"main"} className="mt-6">
+              Вернуться на главную
+            </Button>
           </Link>
         </div>
       </div>
