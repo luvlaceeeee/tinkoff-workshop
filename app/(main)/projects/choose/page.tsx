@@ -22,7 +22,7 @@ export default function ProjectChoosePage() {
           <p className="rounded-xl border px-5 py-4">
             <LinkTitle
               href={`/project/${project.id}/vacancies/create`}
-              className="text-xl"
+              className="text-lg md:text-xl"
             >
               {project.title}
             </LinkTitle>

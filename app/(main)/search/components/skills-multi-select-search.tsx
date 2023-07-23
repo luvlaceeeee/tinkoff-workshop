@@ -126,7 +126,7 @@ export function SkillsMultiSelect() {
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
             placeholder="Выберите навык"
-            className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
+            className="ml-2 w-32 flex-1 bg-transparent outline-none placeholder:text-muted-foreground md:w-fit"
           />
         </div>
         <div className="shrink-0 space-x-1">

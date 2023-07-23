@@ -46,7 +46,7 @@ export function DirectionSelect() {
 
   return (
     <div className="flex items-center gap-2">
-      <Label>Направление: </Label>
+      <Label className="text-xs md:text-sm">Направление: </Label>
       <Select
         open={open}
         onOpenChange={() => {

@@ -15,7 +15,7 @@ export function UserProfileProjects() {
     <div>
       {!!projects.length && (
         <>
-          <h1 className="text-3xl font-semibold transition-colors">
+          <h1 className="text-2xl font-semibold transition-colors md:text-3xl">
             Проекты ({projects.length})
           </h1>
           <Carousel

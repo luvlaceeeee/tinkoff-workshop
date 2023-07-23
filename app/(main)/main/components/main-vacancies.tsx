@@ -14,12 +14,16 @@ export function MainVacancies() {
           Недавние Вакансии
         </h2>
         <div className="flex justify-between gap-3">
-          <Button variant={"main"} size={"sm"}>
-            <Link href={"/projects/choose"}>Создать вакансию</Link>
-          </Button>
-          <Button variant={"secondary"} size={"sm"}>
-            <Link href={"/search/vacancies"}>Смотреть все вакансии</Link>
-          </Button>
+          <Link href={"/projects/choose"}>
+            <Button variant={"main"} size={"sm"}>
+              Создать вакансию
+            </Button>
+          </Link>
+          <Link href={"/search/vacancies"}>
+            <Button variant={"secondary"} size={"sm"}>
+              Смотреть все вакансии
+            </Button>
+          </Link>
         </div>
       </div>
       <MainVacancyCarousel />

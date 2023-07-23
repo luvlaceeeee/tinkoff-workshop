@@ -13,9 +13,9 @@ export default function UserProfilePage({
 }) {
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex gap-5">
+      <div className="flex flex-col gap-5 md:flex-row">
         <UserProfileAvatar />
-        <div className="flex w-full justify-between gap-5 border-b">
+        <div className="flex w-full flex-col justify-between gap-5 border-b md:flex-row">
           <UserProfileContacts className="flex-1" />
           <UserProfileAbout className="flex-1" />
         </div>

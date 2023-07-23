@@ -3,7 +3,7 @@ import CreateResumeUser from "./components/create-resume-user"
 
 function CreateResumePage() {
   return (
-    <div className="flex justify-between gap-5">
+    <div className="flex flex-col justify-between gap-5 md:flex-row">
       <CreateResumeForm />
       <CreateResumeUser />
     </div>

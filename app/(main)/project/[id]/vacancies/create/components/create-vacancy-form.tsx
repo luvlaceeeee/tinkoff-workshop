@@ -5,7 +5,6 @@ import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
 
 import { generateKey } from "@/lib/generateKey"
-import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 import { useDirection } from "@/hooks/useDirection"
 import { Button } from "@/components/ui/button"
@@ -27,6 +26,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 import { MultiSelectSkillsForm } from "@/components/multi-select-skills-form"
+import { SkillBadge } from "@/components/skill-badge"
 
 import { useCreateVacancy } from "../hooks/useCreateVacancy"
 import {
@@ -123,18 +123,16 @@ export function CreateVacancyForm({ projectId }: { projectId: number }) {
                 <FormItem>
                   <div className="flex items-center gap-1">
                     <FormControl>
-                      <p className="rounded-xl border p-2 px-3 text-sm">
-                        {skillMap(field.value)}
-                      </p>
+                      <SkillBadge skill={field.value} />
                     </FormControl>
                     <Button
                       type="button"
                       variant="outline"
-                      className="shrink-0 border-destructive/50"
+                      className="h-7 w-7 shrink-0 rounded-md border-destructive/50 md:h-10 md:w-10 md:rounded-xl"
                       size="icon"
                       onClick={() => remove(index)}
                     >
-                      <X />
+                      <X className="h-5 w-5 md:h-fit md:w-fit" />
                     </Button>
                   </div>
                 </FormItem>

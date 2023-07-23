@@ -48,11 +48,12 @@ export function MultiSelectSkillsForm({
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
             placeholder="Выберите навык"
-            className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
+            className="ml-2 w-40 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
           <Button
             variant={"outline"}
             type="button"
+            size={"sm"}
             onClick={() => {
               const inputValue = inputRef.current?.value
               if (!inputValue) return

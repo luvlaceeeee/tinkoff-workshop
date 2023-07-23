@@ -36,9 +36,9 @@ export default function UserProfileLayout({
         <div className="flex items-center gap-2">
           <BackButton />
           {user.email === currentUser.email && (
-            <Button variant={"main"} asChild>
-              <Link href={"/settings/profile"}>Редактировать профиль</Link>
-            </Button>
+            <Link href={"/settings/profile"}>
+              <Button variant={"main"}>Редактировать профиль</Button>
+            </Link>
           )}
         </div>
       </MainPagesHeader>

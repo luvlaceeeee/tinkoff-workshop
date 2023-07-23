@@ -16,10 +16,12 @@ export function UserProfileContacts({
 }: ProfileUserContactsProps) {
   const { contacts = [] } = useContext(UserProfileContext)
   return (
-    <div className={cn("space-y-2", className)} {...props}>
-      <h2 className="text-3xl font-semibold transition-colors">Контакты</h2>
+    <div className={cn("md:space-y-2", className)} {...props}>
+      <h2 className=" text-2xl font-semibold transition-colors md:text-3xl">
+        Контакты
+      </h2>
       {contacts.length ? (
-        <ul className="ml-6 list-disc [&>li]:mt-2">
+        <ul className="ml-6 list-disc md:[&>li]:mt-2">
           {contacts.map((contact) => (
             <li key={generateKey("li")}>
               <Link

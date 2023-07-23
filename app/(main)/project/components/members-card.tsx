@@ -23,10 +23,13 @@ export function MembersCard(props: IProjectMember) {
           className="h-10 w-10"
         />
         <div>
-          <LinkTitle href={`/profile/${userId}`} className="text-lg">
+          <LinkTitle
+            href={`/profile/${userId}`}
+            className="text-base md:text-lg"
+          >
             {concatStrings(" ", name, surname)}
           </LinkTitle>
-          <h2 className="text-sm text-muted-foreground">
+          <h2 className="text-xs text-muted-foreground md:text-sm">
             {direction.description}
           </h2>
         </div>

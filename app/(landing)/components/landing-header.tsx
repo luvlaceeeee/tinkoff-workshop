@@ -1,7 +1,8 @@
 "use client"
 
-import { ReactNode, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { AlignJustify, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -12,6 +13,12 @@ import { MobileHeader } from "../../../components/header/mobile-header"
 
 export const LandingHeader = ({ children }: { children: ReactNode }) => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setShowMobileMenu(false)
+    console.log(pathname)
+  }, [pathname])
 
   return (
     <>

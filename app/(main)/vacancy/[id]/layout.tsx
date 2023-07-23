@@ -47,7 +47,7 @@ export default function VacancyLayout({
         title={vacancy.direction.description}
         description={convertDate(vacancy.createdWhen)}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <BackButton />
           <SendRequestToVacancyDialog vacancyId={+params.id} />
         </div>

@@ -24,7 +24,7 @@ export function ResumeCard(props: IResume) {
   )
 
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-4 md:px-5">
+    <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
       <header className="flex items-center justify-between gap-2 border-b pb-2 md:pb-3">
         <div>
           <LinkTitle
@@ -63,11 +63,11 @@ export function ResumeCard(props: IResume) {
 
       <section className="flex flex-col justify-end gap-3 border-t pt-3 md:flex-row">
         <DeleteResumeDialog id={id} direction={direction.description} />
-        <Button variant={"outline"}>
-          <Link href={"/search/vacancies" + `?${queries.toString()}`}>
+        <Link href={"/search/vacancies" + `?${queries.toString()}`}>
+          <Button variant={"outline"} className="w-full md:w-fit">
             Найти подходящие вакансии
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Button
           variant={"outline"}
           loading={isLoading}
@@ -78,9 +78,11 @@ export function ResumeCard(props: IResume) {
         </Button>
         <ChangeResumeDialog {...props} />
         {/* {isActive && ( */}
-        <Button variant={"main"}>
-          <Link href={`resumes/${id}/requests`}>Посмотреть запросы</Link>
-        </Button>
+        <Link href={`resumes/${id}/requests`}>
+          <Button variant={"main"} className="w-full md:w-fit">
+            Посмотреть запросы
+          </Button>
+        </Link>
         {/* )} */}
       </section>
     </div>

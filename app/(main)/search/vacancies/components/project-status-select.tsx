@@ -47,7 +47,7 @@ export function ProjectStatusSelect() {
 
   return (
     <div className="flex items-center gap-2">
-      <Label className="shrink-0">Статус проекта: </Label>
+      <Label className="shrink-0 text-xs md:text-sm">Статус проекта: </Label>
       <Select
         open={open}
         onOpenChange={() => {

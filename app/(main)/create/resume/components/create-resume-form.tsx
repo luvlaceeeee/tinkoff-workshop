@@ -59,7 +59,10 @@ export function CreateResumeForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-3 md:flex-1 md:space-y-5"
+      >
         <FormField
           control={form.control}
           name="direction"
@@ -136,13 +139,13 @@ export function CreateResumeForm() {
                     <Button
                       type="button"
                       variant="outline"
-                      className="shrink-0 border-destructive/50"
+                      className="h-7 w-7 shrink-0 rounded-md border-destructive/50 md:h-10 md:w-10 md:rounded-xl"
                       size="icon"
                       onClick={() => {
                         remove(index)
                       }}
                     >
-                      <X />
+                      <X className="h-5 w-5 md:h-fit md:w-fit" />
                     </Button>
                   </div>
                 </FormItem>

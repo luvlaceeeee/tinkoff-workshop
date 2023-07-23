@@ -21,17 +21,17 @@ const LoginPage = () => {
       <UserLoginForm />
 
       <p className="px-8 text-center text-sm">
-        <Button
-          variant={"link"}
-          className="text-muted-foreground/80 hover:text-muted-foreground"
+        <Link
+          href="/register"
+          className="hover:text-brand underline underline-offset-4"
         >
-          <Link
-            href="/register"
-            className="hover:text-brand underline underline-offset-4"
+          <Button
+            variant={"link"}
+            className="text-muted-foreground/80 hover:text-muted-foreground"
           >
             Нету аккаунта? Зарегистрируйтесь
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </p>
     </div>
   )

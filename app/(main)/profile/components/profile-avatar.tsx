@@ -26,9 +26,11 @@ export function ProfileAvatar({ className, ...props }: ProfileUserAvatarProps) {
         className="h-28 w-28 md:h-44 md:w-44"
       />
       <div className="flex w-full flex-col gap-3">
-        <Button variant={"main"} className="w-full text-sm" size={"sm"}>
-          <Link href={"/settings/profile"}>Изменить профиль</Link>
-        </Button>
+        <Link href={"/settings/profile"}>
+          <Button variant={"main"} className="w-full text-sm" size={"sm"}>
+            Изменить профиль
+          </Button>
+        </Link>
         <DeleteAccountDialog />
       </div>
     </section>

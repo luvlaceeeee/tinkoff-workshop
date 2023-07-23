@@ -24,12 +24,16 @@ export default function CreateResumeUser() {
   if (!user) return <div>error</div>
 
   return (
-    <div className="flex-1">
-      <div className="flex items-center justify-between">
-        <Label>Эта информация будет видна на странице резюме</Label>
-        <Button variant={"ghost"} asChild>
-          <Link href={"/settings/profile"}>Редактировать профиль</Link>
-        </Button>
+    <div className="md:flex-1">
+      <div className="flex flex-col gap-2 pb-3 md:flex-row md:items-center md:justify-between">
+        <Label className="text-center text-xs md:text-sm">
+          Эта информация будет видна на странице резюме
+        </Label>
+        <Link href={"/settings/profile"}>
+          <Button variant={"outline"} className="w-full md:w-fit">
+            Редактировать профиль
+          </Button>
+        </Link>
       </div>
       <UserProfileSmall {...user} />
     </div>

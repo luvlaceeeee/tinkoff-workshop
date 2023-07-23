@@ -127,14 +127,19 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-5 md:space-y-8"
+          >
             <FormField
               control={form.control}
               name="vacancyId"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <section className="space-y-2">
-                    <Label className="text-sm">Выберите проект</Label>
+                  <section className="space-y-1 md:space-y-2">
+                    <Label className="text-xs md:text-sm">
+                      Выберите проект
+                    </Label>
                     <Select
                       onValueChange={(value) => setProjectId(+value)}
                       onOpenChange={() => refetchProjects()}
@@ -163,8 +168,8 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                   </section>
 
                   {projectId && (
-                    <section className="space-y-2">
-                      <Label className="text-sm">
+                    <section className="space-y-1 md:space-y-2">
+                      <Label className="text-xs md:text-sm">
                         Выберите вакансию, которую хотите отправить
                       </Label>
                       <Select
@@ -200,13 +205,13 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
               )}
             />
 
-            <section className="flex flex-col items-start gap-3">
+            <section className="flex flex-col gap-2 md:gap-3">
               <div className="flex items-center gap-2">
                 <Checkbox
                   checked={coverLetter}
                   onCheckedChange={() => setCoverLetter(!coverLetter)}
                 />
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                <label className="text-xs font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:text-sm">
                   Хотите добавить сопроводительное письмо?
                 </label>
               </div>
@@ -217,7 +222,7 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                   render={({ field }) => (
                     <FormItem>
                       <div className="space-y-2">
-                        <p className="text-xs font-medium leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        <p className="text-xs font-medium leading-none text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70 md:text-xs">
                           Можете рассказать, почему желаете видеть этого
                           разработчика в проекте, или указать контакты, по
                           которым с вами лучше связаться
@@ -234,18 +239,20 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
             </section>
 
             <DialogFooter>
-              <Button className="w-full" variant={"outline"}>
-                Отменить
-              </Button>
-              <Button
-                className="w-full"
-                variant={"main"}
-                type="submit"
-                loading={isMutationLoading}
-                disabled={isMutationLoading}
-              >
-                Отправить запрос
-              </Button>
+              <div className="flex gap-5">
+                <Button className="w-full flex-1" variant={"outline"}>
+                  Отменить
+                </Button>
+                <Button
+                  className="w-full"
+                  variant={"main"}
+                  type="submit"
+                  loading={isMutationLoading}
+                  disabled={isMutationLoading}
+                >
+                  Отправить запрос
+                </Button>
+              </div>
             </DialogFooter>
           </form>
         </Form>

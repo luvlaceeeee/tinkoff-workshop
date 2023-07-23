@@ -31,7 +31,7 @@ export function SkillsSection({
               <SkillBadge skill={skill} />
             ))}
             {skills.length - 3 > 0 && (
-              <p className="rounded-xl border p-2 px-3 text-sm text-muted-foreground">
+              <p className="rounded-lg border p-1 px-1.5 text-xs text-muted-foreground md:rounded-xl md:p-2 md:px-3 md:text-sm">
                 +{skills.length - 3}
               </p>
             )}

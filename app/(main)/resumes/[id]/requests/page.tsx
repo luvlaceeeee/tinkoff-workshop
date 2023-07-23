@@ -1,7 +1,6 @@
 "use client"
 
-import { useResumeById } from "@/app/(main)/resume/hooks/useResumeById"
-import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
+import { IResume } from "@/types/interfaces/IResume"
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Skeleton } from "@/components/ui/skeleton"
-import { IResume } from "@/types/interfaces/IResume"
+import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
+import { useResumeById } from "@/app/(main)/resume/hooks/useResumeById"
 
 import { ResumeRequestCard } from "./components/resume-request-card"
 import { useResumeRequests } from "./hooks/useResumeRequests"
@@ -33,9 +33,11 @@ export default function ResumeRequestsPage({
 
   return (
     <div className="flex flex-col justify-between gap-3">
-      <div className="flex justify-between gap-5">
+      <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-5">
         <div className="flex-1 space-y-1">
-          <h2 className="text-3xl font-semibold transition-colors">Резюме</h2>
+          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
+            Резюме
+          </h2>
           {isResumeLoading ? (
             <Skeleton className="h-60" />
           ) : (
@@ -43,10 +45,12 @@ export default function ResumeRequestsPage({
           )}
         </div>
         <div className="flex-1 space-y-1">
-          <h2 className="text-3xl font-semibold transition-colors">
+          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
             Статистика
           </h2>
-          <p className="text-sm text-muted-foreground">В разработке...</p>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            В разработке...
+          </p>
         </div>
       </div>
       <Accordion type="single" collapsible className="w-full">
@@ -56,7 +60,7 @@ export default function ResumeRequestsPage({
             {isIncomingLoading ? (
               <div>Loading</div>
             ) : incomingRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-5 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-5 overflow-y-auto pr-2 md:grid-cols-2">
                 {incomingRequests.map((request) => (
                   <ResumeRequestCard request={request} />
                 ))}
@@ -72,7 +76,7 @@ export default function ResumeRequestsPage({
             {isSentLoading ? (
               <div>Loading</div>
             ) : sentRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-3 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {sentRequests.map((request) => (
                   <ResumeRequestCard request={request} />
                 ))}
@@ -88,7 +92,7 @@ export default function ResumeRequestsPage({
             {isRecentLoading ? (
               <div>Loading</div>
             ) : recentRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-3 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {recentRequests.map((request) => (
                   <ResumeRequestCard request={request} />
                 ))}

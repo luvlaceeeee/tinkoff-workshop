@@ -30,8 +30,8 @@ export default function ProjectVacanciesPage({
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center justify-between">
-        <div className="space-x-2">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div className="flex justify-between gap-2 md:justify-normal">
           <Button
             variant={"outline"}
             size={"sm"}
@@ -49,11 +49,11 @@ export default function ProjectVacanciesPage({
             Только выключенные
           </Button>
         </div>
-        <Button variant={"main"}>
-          <Link href={`/project/${params.id}/vacancies/create`}>
+        <Link href={`/project/${params.id}/vacancies/create`}>
+          <Button variant={"main"} className="w-full md:w-fit">
             Создать новую вакансию
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
       {isLoading ? (
         <>

@@ -14,16 +14,19 @@ export function ProjectProfileSmall(props: ProjectProfileSmallProps) {
     <div className="flex justify-start gap-5">
       <div className="flex flex-col gap-3">
         <section>
-          <LinkTitle href={`/project/${id}`} className="text-3xl font-semibold">
+          <LinkTitle
+            href={`/project/${id}`}
+            className="text-2xl font-semibold md:text-3xl"
+          >
             {title}
           </LinkTitle>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground md:text-sm">
             Создан {convertDate(createdWhen)}
           </p>
         </section>
 
         <section className="space-y-0">
-          <h2 className="text-2xl font-semibold transition-colors">
+          <h2 className="text-xl font-semibold transition-colors md:text-2xl">
             Статус проекта
           </h2>
           <Badge status={status.statusName}>
@@ -34,13 +37,13 @@ export function ProjectProfileSmall(props: ProjectProfileSmallProps) {
         <AboutSection
           title="Тема проекта"
           description={theme}
-          titleSize="text-2xl"
+          titleSize="text-xl md:text-2xl"
           className="space-y-0"
         />
         <AboutSection
           title="Описание"
           description={description}
-          titleSize="text-2xl"
+          titleSize="text-xl md:text-2xl"
           className="space-y-0"
         />
       </div>

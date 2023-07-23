@@ -24,7 +24,7 @@ export function ContactSection({
       </h2>
       {contacts.length ? (
         contacts.map((contact) => (
-          <ul className="ml-6 list-disc [&>li]:mt-2">
+          <ul className="ml-6 list-disc md:[&>li]:mt-2">
             <li key={generateKey("li")}>
               <Link
                 className={cn(buttonVariants({ variant: "link" }), "h-fit p-0")}

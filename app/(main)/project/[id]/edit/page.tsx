@@ -22,8 +22,8 @@ export default function EditProjectPage({
   if (!project.isLeader) notFound()
 
   return (
-    <div className="flex justify-between gap-10">
-      <div className="w-full border-r pr-10">
+    <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-10">
+      <div className="w-full border-b pb-5 md:border-b-0 md:border-r md:pb-0 md:pr-10">
         <ProjectEditForm {...project} />
       </div>
       <ProjectEditMembers

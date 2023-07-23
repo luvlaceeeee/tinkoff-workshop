@@ -20,12 +20,12 @@ async function AuthLayout({ children }: AuthLayoutProps) {
 
   return (
     <div className="relative min-h-screen">
-      <Button variant={"secondary"} asChild className="absolute left-4 top-4">
-        <Link href={"/"}>
+      <Link href={"/"}>
+        <Button variant={"secondary"} className="absolute left-4 top-4">
           <ArrowLeft />
           На главную
-        </Link>
-      </Button>
+        </Button>
+      </Link>
       <div className="container">{children}</div>
     </div>
   )
