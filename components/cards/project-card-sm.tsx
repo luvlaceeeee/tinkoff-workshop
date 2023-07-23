@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react"
+import Link from "next/link"
 
 import { IProject } from "@/types/interfaces/IProject"
 import { convertDate } from "@/lib/convertDate"
@@ -36,41 +37,49 @@ export function ProjectCardSmall(props: ProjectCardSmallProps): JSX.Element {
   } = props
 
   return (
-    <Card className={cn("rounded-2xl", className)} {...rest}>
-      <CardHeader className="pb-1 md:pb-2">
-        <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <CardTitle>
-              <LinkTitle
-                href={`/project/${id}`}
-                className="text-xl md:text-2xl"
-              >
-                {title}
-              </LinkTitle>
-            </CardTitle>
-            <CardDescription>{convertDate(createdWhen)}</CardDescription>
+    <Link href={`/project/${id}`}>
+      <Card
+        className={cn(
+          "cursor-pointer rounded-2xl bg-secondary/20 hover:bg-secondary/30",
+          className
+        )}
+        {...rest}
+      >
+        <CardHeader className="pb-1 md:pb-2">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <CardTitle>
+                <LinkTitle
+                  href={`/project/${id}`}
+                  className="text-xl md:text-2xl"
+                >
+                  {title}
+                </LinkTitle>
+              </CardTitle>
+              <CardDescription>{convertDate(createdWhen)}</CardDescription>
+            </div>
+            <Badge status={status.statusName}>
+              {statusMap(status.description)}
+            </Badge>
           </div>
-          <Badge status={status.statusName}>
-            {statusMap(status.description)}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent className="pb-2 md:pb-3">
-        <label className="text-xs text-muted-foreground">Тема: </label>
-        {theme ? (
-          <p>{trimLine(theme, 50)}</p>
-        ) : (
-          <p className="text-sm">Отсутствует</p>
-        )}
-      </CardContent>
-      <CardFooter className="flex flex-col items-start">
-        <label className="text-xs text-muted-foreground">Описание: </label>
-        {description ? (
-          <p>{trimLine(description, 60)}</p>
-        ) : (
-          <p className="text-sm">Отсутствует</p>
-        )}
-      </CardFooter>
-    </Card>
+        </CardHeader>
+        <CardContent className="pb-2 md:pb-3">
+          <label className="text-xs text-muted-foreground">Тема: </label>
+          {theme ? (
+            <p>{trimLine(theme, 50)}</p>
+          ) : (
+            <p className="text-sm">Отсутствует</p>
+          )}
+        </CardContent>
+        <CardFooter className="flex flex-col items-start">
+          <label className="text-xs text-muted-foreground">Описание: </label>
+          {description ? (
+            <p>{trimLine(description, 60)}</p>
+          ) : (
+            <p className="text-sm">Отсутствует</p>
+          )}
+        </CardFooter>
+      </Card>
+    </Link>
   )
 }

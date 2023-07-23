@@ -85,7 +85,12 @@ export function ChangeVacancyDialog(props: IVacancy) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className={cn(buttonVariants({ variant: "outline" }))}>
+      <DialogTrigger
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "bg-secondary/20"
+        )}
+      >
         Редактировать информацию
       </DialogTrigger>
       <DialogContent>

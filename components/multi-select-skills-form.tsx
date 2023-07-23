@@ -54,6 +54,7 @@ export function MultiSelectSkillsForm({
             variant={"outline"}
             type="button"
             size={"sm"}
+            disabled={!inputValue}
             onClick={() => {
               const inputValue = inputRef.current?.value
               if (!inputValue) return

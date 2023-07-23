@@ -152,7 +152,7 @@ export function CreateProjectForm() {
           name="direction"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ваше Направление</FormLabel>
+              <FormLabel>Ваше направление</FormLabel>
               <Select
                 onValueChange={field.onChange}
                 onOpenChange={() => !directions.length && refetchDirections()}
@@ -208,7 +208,7 @@ export function CreateProjectForm() {
                     <FormItem>
                       <FormLabel>Описание</FormLabel>
                       <FormControl>
-                        <Input placeholder="URL" {...field} />
+                        <Input placeholder="Описание ссылки" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -221,7 +221,7 @@ export function CreateProjectForm() {
                   size="icon"
                   onClick={() => remove(index)}
                 >
-                  <X />
+                  <X className="h-5 w-5 md:h-fit md:w-fit" />
                 </Button>
               </div>
             ))}

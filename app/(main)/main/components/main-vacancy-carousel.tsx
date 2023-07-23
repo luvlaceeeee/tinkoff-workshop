@@ -1,14 +1,14 @@
 "use client"
 
-import Link from "next/link"
 import { Carousel } from "@mantine/carousel"
 import { useQuery } from "@tanstack/react-query"
 import { AxiosError } from "axios"
+import Link from "next/link"
 
-import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
+import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
-import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 
 import { IVacancySearchResponse } from "../../search/vacancies/types/IVacancySearchResponse"
 import { CarouselLoader } from "./carousel-loader"
@@ -33,7 +33,7 @@ export function MainVacancyCarousel() {
 
   return (
     <Carousel
-      height={250}
+      height={260}
       slideSize="32.9%"
       slideGap="md"
       align="start"

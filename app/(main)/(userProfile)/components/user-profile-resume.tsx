@@ -1,10 +1,10 @@
 "use client"
 
-import { Carousel } from "@mantine/carousel"
 import { useContext } from "react"
+import { Carousel } from "@mantine/carousel"
 
-import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 import { generateKey } from "@/lib/generateKey"
+import { ResumeCardSmall } from "@/components/cards/resume-card-sm"
 
 import { UserProfileContext } from "../context/UserProfileContext"
 
@@ -17,12 +17,12 @@ export function UserProfileResume() {
     <div>
       {!!resumes.length && (
         <>
-          <h1 className="text-2xl md:text-3xl font-semibold transition-colors">
+          <h1 className="text-2xl font-semibold transition-colors md:text-3xl">
             Активные резюме ({resumes.length})
           </h1>
           <Carousel
             className=" pt-5"
-            height={250}
+            height={260}
             slideSize="50%"
             slideGap="md"
             align="start"

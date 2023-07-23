@@ -24,7 +24,7 @@ export function VacancyCard(props: IVacancy) {
   )
 
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
+    <div className="flex w-full flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-5">
       <section className="flex items-center justify-between gap-2 border-b pb-2 md:pb-3">
         <div>
           <LinkTitle href={`/vacancy/${id}`} className="text-xl md:text-2xl">
@@ -64,7 +64,7 @@ export function VacancyCard(props: IVacancy) {
           direction={direction.description}
           projectId={6}
         />
-        <Button variant={"outline"}>
+        <Button variant={"outline"} className="bg-secondary/20">
           <Link href={"/search/resumes" + `?${queries.toString()}`}>
             Найти подходящие резюме
           </Link>
@@ -74,12 +74,13 @@ export function VacancyCard(props: IVacancy) {
           loading={isLoading}
           disabled={isLoading}
           onClick={() => mutate()}
+          className="bg-secondary/20"
         >
           {isVisible ? "Отключить вакансию" : "Сделать активной"}
         </Button>
         <ChangeVacancyDialog {...props} />
         {/* {isVisible && ( */}
-        <Button variant={"main"} asChild>
+        <Button variant={"main"}>
           <Link href={`vacancies/${id}/requests`}>Посмотреть запросы</Link>
         </Button>
         {/* )} */}

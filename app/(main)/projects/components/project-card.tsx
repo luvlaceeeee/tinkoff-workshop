@@ -18,7 +18,7 @@ export function ProjectCard(
   const { title, theme, membersCount, status, createdWhen, id } = props
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:gap-3 md:px-5">
+    <div className="flex w-full flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 md:gap-3 md:px-5">
       <section className="flex items-center justify-between border-b pb-3">
         <div>
           <LinkTitle

@@ -135,7 +135,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
                           size="icon"
                           onClick={() => remove(index)}
                         >
-                          <X />
+                          <X className="h-5 w-5 md:h-fit md:w-fit" />
                         </Button>
                       </div>
                       <FormMessage />
