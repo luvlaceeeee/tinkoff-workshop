@@ -34,20 +34,25 @@ export default function VacancyRequestsPage({
 
   return (
     <div className="flex flex-col justify-between gap-3">
-      <div className="flex justify-between gap-5">
+      <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-5">
         <div className="flex-1 space-y-1">
-          <h2 className="text-3xl font-semibold transition-colors">Вакансия</h2>
+          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
+            Вакансия
+          </h2>
           {isVacancyLoading ? (
             <Skeleton className="h-60" />
           ) : (
             <VacancyCardSmall {...data} />
           )}
         </div>
+
         <div className="flex-1 space-y-1">
-          <h2 className="text-3xl font-semibold transition-colors">
+          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
             Статистика
           </h2>
-          <p className="text-sm text-muted-foreground">В разработке...</p>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            В разработке...
+          </p>
         </div>
       </div>
 
@@ -58,7 +63,7 @@ export default function VacancyRequestsPage({
             {isIncomingLoading ? (
               <div>Loading</div>
             ) : incomingRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-5 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-5 overflow-y-auto pr-2 md:grid-cols-2">
                 {incomingRequests.map((request) => (
                   <VacancyRequestCard
                     request={request}
@@ -77,7 +82,7 @@ export default function VacancyRequestsPage({
             {isSentLoading ? (
               <div>Loading</div>
             ) : sentRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-3 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {sentRequests.map((request) => (
                   <VacancyRequestCard
                     request={request}
@@ -96,7 +101,7 @@ export default function VacancyRequestsPage({
             {isRecentLoading ? (
               <div>Loading</div>
             ) : recentRequests.length ? (
-              <div className="scrollbar grid h-96 grid-cols-2 gap-3 overflow-y-auto pr-2">
+              <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {recentRequests.map((request) => (
                   <VacancyRequestCard
                     request={request}

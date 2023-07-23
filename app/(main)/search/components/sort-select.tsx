@@ -41,7 +41,7 @@ export function SortSelect() {
 
   return (
     <div className="flex items-center gap-2">
-      <Label>Сортировка: </Label>
+      <Label className="text-xs md:text-sm">Сортировка: </Label>
       <Select
         onValueChange={handleOnValueChange}
         //@ts-ignore

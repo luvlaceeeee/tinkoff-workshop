@@ -21,7 +21,7 @@ export function UserProfileAvatar({
         userId={id}
         name={name}
         surname={surname}
-        className="h-44 w-44"
+        className="h-24 w-24 md:h-44 md:w-44"
       />
     </section>
   )

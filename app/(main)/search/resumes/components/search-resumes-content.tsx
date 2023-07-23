@@ -87,7 +87,7 @@ export function SearchResumesContent() {
 
   if (isLoading)
     return (
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid gap-5 md:grid-cols-2">
         {[...new Array(4)].map(() => (
           <Skeleton
             key={generateKey("skeleton")}
@@ -108,7 +108,7 @@ export function SearchResumesContent() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid gap-5 md:grid-cols-2">
         {resumes.content.map((resume) => (
           <Fragment key={resume.id}>
             <ResumeSearchCard {...resume} />

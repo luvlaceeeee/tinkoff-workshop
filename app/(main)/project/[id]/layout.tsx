@@ -45,35 +45,69 @@ export default function ProjectLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          {project.members.find((member) => member.userId === id) &&
-            (project.isLeader ? (
-              <LeaveLeadDialog title={project.title} projectId={project.id} />
-            ) : (
-              <LeaveProjectDialog
-                title={project.title}
-                projectId={project.id}
-              />
-            ))}
-
-          {project.isLeader && (
-            <>
-              <Button disabled={pathname === `/project/${params.id}/vacancies`}>
+          <div className="hidden space-x-2 md:block">
+            {project.members.find((member) => member.userId === id) &&
+              (project.isLeader ? (
+                <LeaveLeadDialog title={project.title} projectId={project.id} />
+              ) : (
+                <LeaveProjectDialog
+                  title={project.title}
+                  projectId={project.id}
+                />
+              ))}
+            {project.isLeader && (
+              <>
                 <Link href={`/project/${params.id}/vacancies`}>
-                  Вакансии проекта
+                  <Button
+                    disabled={pathname === `/project/${params.id}/vacancies`}
+                  >
+                    Вакансии проекта
+                  </Button>
                 </Link>
-              </Button>
-              <Button
-                variant={"main"}
-                disabled={pathname === `/project/${params.id}/edit`}
-              >
                 <Link href={`/project/${params.id}/edit`}>
-                  Редактировать проект
+                  <Button
+                    variant={"main"}
+                    disabled={pathname === `/project/${params.id}/edit`}
+                  >
+                    Редактировать проект
+                  </Button>
                 </Link>
-              </Button>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </MainPagesHeader>
+      {/* mobile */}
+      <div className="mt-3 flex flex-col gap-2 md:hidden">
+        {project.members.find((member) => member.userId === id) &&
+          (project.isLeader ? (
+            <LeaveLeadDialog title={project.title} projectId={project.id} />
+          ) : (
+            <LeaveProjectDialog title={project.title} projectId={project.id} />
+          ))}
+        {project.isLeader && (
+          <>
+            <Link href={`/project/${params.id}/vacancies`}>
+              <Button
+                className="w-full"
+                disabled={pathname === `/project/${params.id}/vacancies`}
+              >
+                Вакансии проекта
+              </Button>
+            </Link>
+            <Link href={`/project/${params.id}/edit`}>
+              <Button
+                variant={"main"}
+                className="w-full"
+                disabled={pathname === `/project/${params.id}/edit`}
+              >
+                Редактировать проект
+              </Button>
+            </Link>
+          </>
+        )}
+      </div>
+
       <div className="pt-5">{children}</div>
     </div>
   )

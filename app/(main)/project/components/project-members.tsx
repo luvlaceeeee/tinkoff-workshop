@@ -12,8 +12,8 @@ export function ProjectMembers({ projectId }: { projectId: number }) {
   const { data: members = [], isLoading } = useProjectMembersById(projectId)
 
   return (
-    <div className="w-1/3 shrink-0 space-y-3">
-      <h1 className="text-3xl font-semibold transition-colors">
+    <div className="shrink-0 space-y-3 md:w-1/3">
+      <h1 className="text-2xl font-semibold transition-colors md:text-3xl">
         Участники ({isLoading ? 0 : members.length})
       </h1>
 

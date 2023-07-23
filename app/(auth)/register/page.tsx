@@ -21,14 +21,14 @@ const Page = () => {
       <UserRegisterForm />
 
       <p className="px-8 text-center text-sm">
-        <Button
-          variant={"link"}
-          className="text-muted-foreground/80 hover:text-muted-foreground"
-        >
-          <Link href="/login" className="underline underline-offset-4">
+        <Link href="/login" className="underline underline-offset-4">
+          <Button
+            variant={"link"}
+            className="text-muted-foreground/80 hover:text-muted-foreground"
+          >
             Уже есть аккаунт? Войдите
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </p>
     </div>
   )

@@ -12,12 +12,16 @@ export function MainResumes() {
           Недавние Резюме
         </h2>
         <div className="flex justify-between gap-3">
-          <Button variant={"main"} size={"sm"}>
-            <Link href={"/create/resume"}>Создать резюме</Link>
-          </Button>
-          <Button variant={"secondary"} size={"sm"}>
-            <Link href={"/search/resumes"}>Смотреть все резюме</Link>
-          </Button>
+          <Link href={"/create/resume"}>
+            <Button variant={"main"} size={"sm"}>
+              Создать резюме
+            </Button>
+          </Link>
+          <Link href={"/search/resumes"}>
+            <Button variant={"secondary"} size={"sm"}>
+              Смотреть все резюме
+            </Button>
+          </Link>
         </div>
       </div>
       <MainResumeCarousel />

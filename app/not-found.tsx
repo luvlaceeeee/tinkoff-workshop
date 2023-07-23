@@ -17,10 +17,9 @@ export default function NotFound() {
             404
           </span>
           <p className="text-7xl font-bold">Такой страницы не существует :(</p>
-          <Button variant={"main"} asChild>
-            <Link href={"/"}>Вернуться на главную</Link>
-            {/* <BackButton /> */}
-          </Button>
+          <Link href={"/"}>
+            <Button variant={"main"}>Вернуться на главную</Button>
+          </Link>
         </div>
       </div>
     </div>

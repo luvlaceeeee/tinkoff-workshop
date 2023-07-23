@@ -50,9 +50,9 @@ export function UserAvatarDropdown() {
         <Link href={"/profile"}>
           <DropdownMenuItem>Профиль</DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>
-          <Link href={"/settings/profile"}>Настройки</Link>
-        </DropdownMenuItem>
+        <Link href={"/settings/profile"}>
+          <DropdownMenuItem>Настройки</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="text-destructive"

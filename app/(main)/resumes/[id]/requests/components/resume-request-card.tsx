@@ -95,30 +95,30 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
   }
 
   return (
-    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-5">
-      <header className="flex items-center justify-between border-b pb-3">
+    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:px-5">
+      <header className="flex items-center justify-between border-b pb-2 md:pb-3">
         <div>
           <LinkTitle
             href={`/vacancy/${position.id}`}
-            className="text-xl font-semibold"
+            className="text-lg font-semibold md:text-xl"
           >
             {position.direction.description}
           </LinkTitle>
           <LinkTitle
             href={`/project/${position.project.id}`}
-            className="block text-base font-normal"
+            className="block text-sm font-normal md:text-base"
           >
             {position.project.title}
           </LinkTitle>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground md:text-sm">
           Отправлен {convertDate(createdWhen)}
         </p>
       </header>
 
       <SkillsSection
         skills={position.skills}
-        titleSize="text-lg"
+        titleSize="text-base md:text-lg"
         className="space-y-1"
         isCard
       />
@@ -126,25 +126,25 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
       <AboutSection
         title="Описание вакансии"
         description={position.description}
-        titleSize={"text-lg"}
-        className="space-y-0"
+        titleSize="text-base md:text-lg"
+        className="space-y-1"
       />
 
       {coverLetter && (
         <AboutSection
           title="Сопроводительное письмо"
           description={coverLetter}
-          titleSize={"text-lg"}
-          className="space-y-0"
+          titleSize="text-base md:text-lg"
+          className="space-y-1"
         />
       )}
 
       <footer className="flex items-center justify-end gap-3 border-t pt-3">
-        <Button variant={"outline"} asChild>
-          <Link href={`/vacancy/${position.id}`} target="_blank">
+        <Link href={`/vacancy/${position.id}`} target="_blank">
+          <Button variant={"outline"} asChild>
             Посмотреть вакансию
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Footer />
       </footer>
     </div>

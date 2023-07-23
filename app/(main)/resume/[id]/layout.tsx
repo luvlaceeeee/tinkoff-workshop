@@ -37,14 +37,16 @@ export default function ResumeLayout({
         title={resume.direction.description}
         description={convertDate(resume.createdWhen)}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <BackButton />
           {user.id !== resume.user.id ? (
             <SendRequestToResumeDialog resumeId={resume.id} />
           ) : (
-            <Button variant={"main"} asChild>
-              <Link href={"/resumes"}>Редактировать резюме</Link>
-            </Button>
+            <Link href={"/resumes"}>
+              <Button variant={"main"} asChild>
+                Редактировать резюме
+              </Button>
+            </Link>
           )}
         </div>
       </MainPagesHeader>

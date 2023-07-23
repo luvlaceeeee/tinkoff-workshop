@@ -17,19 +17,19 @@ export async function RightPartHeader() {
       <nav className="hidden items-center space-x-3 md:flex">
         {data?.user ? (
           <>
-            <Button variant={"secondary"} asChild>
-              <Link href="/projects">Мои проекты</Link>
-            </Button>
-            <Button variant={"secondary"} asChild>
-              <Link href="/resumes">Мои резюме</Link>
-            </Button>
+            <Link href="/projects">
+              <Button variant={"secondary"}>Мои проекты</Button>
+            </Link>
+            <Link href="/resumes">
+              <Button variant={"secondary"}>Мои резюме</Button>
+            </Link>
             {/* TODO Add Notifications */}
             <div className="relative">
-              <Button variant="secondary" size="icon" asChild>
-                <Link href="/notifications">
-                  <Bell />
-                </Link>
-              </Button>
+              <Link href="/notifications">
+                <Button variant="secondary" size="icon">
+                  <Bell className="h-5 w-5" />
+                </Button>
+              </Link>
               <div className="absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm">
                 0
               </div>
@@ -38,12 +38,12 @@ export async function RightPartHeader() {
           </>
         ) : (
           <>
-            <Button variant={"secondary"} asChild>
-              <Link href="/login">Войти</Link>
-            </Button>
-            <Button variant={"secondary"} asChild>
-              <Link href="/register">Зарегистрироваться</Link>
-            </Button>
+            <Link href="/login">
+              <Button variant={"secondary"}>Войти</Button>
+            </Link>
+            <Link href="/register">
+              <Button variant={"secondary"}>Зарегистрироваться</Button>
+            </Link>
           </>
         )}
         <ThemeToggle />
@@ -54,61 +54,81 @@ export async function RightPartHeader() {
           <>
             <div className="flex w-full justify-between">
               <div className="relative">
-                <Button variant="secondary" size="icon" asChild>
-                  <Link href="/notifications">
-                    <Bell />
-                  </Link>
-                </Button>
+                <Link href="/notifications">
+                  <Button variant="secondary" size="icon">
+                    <Bell className="h-5 w-5" />
+                  </Button>
+                </Link>
                 <div className="absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm">
                   0
                 </div>
               </div>
               <UserAvatarDropdown />
             </div>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/projects">Мои проекты</Link>
-            </Button>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/resumes">Мои резюме</Link>
-            </Button>
+            <Link href="/projects" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Мои проекты
+              </Button>
+            </Link>
+            <Link href="/resumes" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Мои резюме
+              </Button>
+            </Link>
 
             <Separator />
 
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/main">Главная</Link>
-            </Button>
+            <Link href="/main" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Главная
+              </Button>
+            </Link>
 
             <p className="w-full text-left text-sm text-muted-foreground">
               Найти
             </p>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/search/vacancies">Проект</Link>
-            </Button>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/search/resumes">Разработчика</Link>
-            </Button>
+            <Link href="/search/vacancies" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Проект
+              </Button>
+            </Link>
+            <Link href="/search/resumes" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Разработчика
+              </Button>
+            </Link>
 
             <p className="w-full text-left text-sm text-muted-foreground">
               Создать
             </p>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/create/resume">Вакансию</Link>
-            </Button>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/projects/choose">Резюме</Link>
-            </Button>
-            <Button variant={"secondary"} className="w-full">
-              <Link href="/create/project">Проект</Link>
-            </Button>
+            <Link href="/projects/choose" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Вакансию
+              </Button>
+            </Link>
+            <Link href="/create/resume" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Резюме
+              </Button>
+            </Link>
+            <Link href="/create/project" className="w-full">
+              <Button variant={"secondary"} className="w-full">
+                Проект
+              </Button>
+            </Link>
           </>
         ) : (
           <>
-            <Button variant={"ghost"} className="w-full">
-              <Link href="/login">Войти</Link>
-            </Button>
-            <Button variant={"ghost"} className="w-full">
-              <Link href="/register">Зарегистрироваться</Link>
-            </Button>
+            <Link href="/login" className="w-full">
+              <Button variant={"ghost"} className="w-full">
+                Войти
+              </Button>
+            </Link>
+            <Link href="/register" className="w-full">
+              <Button variant={"ghost"} className="w-full">
+                Зарегистрироваться
+              </Button>
+            </Link>
           </>
         )}
       </nav>

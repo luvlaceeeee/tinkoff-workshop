@@ -8,9 +8,9 @@ export default function ProjectsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col">
       <MainPagesHeader title="Ваши проекты">
-        <Button variant={"main"}>
-          <Link href="/create/project">Создать проект</Link>
-        </Button>
+        <Link href="/create/project">
+          <Button variant={"main"}>Создать проект</Button>
+        </Link>
       </MainPagesHeader>
       <div className="pt-5">{children}</div>
     </div>

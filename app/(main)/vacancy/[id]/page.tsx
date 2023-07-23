@@ -11,13 +11,17 @@ export default function VacancyPage({ params }: { params: { id: string } }) {
   const { data: vacancy = {} as IVacancy } = useVacancyById(+params.id)
 
   return (
-    <div className="flex justify-between gap-10">
-      <div className="flex flex-1 flex-col gap-5 border-r pr-3">
-        <SkillsSection skills={vacancy.skills} titleSize="text-3xl" />
+    <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-10">
+      <div className="flex flex-1 flex-col gap-5 border-b pb-5 md:border-b-0 md:border-r md:pb-0 md:pr-3">
+        <SkillsSection
+          skills={vacancy.skills}
+          titleSize="text-2xl md:text-3xl"
+        />
         <AboutSection
           title="Опыт разработки"
           description={vacancy.description}
-          titleSize="text-3xl"
+          titleSize="text-2xl md:text-3xl"
+          className="space-y-1"
         />
       </div>
       <div className="flex-1 space-y-3">

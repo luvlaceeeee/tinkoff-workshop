@@ -59,9 +59,11 @@ export function ProjectCard(
       </section>
 
       <section>
-        <Button variant={"main"} className="w-full">
-          <Link href={`/project/${id}`}>Открыть</Link>
-        </Button>
+        <Link href={`/project/${id}`} className="w-full">
+          <Button variant={"main"} className="w-full">
+            Открыть
+          </Button>
+        </Link>
       </section>
     </div>
   )

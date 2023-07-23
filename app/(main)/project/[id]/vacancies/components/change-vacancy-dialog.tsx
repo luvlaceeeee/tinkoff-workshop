@@ -5,7 +5,6 @@ import { useFieldArray, useForm } from "react-hook-form"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import { generateKey } from "@/lib/generateKey"
-import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 import { useDirection } from "@/hooks/useDirection"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -36,6 +35,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Icons } from "@/components/icons"
 import { MultiSelectSkillsForm } from "@/components/multi-select-skills-form"
+import { SkillBadge } from "@/components/skill-badge"
 
 import {
   CreateVacancySchema,
@@ -65,11 +65,8 @@ export function ChangeVacancyDialog(props: IVacancy) {
     control: form.control,
   })
 
-  const {
-    data: directions = [],
-    isLoading: isDirectionLoading,
-    refetch,
-  } = useDirection({ enabled: false })
+  const { data: directions = [], isLoading: isDirectionLoading } =
+    useDirection()
 
   const { mutate, isLoading } = useUpdateVacancy(
     id,
@@ -93,7 +90,7 @@ export function ChangeVacancyDialog(props: IVacancy) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Редактирование резюме</DialogTitle>
+          <DialogTitle>Редактирование вакансии</DialogTitle>
           <DialogDescription>
             Измените нужные поля и сохраните
           </DialogDescription>
@@ -109,11 +106,7 @@ export function ChangeVacancyDialog(props: IVacancy) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Направление</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    onOpenChange={() => refetch()}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger className="rounded-2xl">
                         <SelectValue placeholder="Выберите направление вакансии" />
@@ -167,18 +160,16 @@ export function ChangeVacancyDialog(props: IVacancy) {
                     <FormItem>
                       <div className="flex items-center gap-1">
                         <FormControl>
-                          <p className="rounded-xl border p-2 px-3 text-sm">
-                            {skillMap(field.value)}
-                          </p>
+                          <SkillBadge skill={field.value} />
                         </FormControl>
                         <Button
                           type="button"
                           variant="outline"
-                          className="shrink-0 border-destructive/50"
+                          className="h-7 w-7 shrink-0 rounded-md border-destructive/50 md:h-10 md:w-10 md:rounded-xl"
                           size="icon"
                           onClick={() => remove(index)}
                         >
-                          <X />
+                          <X className="h-5 w-5 md:h-fit md:w-fit" />
                         </Button>
                       </div>
                     </FormItem>

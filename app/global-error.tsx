@@ -3,7 +3,6 @@
 import { Link } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { BackButton } from "@/components/back-button"
 import { RightPartHeader } from "@/components/header/right-part-header"
 import { SiteHeader } from "@/components/header/site-header"
 
@@ -28,10 +27,9 @@ export default function GlobalError({
                 Неожиданная ошибка
               </span>
               <p className="text-7xl font-bold">Как такое произошло?...</p>
-              <Button variant={"main"} asChild>
-                <Link href={"/"}>Вернуться на главную</Link>
-                <BackButton />
-              </Button>
+              <Link href={"/"}>
+                <Button variant={"main"}>Вернуться на главную</Button>
+              </Link>
             </div>
           </div>
         </div>

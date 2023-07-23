@@ -68,7 +68,6 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
 
             {skills.length - 3 > 0 && (
               <p className="rounded-lg border p-1 px-1.5 text-xs text-muted-foreground md:rounded-xl md:p-2 md:px-3 md:text-sm">
-                {" "}
                 +{skills.length - 3}
               </p>
             )}

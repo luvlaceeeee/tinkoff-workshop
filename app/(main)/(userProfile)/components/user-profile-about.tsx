@@ -12,10 +12,12 @@ export function UserProfileAbout({
 }: ProfileUserAboutProps) {
   const { mainInformation = "" } = useContext(UserProfileContext)
   return (
-    <div className={cn(className)} {...props}>
-      <h2 className="mb-2 text-3xl font-semibold transition-colors">О себе</h2>
+    <div className={cn(className, "pb-3 md:pb-0")} {...props}>
+      <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
+        О себе
+      </h2>
       {mainInformation ? (
-        <span className="mt-2 inline-block text-sm">{mainInformation}</span>
+        <span className="inline-block text-sm md:mt-2">{mainInformation}</span>
       ) : (
         <p className="text-sm text-muted-foreground">Отсутствует</p>
       )}

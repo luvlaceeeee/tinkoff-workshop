@@ -9,7 +9,6 @@ import { statusMap } from "@/lib/statusMap"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { AboutSection } from "@/components/sections/about-section"
 
 import { ProjectMembers } from "../components/project-members"
@@ -22,10 +21,10 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
 
   const { id } = useUserStore((state) => state.user)
   return (
-    <div className="flex justify-between gap-5">
-      <div className="flex flex-1 flex-col gap-5 border-r">
-        <section className="space-y-2">
-          <h2 className="text-3xl font-semibold transition-colors">
+    <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-10">
+      <div className="flex flex-col gap-3 border-b pb-5 md:flex-1 md:gap-5 md:border-b-0 md:border-r md:pb-0">
+        <section className="space-y-1 md:space-y-2">
+          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
             Статус проекта
           </h2>
           <Badge status={project.status.statusName}>
@@ -34,8 +33,8 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         </section>
 
         {project.members.find((member) => member.userId === id) && (
-          <section className="space-y-1">
-            <h2 className="text-3xl font-semibold transition-colors">
+          <section className="space-y-0 md:space-y-1">
+            <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
               Инфраструктура
             </h2>
             {project.contacts.length ? (
@@ -71,18 +70,17 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
         <AboutSection
           title="Тема проекта"
           description={project.theme}
-          titleSize="text-3xl"
-          className="space-y-1"
+          titleSize="text-2xl md:text-3xl"
+          className="space-y-0 md:space-y-1"
         />
         <AboutSection
           title="Описание"
           description={project.description}
-          titleSize="text-3xl"
-          className="space-y-1"
+          titleSize="text-2xl md:text-3xl"
+          className="space-y-0 md:space-y-1"
         />
       </div>
 
-      <Separator orientation="vertical" />
       <ProjectMembers projectId={+params.id} />
     </div>
   )

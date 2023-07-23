@@ -105,30 +105,30 @@ export function VacancyRequestCard({
   }
 
   return (
-    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-5">
-      <header className="flex items-center justify-between border-b pb-3">
+    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:px-5">
+      <header className="flex items-center justify-between border-b pb-2 md:pb-3">
         <div>
           <LinkTitle
             href={`/resume/${resume.id}`}
-            className="text-xl font-semibold"
+            className="text-lg font-semibold md:text-xl"
           >
             {resume.direction.description}
           </LinkTitle>
           <LinkTitle
             href={`/profile/${resume.user.id}`}
-            className="block text-base font-normal"
+            className="block text-sm font-normal md:text-base"
           >
             {concatStrings(" ", resume.user.name, resume.user.surname)}
           </LinkTitle>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground md:text-sm">
           Отправлен {convertDate(createdWhen)}
         </p>
       </header>
 
       <SkillsSection
         skills={resume.skills}
-        titleSize="text-lg"
+        titleSize="text-base md:text-lg"
         className="space-y-1"
         isCard
       />
@@ -136,25 +136,25 @@ export function VacancyRequestCard({
       <AboutSection
         title="Описание резюме"
         description={resume.description}
-        titleSize={"text-lg"}
-        className="space-y-0"
+        titleSize="text-base md:text-lg"
+        className="space-y-0 md:space-y-1"
       />
 
       {coverLetter && (
         <AboutSection
           title="Сопроводительное письмо"
           description={coverLetter}
-          titleSize={"text-lg"}
-          className="space-y-0"
+          titleSize="text-base md:text-lg"
+          className="space-y-0 md:space-y-1"
         />
       )}
 
       <footer className="flex items-center justify-end gap-3 border-t pt-3">
-        <Button variant={"outline"} asChild>
-          <Link href={`/resume/${resume.id}`} target="_blank">
+        <Link href={`/resume/${resume.id}`} target="_blank">
+          <Button variant={"outline"} asChild>
             Посмотреть резюме
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <Footer />
       </footer>
     </div>

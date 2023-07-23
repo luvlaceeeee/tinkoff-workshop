@@ -180,13 +180,13 @@ export function ChangeResumeDialog(props: IResume) {
                         <Button
                           type="button"
                           variant="outline"
-                          className="shrink-0 border-destructive/50"
+                          className="h-7 w-7 shrink-0 rounded-md border-destructive/50 md:h-10 md:w-10 md:rounded-xl"
                           size="icon"
                           onClick={() => {
                             remove(index)
                           }}
                         >
-                          <X />
+                          <X className="h-5 w-5 md:h-fit md:w-fit" />
                         </Button>
                       </div>
                     </FormItem>
