@@ -24,7 +24,8 @@ export function ResumeCard(props: IResume) {
   )
 
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border p-3 px-5">
+    <div className="flex w-full flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-5">
+      {/* <Link href={`/resume/${id}`} className="cursor-pointer"> */}
       <header className="flex items-center justify-between gap-2 border-b pb-2 md:pb-3">
         <div>
           <LinkTitle
@@ -60,11 +61,15 @@ export function ResumeCard(props: IResume) {
         titleSize="text-lg md:text-xl"
         className="space-y-0 md:space-y-1"
       />
+      {/* </Link> */}
 
       <section className="flex flex-col justify-end gap-3 border-t pt-3 md:flex-row">
         <DeleteResumeDialog id={id} direction={direction.description} />
         <Link href={"/search/vacancies" + `?${queries.toString()}`}>
-          <Button variant={"outline"} className="w-full md:w-fit">
+          <Button
+            variant={"outline"}
+            className="w-full bg-secondary/20 md:w-fit"
+          >
             Найти подходящие вакансии
           </Button>
         </Link>
@@ -73,6 +78,7 @@ export function ResumeCard(props: IResume) {
           loading={isLoading}
           disabled={isLoading}
           onClick={() => mutate()}
+          className="bg-secondary/20"
         >
           {isActive ? "Отключить резюме" : "Сделать активным"}
         </Button>

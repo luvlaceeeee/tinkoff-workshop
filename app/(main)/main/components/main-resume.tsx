@@ -9,7 +9,7 @@ export function MainResumes() {
     <section className="space-y-3">
       <div className="flex flex-col justify-between gap-1 md:flex-row">
         <h2 className="text-lg font-semibold transition-colors md:text-3xl">
-          Недавние Резюме
+          Недавние резюме
         </h2>
         <div className="flex justify-between gap-3">
           <Link href={"/create/resume"}>

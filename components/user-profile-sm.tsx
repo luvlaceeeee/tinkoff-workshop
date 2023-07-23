@@ -12,12 +12,12 @@ export function UserProfileSmall(props: UserProfileSmall) {
   const { id, contacts, email, mainInformation, name, surname } = props
 
   return (
-    <div className="flex flex-col justify-start gap-5 md:flex-row">
+    <div className="flex flex-col items-start justify-start gap-5 md:flex-row">
       <UserAvatar
         userId={id}
         name={name}
         surname={surname}
-        className="mx-auto h-24 w-24"
+        className="mx-auto h-24 w-24 md:mx-0"
       />
 
       <div className="flex flex-col gap-3">

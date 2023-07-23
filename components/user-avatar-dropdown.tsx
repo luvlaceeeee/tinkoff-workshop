@@ -36,7 +36,6 @@ export function UserAvatarDropdown() {
         </AvatarFallback>
       </Avatar>
     )
-
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger className="select-none rounded-full">
@@ -57,7 +56,9 @@ export function UserAvatarDropdown() {
         <DropdownMenuItem
           className="text-destructive"
           onClick={() => {
-            signOut()
+            signOut({
+              callbackUrl: `${window.location.origin}`,
+            })
             redirect("/")
           }}
         >

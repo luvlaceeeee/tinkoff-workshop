@@ -30,7 +30,7 @@ export function DeleteResumeDialog({ id, direction }: DeleteResumeDialogProps) {
       <AlertDialogTrigger asChild>
         <Button
           variant={"outline"}
-          className="border-destructive/30 hover:bg-destructive/20"
+          className="border-destructive/30 bg-destructive/20 hover:bg-destructive/30"
         >
           Удалить резюме
         </Button>

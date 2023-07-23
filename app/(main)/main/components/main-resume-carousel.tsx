@@ -27,7 +27,7 @@ export function MainResumeCarousel() {
 
   return (
     <Carousel
-      height={250}
+      height={260}
       slideSize="32.5%"
       slideGap="md"
       align="start"

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { useMutation, useQuery } from "@tanstack/react-query"
@@ -138,7 +139,7 @@ export function SendRequestToVacancyDialog({
                       <SelectContent>
                         {isLoading ? (
                           <Icons.loader className="mx-auto h-7 w-7 fill-main" />
-                        ) : (
+                        ) : resumes.length ? (
                           resumes.map((resume) => (
                             <SelectItem
                               key={generateKey("resume")}
@@ -148,6 +149,21 @@ export function SendRequestToVacancyDialog({
                               {resume.direction.description}
                             </SelectItem>
                           ))
+                        ) : (
+                          <div className="flex flex-col items-center gap-2 p-3 md:p-4">
+                            <p className="text-xs text-muted-foreground md:text-sm">
+                              У вас нет активных резюме
+                            </p>
+                            <Link href={"/create/resume"}>
+                              <Button
+                                size={"sm"}
+                                variant={"secondary"}
+                                className="text-xs"
+                              >
+                                Создать резюме
+                              </Button>
+                            </Link>
+                          </div>
                         )}
                       </SelectContent>
                     </Select>
@@ -192,7 +208,12 @@ export function SendRequestToVacancyDialog({
 
             <DialogFooter>
               <div className="flex gap-5">
-                <Button className="w-full flex-1" variant={"outline"}>
+                <Button
+                  className="w-full flex-1"
+                  variant={"outline"}
+                  type="button"
+                  onClick={() => setOpen(false)}
+                >
                   Отменить
                 </Button>
                 <Button

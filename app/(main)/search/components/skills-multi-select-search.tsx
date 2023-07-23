@@ -150,6 +150,7 @@ export function SkillsMultiSelect() {
             variant={"outline"}
             type="button"
             size={"sm"}
+            disabled={!inputValue}
             className="rounded-2xl border-destructive/50 hover:bg-destructive/50"
             onClick={() => handleUnselectAll()}
           >

@@ -3,7 +3,9 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
+import { AxiosError } from "axios"
 
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import $api from "@/config/axios"
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -40,12 +42,14 @@ export function ChangeAvatarDialog() {
     {
       onSuccess: () => {
         setOpen(false)
-        toast({
-          variant: "accept",
-          title: "Фото обновлено",
-          description: "Обновите страницу",
-        })
         window.location.reload()
+      },
+      onError: (error: AxiosError<IErrorResponse>) => {
+        toast({
+          variant: "destructive",
+          title: "Ошибка",
+          description: error.response?.data.message,
+        })
       },
     }
   )

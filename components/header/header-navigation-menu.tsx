@@ -16,7 +16,7 @@ import {
 
 export function HeaderNavigationMenu() {
   return (
-    <NavigationMenu>
+    <NavigationMenu delayDuration={600}>
       <NavigationMenuList>
         <NavigationMenuItem>
           <Link href="/main" legacyBehavior passHref>

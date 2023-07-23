@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Label } from "@radix-ui/react-dropdown-menu"
 import { useMutation, useQuery } from "@tanstack/react-query"
@@ -152,7 +153,7 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                       <SelectContent>
                         {isProjectsLoading ? (
                           <Icons.loader className="mx-auto h-7 w-7 fill-main" />
-                        ) : (
+                        ) : projects.length ? (
                           projects.map((project) => (
                             <SelectItem
                               key={generateKey("resume")}
@@ -162,6 +163,21 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                               {project.title}
                             </SelectItem>
                           ))
+                        ) : (
+                          <div className="flex flex-col items-center gap-2 p-3 md:p-4">
+                            <p className="text-xs text-muted-foreground md:text-sm">
+                              У вас нет проектов
+                            </p>
+                            <Link href={"/create/project"}>
+                              <Button
+                                size={"sm"}
+                                variant={"secondary"}
+                                className="text-xs"
+                              >
+                                Создать проект
+                              </Button>
+                            </Link>
+                          </div>
                         )}
                       </SelectContent>
                     </Select>
@@ -185,7 +201,7 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                         <SelectContent>
                           {isVacanciesLoading ? (
                             <Icons.loader className="mx-auto h-7 w-7 fill-main" />
-                          ) : (
+                          ) : vacancies.length ? (
                             vacancies.map((vacancy) => (
                               <SelectItem
                                 key={generateKey("resume")}
@@ -195,6 +211,23 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                                 {vacancy.direction.description}
                               </SelectItem>
                             ))
+                          ) : (
+                            <div className="flex flex-col items-center gap-2 p-3 md:p-4">
+                              <p className="text-xs text-muted-foreground md:text-sm">
+                                У вас нет активных вакансий
+                              </p>
+                              <Link
+                                href={`project/${projectId}/vacancies/create`}
+                              >
+                                <Button
+                                  size={"sm"}
+                                  variant={"secondary"}
+                                  className="text-xs"
+                                >
+                                  Создать вакансию
+                                </Button>
+                              </Link>
+                            </div>
                           )}
                         </SelectContent>
                       </Select>
@@ -240,7 +273,12 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
 
             <DialogFooter>
               <div className="flex gap-5">
-                <Button className="w-full flex-1" variant={"outline"}>
+                <Button
+                  className="w-full flex-1"
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  variant={"outline"}
+                >
                   Отменить
                 </Button>
                 <Button

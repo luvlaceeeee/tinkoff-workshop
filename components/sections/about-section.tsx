@@ -16,7 +16,7 @@ export function AboutSection({
   ...props
 }: AboutSectionProps) {
   return (
-    <section className={cn("space-y-3", className)} {...props}>
+    <section className={cn("space-y-3 break-all", className)} {...props}>
       <h2 className={cn("font-semibold transition-colors", titleSize)}>
         {title}
       </h2>
