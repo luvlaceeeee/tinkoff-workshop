@@ -4,6 +4,7 @@ import { X } from "lucide-react"
 import { useFieldArray, useForm } from "react-hook-form"
 
 import { IResume } from "@/types/interfaces/IResume"
+import { generateKey } from "@/lib/generateKey"
 import { cn } from "@/lib/utils"
 import { useResumeDirection } from "@/hooks/useResumeDirection"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -127,6 +128,7 @@ export function ChangeResumeDialog(props: IResume) {
                           </SelectItem>
                           {directions.map((direction) => (
                             <SelectItem
+                              key={generateKey("direction")}
                               className="rounded-xl"
                               value={direction.directionName}
                             >

@@ -1,3 +1,5 @@
+import { generateKey } from "@/lib/generateKey"
+
 import { MembersCard } from "../../../components/members-card"
 import { useProjectMembersById } from "../../../hooks/useProjectMembersById"
 import { DeleteMemberDialog } from "./delete-member-dialog"
@@ -32,7 +34,7 @@ export function ProjectEditMembers({
       <div className="space-y-1">
         <h3 className="text-lg transition-colors">Участники</h3>
         {members.slice(1).map((member) => (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" key={generateKey("member")}>
             <MembersCard {...member} />
             <DeleteMemberDialog
               projectId={projectId}

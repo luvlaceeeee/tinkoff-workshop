@@ -23,8 +23,8 @@ export function ContactSection({
         Контакты
       </h2>
       {contacts.length ? (
-        contacts.map((contact) => (
-          <ul className="ml-6 list-disc md:[&>li]:mt-2">
+        <ul className="ml-6 list-disc md:[&>li]:mt-2">
+          {contacts.map((contact) => (
             <li key={generateKey("li")}>
               <Link
                 className={cn(buttonVariants({ variant: "link" }), "h-fit p-0")}
@@ -34,8 +34,8 @@ export function ContactSection({
                 {contact}
               </Link>
             </li>
-          </ul>
-        ))
+          ))}
+        </ul>
       ) : (
         <p className="text-sm text-muted-foreground">Отсутствуют</p>
       )}

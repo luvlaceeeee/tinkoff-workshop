@@ -1,3 +1,6 @@
+import { Fragment } from "react"
+
+import { generateKey } from "@/lib/generateKey"
 import { Separator } from "@/components/ui/separator"
 
 import { useProjectMembersById } from "../hooks/useProjectMembersById"
@@ -30,9 +33,16 @@ export function ProjectMembers({ projectId }: { projectId: number }) {
         <h3 className="text-lg transition-colors">Участники</h3>
         {isLoading
           ? [...new Array(3)].map(() => (
-              <Separator className="h-18 rounded-2xl" />
+              <Separator
+                className="h-18 rounded-2xl"
+                key={generateKey("skeleton")}
+              />
             ))
-          : members.slice(1).map((member) => <MembersCard {...member} />)}
+          : members.slice(1).map((member) => (
+              <Fragment key={generateKey("member-card")}>
+                <MembersCard {...member} />
+              </Fragment>
+            ))}
       </div>
     </div>
   )

@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Icons } from "@/components/icons"
+import { queryClient } from "@/components/providers"
 
 import { useProjectMembersById } from "../hooks/useProjectMembersById"
 
@@ -43,7 +44,10 @@ export function LeaveLeadDialog(props: { projectId: number; title: string }) {
       ),
     {
       onSuccess: () => {
-        redirect("/projects")
+        queryClient
+          .invalidateQueries(["user-projects"])
+          .then(() => redirect("/projects"))
+        queryClient.invalidateQueries(["user"])
       },
     }
   )

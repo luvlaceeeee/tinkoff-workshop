@@ -1,6 +1,9 @@
 "use client"
 
+import { Fragment } from "react"
+
 import { IResume } from "@/types/interfaces/IResume"
+import { generateKey } from "@/lib/generateKey"
 import {
   Accordion,
   AccordionContent,
@@ -41,7 +44,7 @@ export default function ResumeRequestsPage({
           {isResumeLoading ? (
             <Skeleton className="h-60" />
           ) : (
-            <ResumeCardSmall {...resume} />
+            <ResumeCardSmall {...resume} className="mt-2" />
           )}
         </div>
         <div className="flex-1 space-y-1">
@@ -62,7 +65,9 @@ export default function ResumeRequestsPage({
             ) : incomingRequests.length ? (
               <div className="scrollbar grid h-96 gap-5 overflow-y-auto pr-2 md:grid-cols-2">
                 {incomingRequests.map((request) => (
-                  <ResumeRequestCard request={request} />
+                  <Fragment key={generateKey("resume-card")}>
+                    <ResumeRequestCard request={request} />
+                  </Fragment>
                 ))}
               </div>
             ) : (
@@ -78,7 +83,9 @@ export default function ResumeRequestsPage({
             ) : sentRequests.length ? (
               <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {sentRequests.map((request) => (
-                  <ResumeRequestCard request={request} />
+                  <Fragment key={generateKey("resume-card")}>
+                    <ResumeRequestCard request={request} />
+                  </Fragment>
                 ))}
               </div>
             ) : (
@@ -94,7 +101,9 @@ export default function ResumeRequestsPage({
             ) : recentRequests.length ? (
               <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {recentRequests.map((request) => (
-                  <ResumeRequestCard request={request} />
+                  <Fragment key={generateKey("resume-card")}>
+                    <ResumeRequestCard request={request} />
+                  </Fragment>
                 ))}
               </div>
             ) : (

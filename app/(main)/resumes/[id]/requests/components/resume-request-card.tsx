@@ -95,49 +95,54 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
   }
 
   return (
-    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:px-5">
-      <header className="flex items-center justify-between border-b pb-2 md:pb-3">
-        <div>
-          <LinkTitle
-            href={`/vacancy/${position.id}`}
-            className="text-lg font-semibold md:text-xl"
-          >
-            {position.direction.description}
-          </LinkTitle>
-          <LinkTitle
-            href={`/project/${position.project.id}`}
-            className="block text-sm font-normal md:text-base"
-          >
-            {position.project.title}
-          </LinkTitle>
-        </div>
-        <p className="text-xs text-muted-foreground md:text-sm">
-          Отправлен {convertDate(createdWhen)}
-        </p>
-      </header>
+    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+      <Link
+        href={`/vacancy/${position.id}`}
+        className="cursor-pointer space-y-2"
+      >
+        <header className="flex items-center justify-between border-b pb-2 md:pb-3">
+          <div>
+            <LinkTitle
+              href={`/vacancy/${position.id}`}
+              className="text-lg font-semibold md:text-xl"
+            >
+              {position.direction.description}
+            </LinkTitle>
+            <LinkTitle
+              href={`/project/${position.project.id}`}
+              className="block text-sm font-normal md:text-base"
+            >
+              {position.project.title}
+            </LinkTitle>
+          </div>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            Отправлен {convertDate(createdWhen)}
+          </p>
+        </header>
 
-      <SkillsSection
-        skills={position.skills}
-        titleSize="text-base md:text-lg"
-        className="space-y-1"
-        isCard
-      />
+        <SkillsSection
+          skills={position.skills}
+          titleSize="text-base md:text-lg"
+          className="space-y-1"
+          isCard
+        />
 
-      <AboutSection
-        title="Описание вакансии"
-        description={position.description}
-        titleSize="text-base md:text-lg"
-        className="space-y-1"
-      />
-
-      {coverLetter && (
         <AboutSection
-          title="Сопроводительное письмо"
-          description={coverLetter}
+          title="Описание вакансии"
+          description={position.description}
           titleSize="text-base md:text-lg"
           className="space-y-1"
         />
-      )}
+
+        {coverLetter && (
+          <AboutSection
+            title="Сопроводительное письмо"
+            description={coverLetter}
+            titleSize="text-base md:text-lg"
+            className="space-y-1"
+          />
+        )}
+      </Link>
 
       <footer className="flex items-center justify-end gap-3 border-t pt-3">
         <Link href={`/vacancy/${position.id}`} target="_blank">

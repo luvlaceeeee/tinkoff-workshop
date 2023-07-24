@@ -19,9 +19,11 @@ import { IVacancyRequest } from "../types/IVacancyRequest"
 export function VacancyRequestCard({
   request,
   projectId,
+  vacancyId,
 }: {
   request: IVacancyRequest
   projectId: number
+  vacancyId: number
 }) {
   const { resume, createdWhen, id, isInvite, status, coverLetter } = request
   const router = useRouter()
@@ -52,7 +54,6 @@ export function VacancyRequestCard({
       },
     }
   )
-
   const { mutate: rejectMutate, isLoading: isRejectLoading } = useRejectRequest(
     id,
     {
@@ -62,7 +63,7 @@ export function VacancyRequestCard({
           title: "Запрос отклонен",
           description: "Запрос перемещен в прошлые",
         })
-        queryClient.invalidateQueries(["vacancy-requests", id])
+        queryClient.invalidateQueries(["vacancy-requests", +vacancyId])
       },
       onError: (error: AxiosError<IErrorResponse>) => {
         toast({
@@ -76,7 +77,11 @@ export function VacancyRequestCard({
 
   const Footer = () => {
     if (status.statusName !== "IN_CONSIDERATION")
-      return <p>{status.description}</p>
+      return status.description === "Request is declined" ? (
+        <p className="text-destructive">Отклонен</p>
+      ) : (
+        <p className="text-accept">Принят</p>
+      )
 
     if (isInvite) {
       return <p>В ожидании ответа</p>
@@ -85,17 +90,17 @@ export function VacancyRequestCard({
         <>
           <Button
             variant={"destructive"}
-            loading={isRejectLoading}
+            loading={isRejectLoading || isAcceptLoading}
             onClick={() => rejectMutate()}
-            disabled={isRejectLoading}
+            disabled={isRejectLoading || isAcceptLoading}
           >
             Отклонить
           </Button>
           <Button
             variant={"main"}
             onClick={() => acceptMutate()}
-            loading={isAcceptLoading}
-            disabled={isAcceptLoading}
+            loading={isAcceptLoading || isRejectLoading}
+            disabled={isAcceptLoading || isRejectLoading}
           >
             Принять
           </Button>
@@ -105,49 +110,50 @@ export function VacancyRequestCard({
   }
 
   return (
-    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border p-3 px-4 md:px-5">
-      <header className="flex items-center justify-between border-b pb-2 md:pb-3">
-        <div>
-          <LinkTitle
-            href={`/resume/${resume.id}`}
-            className="text-lg font-semibold md:text-xl"
-          >
-            {resume.direction.description}
-          </LinkTitle>
-          <LinkTitle
-            href={`/profile/${resume.user.id}`}
-            className="block text-sm font-normal md:text-base"
-          >
-            {concatStrings(" ", resume.user.name, resume.user.surname)}
-          </LinkTitle>
-        </div>
-        <p className="text-xs text-muted-foreground md:text-sm">
-          Отправлен {convertDate(createdWhen)}
-        </p>
-      </header>
+    <div className="flex h-fit w-full flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+      <Link href={`/resume/${resume.id}`} className="cursor-pointer space-y-2">
+        <header className="flex items-center justify-between border-b pb-2 md:pb-3">
+          <div>
+            <LinkTitle
+              href={`/resume/${resume.id}`}
+              className="text-lg font-semibold md:text-xl"
+            >
+              {resume.direction.description}
+            </LinkTitle>
+            <LinkTitle
+              href={`/profile/${resume.user.id}`}
+              className="block text-sm font-normal md:text-base"
+            >
+              {concatStrings(" ", resume.user.name, resume.user.surname)}
+            </LinkTitle>
+          </div>
+          <p className="text-xs text-muted-foreground md:text-sm">
+            Отправлен {convertDate(createdWhen)}
+          </p>
+        </header>
 
-      <SkillsSection
-        skills={resume.skills}
-        titleSize="text-base md:text-lg"
-        className="space-y-1"
-        isCard
-      />
+        <SkillsSection
+          skills={resume.skills}
+          titleSize="text-base md:text-lg"
+          className="space-y-1"
+          isCard
+        />
 
-      <AboutSection
-        title="Описание резюме"
-        description={resume.description}
-        titleSize="text-base md:text-lg"
-        className="space-y-0 md:space-y-1"
-      />
-
-      {coverLetter && (
         <AboutSection
-          title="Сопроводительное письмо"
-          description={coverLetter}
+          title="Описание резюме"
+          description={resume.description}
           titleSize="text-base md:text-lg"
           className="space-y-0 md:space-y-1"
         />
-      )}
+        {coverLetter && (
+          <AboutSection
+            title="Сопроводительное письмо"
+            description={coverLetter}
+            titleSize="text-base md:text-lg"
+            className="space-y-0 md:space-y-1"
+          />
+        )}
+      </Link>
 
       <footer className="flex items-center justify-end gap-3 border-t pt-3">
         <Link href={`/resume/${resume.id}`} target="_blank">

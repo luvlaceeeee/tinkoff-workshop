@@ -94,7 +94,7 @@ export function SkillsMultiSelect() {
       onKeyDown={handleKeyDown}
       className="overflow-visible bg-transparent"
     >
-      <div className="group flex items-center justify-between rounded-2xl border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+      <div className="group flex items-center justify-between rounded-2xl border border-input bg-secondary/20 px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
         <div className="flex flex-wrap gap-1">
           {selected.map((skill) => {
             return (
@@ -134,6 +134,7 @@ export function SkillsMultiSelect() {
             variant={"outline"}
             type="button"
             size={"sm"}
+            disabled={!inputValue}
             className="rounded-2xl"
             onClick={() => {
               if (!inputValue) return
@@ -150,7 +151,6 @@ export function SkillsMultiSelect() {
             variant={"outline"}
             type="button"
             size={"sm"}
-            disabled={!inputValue}
             className="rounded-2xl border-destructive/50 hover:bg-destructive/50"
             onClick={() => handleUnselectAll()}
           >

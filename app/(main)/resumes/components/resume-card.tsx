@@ -24,44 +24,44 @@ export function ResumeCard(props: IResume) {
   )
 
   return (
-    <div className="flex w-full flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-5">
-      {/* <Link href={`/resume/${id}`} className="cursor-pointer"> */}
-      <header className="flex items-center justify-between gap-2 border-b pb-2 md:pb-3">
-        <div>
-          <LinkTitle
-            href={`/resume/${id}`}
-            className="text-xl font-semibold md:text-2xl"
-          >
-            {direction.description}
-          </LinkTitle>
-          <p className="inline-block text-xs text-muted-foreground md:ml-3 md:text-sm">
-            Создан: {convertDate(createdWhen)}
-          </p>
-        </div>
+    <div className="flex w-full flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-5 hover:bg-secondary/30">
+      <Link href={`/resume/${id}`} className="cursor-pointer space-y-3">
+        <header className="flex items-center justify-between gap-2 border-b pb-2 md:pb-3">
+          <div>
+            <LinkTitle
+              href={`/resume/${id}`}
+              className="text-xl font-semibold md:text-2xl"
+            >
+              {direction.description}
+            </LinkTitle>
+            <p className="inline-block text-xs text-muted-foreground md:ml-3 md:text-sm">
+              Создан: {convertDate(createdWhen)}
+            </p>
+          </div>
 
-        {isActive ? (
-          <span className="text-base text-accept md:text-xl">Активное</span>
-        ) : (
-          <span className="text-base text-destructive md:text-xl">
-            Отключено
-          </span>
-        )}
-      </header>
+          {isActive ? (
+            <span className="text-base text-accept md:text-xl">Активное</span>
+          ) : (
+            <span className="text-base text-destructive md:text-xl">
+              Отключено
+            </span>
+          )}
+        </header>
 
-      <SkillsSection
-        skills={skills}
-        titleSize="text-lg md:text-xl"
-        className="space-y-0 md:space-y-1"
-        isCard
-      />
+        <SkillsSection
+          skills={skills}
+          titleSize="text-lg md:text-xl"
+          className="space-y-0 md:space-y-1"
+          isCard
+        />
 
-      <AboutSection
-        title="Описание"
-        description={description}
-        titleSize="text-lg md:text-xl"
-        className="space-y-0 md:space-y-1"
-      />
-      {/* </Link> */}
+        <AboutSection
+          title="Описание"
+          description={description}
+          titleSize="text-lg md:text-xl"
+          className="space-y-0 md:space-y-1"
+        />
+      </Link>
 
       <section className="flex flex-col justify-end gap-3 border-t pt-3 md:flex-row">
         <DeleteResumeDialog id={id} direction={direction.description} />

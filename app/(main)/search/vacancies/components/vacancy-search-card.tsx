@@ -12,8 +12,8 @@ export function VacancySearchCard(props: Omit<IVacancy, "isActive">) {
   const { direction, createdWhen, skills, description, id, project } = props
 
   return (
-    <Link href={`/vacancy/${id}`}>
-      <div className="flex h-fit cursor-pointer flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+    <div className="flex h-fit flex-col gap-3 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+      <Link href={`/vacancy/${id}`} className="cursor-pointer space-y-2">
         <section className="flex items-center justify-between border-b pb-2 md:pb-3">
           <div>
             <LinkTitle
@@ -47,16 +47,16 @@ export function VacancySearchCard(props: Omit<IVacancy, "isActive">) {
           titleSize="text-lg md:text-xl"
           className="space-y-0 md:space-y-1"
         />
+      </Link>
 
-        <section className="flex items-center justify-end gap-3 border-t pt-3">
-          <Link href={`/vacancy/${id}`}>
-            <Button variant={"outline"} size={"sm"} className="bg-secondary/20">
-              Узнать подробнее
-            </Button>
-          </Link>
-          <SendRequestToVacancyDialog vacancyId={id} />
-        </section>
-      </div>
-    </Link>
+      <section className="flex items-center justify-end gap-3 border-t pt-3">
+        <Link href={`/vacancy/${id}`}>
+          <Button variant={"outline"} size={"sm"} className="bg-secondary/20">
+            Узнать подробнее
+          </Button>
+        </Link>
+        <SendRequestToVacancyDialog vacancyId={id} />
+      </section>
+    </div>
   )
 }

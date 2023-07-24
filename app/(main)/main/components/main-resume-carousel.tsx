@@ -20,7 +20,7 @@ export function MainResumeCarousel() {
           params: { page: 0, size: 10, dateSort: "DESC" },
         })
         .then((res) => res.data),
-    { refetchOnMount: true, refetchInterval: 5000 }
+    { refetchOnMount: true }
   )
 
   if (isLoading) return <CarouselLoader />

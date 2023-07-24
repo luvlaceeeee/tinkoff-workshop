@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 import { LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 
@@ -56,10 +55,8 @@ export function UserAvatarDropdown() {
         <DropdownMenuItem
           className="text-destructive"
           onClick={() => {
-            signOut({
-              callbackUrl: `${window.location.origin}`,
-            })
-            redirect("/")
+            signOut({ redirect: false }).then(() => window.location.reload())
+            // redirect("/")
           }}
         >
           <LogOut className="mr-2 h-4 w-4" />

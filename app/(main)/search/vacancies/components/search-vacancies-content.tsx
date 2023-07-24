@@ -142,6 +142,7 @@ export function SearchVacanciesContent() {
             if (i === 0 || i === vacancies.pageCount - 1) return
             return (
               <Button
+                key={generateKey("paginate-button")}
                 size={"icon"}
                 variant={"outline"}
                 onClick={() => handleCurrentPage(i + 1)}

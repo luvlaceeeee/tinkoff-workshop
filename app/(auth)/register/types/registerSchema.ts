@@ -9,11 +9,17 @@ export const registerSchema = z
     name: z
       .string()
       .min(1, { message: "Обязательное поле" })
-      .min(2, { message: "Имя слишком короткое" }),
+      .min(2, { message: "Имя слишком короткое" })
+      .regex(new RegExp("^[A-Za-z]+$"), {
+        message: "Имя должно состоять из одного слова",
+      }),
     surname: z
       .string()
       .min(1, { message: "Обязательное поле" })
-      .min(2, { message: "Фамилия слишком короткая" }),
+      .min(2, { message: "Фамилия слишком короткая" })
+      .regex(new RegExp("^[A-Za-z]+$"), {
+        message: "Имя должно состоять из одного слова",
+      }),
     password: z
       .string()
       .min(6, { message: "Пароль не может быть меньше 6 символов" }),

@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { Bell } from "lucide-react"
 import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/config/authOptions"
 
+import { NotificationButton } from "../noti-button"
 import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
@@ -24,16 +24,7 @@ export async function RightPartHeader() {
               <Button variant={"secondary"}>Мои резюме</Button>
             </Link>
             {/* TODO Add Notifications */}
-            <div className="relative">
-              <Link href="/notifications">
-                <Button variant="secondary" size="icon">
-                  <Bell className="h-5 w-5" />
-                </Button>
-              </Link>
-              <div className="absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm">
-                0
-              </div>
-            </div>
+            <NotificationButton />
             <UserAvatarDropdown />
           </>
         ) : (
@@ -53,16 +44,8 @@ export async function RightPartHeader() {
         {data?.user ? (
           <>
             <div className="flex w-full justify-between">
-              <div className="relative">
-                <Link href="/notifications">
-                  <Button variant="secondary" size="icon">
-                    <Bell className="h-5 w-5" />
-                  </Button>
-                </Link>
-                <div className="absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm">
-                  0
-                </div>
-              </div>
+              <NotificationButton />
+
               <UserAvatarDropdown />
             </div>
             <Link href="/projects" className="w-full">

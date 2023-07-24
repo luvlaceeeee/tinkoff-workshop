@@ -14,12 +14,13 @@ export const useDeleteResume = (
 ) => {
   return useMutation(["resume-delete"], () => $api.delete(`/resumes/${id}`), {
     onSuccess: () => {
-      queryClient.invalidateQueries(["user-resumes"])
       toast({
         variant: "accept",
         title: `Резюме на направление ${direction} удалено`,
       })
-      setOpen(false)
+      queryClient.invalidateQueries(["user-resumes"]).then(() => setOpen(false))
+
+      queryClient.invalidateQueries(["resume-directions"])
     },
     onError: (error: AxiosError<IErrorResponse>) => {
       toast({

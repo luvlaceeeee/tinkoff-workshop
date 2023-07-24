@@ -25,6 +25,7 @@ export const useCreateVacancy = (projectId: number) => {
           title: "Вакансия создана",
           description: "Теперь она видна всем",
         })
+
         queryClient.invalidateQueries(["project-vacancies", projectId])
         router.push(`/project/${projectId}/vacancies`)
       },

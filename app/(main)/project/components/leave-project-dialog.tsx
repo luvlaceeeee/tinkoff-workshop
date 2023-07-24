@@ -16,6 +16,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { queryClient } from "@/components/providers"
 
 export function LeaveProjectDialog(props: {
   projectId: number
@@ -32,7 +33,10 @@ export function LeaveProjectDialog(props: {
       ),
     {
       onSuccess: () => {
-        redirect("/projects")
+        queryClient
+          .invalidateQueries(["user-projects"])
+          .then(() => redirect("/projects"))
+        queryClient.invalidateQueries(["user"])
       },
     }
   )

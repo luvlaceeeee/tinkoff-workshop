@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { Fragment, useState } from "react"
 
+import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
@@ -51,9 +52,15 @@ export default function ProjectsPage() {
         <Loader />
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard {...project} />
-          ))}
+          {projects.length ? (
+            projects.map((project) => (
+              <Fragment key={generateKey("project-card")}>
+                <ProjectCard {...project} />
+              </Fragment>
+            ))
+          ) : (
+            <p>{isLead ? "У вас созданных проектов" : "У вас нету проектов"}</p>
+          )}
         </div>
       )}
     </div>
