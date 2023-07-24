@@ -29,6 +29,7 @@ export const useDeleteMember = (
         queryClient
           .invalidateQueries(["project-members", projectId])
           .then(() => setOpen(false)),
+
       onError: (error: AxiosError<IErrorResponse>) => {
         toast({
           variant: "destructive",

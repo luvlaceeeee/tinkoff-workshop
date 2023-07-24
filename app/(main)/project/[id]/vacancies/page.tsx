@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import $api from "@/config/axios"
+import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -61,7 +62,11 @@ export default function ProjectVacanciesPage({
           <Skeleton className="h-64 rounded-2xl" />
         </>
       ) : vacancies.length ? (
-        vacancies.map((vacancy) => <VacancyCard {...vacancy} />)
+        vacancies.map((vacancy) => (
+          <Fragment key={generateKey("vacancy-card")}>
+            <VacancyCard vacancy={vacancy} projectId={+params.id} />
+          </Fragment>
+        ))
       ) : (
         <p>
           {isVisible ? "Нет активных вакансий" : "Нет отключенных вакансий"}

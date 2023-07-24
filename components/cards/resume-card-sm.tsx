@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { IResume } from "@/types/interfaces/IResume"
 import { convertDate } from "@/lib/convertDate"
+import { generateKey } from "@/lib/generateKey"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
@@ -71,7 +72,7 @@ export function ResumeCardSmall(props: ResumeCardSmallProps): JSX.Element {
           {skills.length ? (
             <div className="flex flex-wrap items-center gap-2">
               {skills.slice(0, 3).map((skill) => (
-                <SkillBadge skill={skill} />
+                <SkillBadge skill={skill} key={generateKey("skill-badge")} />
               ))}
 
               {skills.length - 3 > 0 && (

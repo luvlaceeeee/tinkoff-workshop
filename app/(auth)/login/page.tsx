@@ -10,9 +10,9 @@ const LoginPage = () => {
     <div className="flex h-screen flex-col items-center justify-center gap-6">
       <div className="flex flex-col items-center space-y-2">
         <Icons.logo />
-        <h1 className="text-2xl font-semibold tracking-tight">
+        {/* <h1 className="text-2xl font-semibold tracking-tight">
           С Возвращением!
-        </h1>
+        </h1> */}
         <p className="text-sm text-muted-foreground">
           Введите почту и пароль, чтобы войти
         </p>

@@ -6,14 +6,15 @@ import { queryClient } from "@/components/providers"
 
 export const useChangeVacancyVisibility = (
   id: number,
-  directionName: string
+  directionName: string,
+  projectId: number
 ) => {
   return useMutation(
     ["change-vacancy-visibility", id],
     () => $api.post(`/positions/visible/${id}`),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["project-vacancies"])
+        queryClient.invalidateQueries(["project-vacancies", projectId])
         toast({
           variant: "accept",
           title: `Вакансия ${directionName} обновлено`,

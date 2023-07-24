@@ -13,6 +13,7 @@ export function SettingSidebar() {
         <Button
           variant={"secondary"}
           disabled={pathname === "/settings/profile"}
+          className="w-full"
         >
           Настройки профиля
         </Button>

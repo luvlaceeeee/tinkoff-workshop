@@ -1,6 +1,9 @@
 "use client"
 
+import { Fragment } from "react"
+
 import { IVacancy } from "@/types/interfaces/IVacancy"
+import { generateKey } from "@/lib/generateKey"
 import {
   Accordion,
   AccordionContent,
@@ -65,10 +68,13 @@ export default function VacancyRequestsPage({
             ) : incomingRequests.length ? (
               <div className="scrollbar grid h-96 gap-5 overflow-y-auto pr-2 md:grid-cols-2">
                 {incomingRequests.map((request) => (
-                  <VacancyRequestCard
-                    request={request}
-                    projectId={+params.id}
-                  />
+                  <Fragment key={generateKey("vacancy-request")}>
+                    <VacancyRequestCard
+                      request={request}
+                      projectId={+params.id}
+                      vacancyId={params.vacancyId}
+                    />
+                  </Fragment>
                 ))}
               </div>
             ) : (
@@ -84,10 +90,13 @@ export default function VacancyRequestsPage({
             ) : sentRequests.length ? (
               <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {sentRequests.map((request) => (
-                  <VacancyRequestCard
-                    request={request}
-                    projectId={+params.id}
-                  />
+                  <Fragment key={generateKey("vacancy-request")}>
+                    <VacancyRequestCard
+                      request={request}
+                      projectId={+params.id}
+                      vacancyId={params.vacancyId}
+                    />
+                  </Fragment>
                 ))}
               </div>
             ) : (
@@ -103,10 +112,13 @@ export default function VacancyRequestsPage({
             ) : recentRequests.length ? (
               <div className="scrollbar grid h-96 gap-3 overflow-y-auto pr-2 md:grid-cols-2">
                 {recentRequests.map((request) => (
-                  <VacancyRequestCard
-                    request={request}
-                    projectId={+params.id}
-                  />
+                  <Fragment key={generateKey("vacancy-request")}>
+                    <VacancyRequestCard
+                      request={request}
+                      projectId={+params.id}
+                      vacancyId={params.vacancyId}
+                    />
+                  </Fragment>
                 ))}
               </div>
             ) : (

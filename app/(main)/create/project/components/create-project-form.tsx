@@ -187,7 +187,10 @@ export function CreateProjectForm() {
           <div className="space-y-3">
             <FormLabel>Инфраструктура</FormLabel>
             {fields.map((field, index) => (
-              <div className="flex flex-col gap-1" key={field.id}>
+              <div
+                className="flex flex-col gap-1 rounded-2xl border-2 p-4"
+                key={field.id}
+              >
                 <FormField
                   control={form.control}
                   name={`contacts.${index}.link`}
@@ -217,11 +220,12 @@ export function CreateProjectForm() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="mt-2 h-7 w-7 shrink-0 rounded-md border-destructive/50 md:h-10 md:w-10 md:rounded-xl"
-                  size="icon"
+                  className="mt-2 w-fit shrink-0 rounded-md border-destructive/50 md:rounded-xl"
+                  size="sm"
                   onClick={() => remove(index)}
                 >
-                  <X className="h-5 w-5 md:h-fit md:w-fit" />
+                  <X className="mr-2 h-5 w-5 md:h-fit md:w-fit" />
+                  Удалить ссылку
                 </Button>
               </div>
             ))}

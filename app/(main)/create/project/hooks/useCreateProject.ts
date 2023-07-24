@@ -23,7 +23,9 @@ export const useCreateProject = () => {
           title: "Проект создан!",
           description: "Создайте вакансию, чтобы найти людей",
         })
+
         queryClient.invalidateQueries(["user-projects"])
+        queryClient.invalidateQueries(["user"])
         router.push(`/project/${project.id}`)
       },
       onError: (error: AxiosError<IErrorResponse>) =>

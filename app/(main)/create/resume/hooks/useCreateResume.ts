@@ -26,8 +26,10 @@ export const useCreateResume = () => {
         })
 
         queryClient
-          .invalidateQueries(["user-resumes", "user", "resume-directions"])
-          .then(() => router.push(`/resume/${resume.id}`))
+          .invalidateQueries(["user-resumes"])
+          .then(() => router.push(`/resumes/`))
+        queryClient.invalidateQueries(["resume-directions"])
+        queryClient.invalidateQueries(["user"])
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

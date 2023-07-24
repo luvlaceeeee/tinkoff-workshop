@@ -137,6 +137,7 @@ export function SearchResumesContent() {
             if (i === 0 || i === resumes.pageCount - 1) return
             return (
               <Button
+                key={generateKey("paginate-button")}
                 size={"icon"}
                 variant={"outline"}
                 onClick={() => handleCurrentPage(i + 1)}
@@ -146,14 +147,16 @@ export function SearchResumesContent() {
               </Button>
             )
           })}
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => handleCurrentPage(resumes.pageCount)}
-            className={page === resumes.pageCount - 1 ? "bg-secondary" : ""}
-          >
-            {resumes.pageCount}
-          </Button>
+          {resumes.pageCount > 1 && (
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              onClick={() => handleCurrentPage(resumes.pageCount)}
+              className={page === resumes.pageCount - 1 ? "bg-secondary" : ""}
+            >
+              {resumes.pageCount}
+            </Button>
+          )}
         </div>
         <Button
           size={"icon"}

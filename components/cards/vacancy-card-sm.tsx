@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
 import { convertDate } from "@/lib/convertDate"
+import { generateKey } from "@/lib/generateKey"
 import { trimLine } from "@/lib/trimLine"
 import { cn } from "@/lib/utils"
 
@@ -63,7 +64,7 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
           {skills.length ? (
             <div className="flex flex-wrap items-center gap-2">
               {skills.slice(0, 4).map((skill) => (
-                <SkillBadge skill={skill} />
+                <SkillBadge skill={skill} key={generateKey("skill-badge")} />
               ))}
               {skills.length - 5 > 0 && (
                 <p className="rounded-lg border p-1 px-1.5 text-xs text-muted-foreground md:rounded-xl md:p-2 md:px-3 md:text-sm">

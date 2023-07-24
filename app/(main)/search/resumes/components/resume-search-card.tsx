@@ -13,8 +13,8 @@ export function ResumeSearchCard(props: Omit<IResume, "isActive">) {
   const { direction, createdWhen, skills, description, id, user } = props
 
   return (
-    <Link href={`/resume/${id}`}>
-      <div className="flex h-fit cursor-pointer flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+    <div className="flex h-fit flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 hover:bg-secondary/30 md:px-5">
+      <Link href={`/resume/${id}`} className="cursor-pointer space-y-2">
         <section className="flex items-center justify-between border-b pb-2 md:pb-3">
           <div className="">
             <LinkTitle
@@ -48,16 +48,16 @@ export function ResumeSearchCard(props: Omit<IResume, "isActive">) {
           titleSize="text-lg md:text-xl"
           className="space-y-0 md:space-y-1"
         />
+      </Link>
 
-        <section className="flex items-center justify-end gap-3 border-t pt-3">
-          <Link href={`/resume/${id}`}>
-            <Button variant={"outline"} size={"sm"} className="bg-secondary/20">
-              Узнать подробнее
-            </Button>
-          </Link>
-          <SendRequestToResumeDialog resumeId={id} />
-        </section>
-      </div>
-    </Link>
+      <section className="flex items-center justify-end gap-3 border-t pt-3">
+        <Link href={`/resume/${id}`}>
+          <Button variant={"outline"} size={"sm"} className="bg-secondary/20">
+            Узнать подробнее
+          </Button>
+        </Link>
+        <SendRequestToResumeDialog resumeId={id} />
+      </section>
+    </div>
   )
 }

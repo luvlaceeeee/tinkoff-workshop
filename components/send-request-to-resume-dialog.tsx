@@ -16,6 +16,7 @@ import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
 
 import { Icons } from "./icons"
+import { queryClient } from "./providers"
 import { Button } from "./ui/button"
 import { Checkbox } from "./ui/checkbox"
 import {
@@ -92,6 +93,10 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
           title: "Запрос отправлен",
           description: "Ждите ответа от пользователя",
         })
+        queryClient.invalidateQueries([
+          "vacancy-requests",
+          form.getValues("vacancyId"),
+        ])
         setOpen(false)
       },
       onError: (error: AxiosError<IErrorResponse>) => {

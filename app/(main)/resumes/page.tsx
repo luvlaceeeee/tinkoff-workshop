@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { Fragment, useState } from "react"
 
+import { generateKey } from "@/lib/generateKey"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -39,7 +40,11 @@ function ResumesPage() {
           <Skeleton className="h-64 rounded-2xl" />
         </>
       ) : resumes.length ? (
-        resumes.map((resume) => <ResumeCard {...resume} />)
+        resumes.map((resume) => (
+          <Fragment key={generateKey("resume-card")}>
+            <ResumeCard {...resume} />
+          </Fragment>
+        ))
       ) : (
         <p>{isActive ? "Нет активных резюме" : "Нет отключенных резюме"}</p>
       )}

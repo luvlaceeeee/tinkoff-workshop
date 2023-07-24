@@ -1,14 +1,14 @@
 "use client"
 
+import Link from "next/link"
 import { Carousel } from "@mantine/carousel"
 import { useQuery } from "@tanstack/react-query"
 import { AxiosError } from "axios"
-import Link from "next/link"
 
-import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
+import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
-import { IErrorResponse } from "@/types/interfaces/IErrorResponse"
+import { VacancyCardSmall } from "@/components/cards/vacancy-card-sm"
 
 import { IVacancySearchResponse } from "../../search/vacancies/types/IVacancySearchResponse"
 import { CarouselLoader } from "./carousel-loader"
@@ -25,7 +25,7 @@ export function MainVacancyCarousel() {
           params: { page: 0, size: 10, dateSort: "DESC" },
         })
         .then((res) => res.data),
-    { refetchOnMount: true, refetchInterval: 10000 }
+    { refetchOnMount: true }
   )
 
   if (isLoading) return <CarouselLoader />

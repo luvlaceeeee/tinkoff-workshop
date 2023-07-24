@@ -7,7 +7,7 @@ import $api from "@/config/axios"
 export const useDeleteUser = () => {
   return useMutation(["user-delete"], () => $api.delete("/users"), {
     onSuccess: () => {
-      signOut()
+      signOut({ redirect: false }).then(() => window.location.reload())
       redirect("/")
     },
   })

@@ -11,8 +11,14 @@ import { useChangeVacancyVisibility } from "../hooks/useChangeVacancyVisibility"
 import { ChangeVacancyDialog } from "./change-vacancy-dialog"
 import { DeleteVacancyDialog } from "./delete-vacancy-dialog"
 
-export function VacancyCard(props: IVacancy) {
-  const { createdWhen, description, direction, id, isVisible, skills } = props
+export function VacancyCard({
+  vacancy,
+  projectId,
+}: {
+  vacancy: IVacancy
+  projectId: number
+}) {
+  const { createdWhen, description, direction, id, isVisible, skills } = vacancy
 
   const queries = new URLSearchParams()
   queries.set("skills", [...skills].join(","))
@@ -20,7 +26,8 @@ export function VacancyCard(props: IVacancy) {
 
   const { mutate, isLoading } = useChangeVacancyVisibility(
     id,
-    direction.description
+    direction.description,
+    projectId
   )
 
   return (
@@ -78,7 +85,7 @@ export function VacancyCard(props: IVacancy) {
         >
           {isVisible ? "Отключить вакансию" : "Сделать активной"}
         </Button>
-        <ChangeVacancyDialog {...props} />
+        <ChangeVacancyDialog {...vacancy} />
         {/* {isVisible && ( */}
         <Button variant={"main"}>
           <Link href={`vacancies/${id}/requests`}>Посмотреть запросы</Link>
