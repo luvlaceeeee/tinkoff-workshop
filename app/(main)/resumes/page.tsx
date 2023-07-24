@@ -31,7 +31,7 @@ function ResumesPage() {
           onClick={() => setIsActive(false)}
           disabled={!isActive}
         >
-          Только отключенные
+          Только неактивные
         </Button>
       </div>
       {isLoading ? (

@@ -46,7 +46,7 @@ export function LeaveProjectDialog(props: {
       <AlertDialogTrigger asChild>
         <Button
           variant={"outline"}
-          className="border-destructive/30 hover:bg-destructive/20"
+          className="border-destructive/30 bg-destructive/20 hover:bg-destructive/90"
         >
           Покинуть проект
         </Button>
