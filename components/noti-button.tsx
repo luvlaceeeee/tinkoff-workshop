@@ -1,20 +1,23 @@
 "use client"
 
 import Link from "next/link"
+import { useUserStore } from "@/store/userStore"
 import { Bell } from "lucide-react"
-import { useSession } from "next-auth/react"
 import useWebSocket from "react-use-websocket"
 
 import { Button } from "./ui/button"
 
 export function NotificationButton() {
-  const { data } = useSession()
-  useWebSocket("ws://localhost:8080/ws/notifications", {
-    queryParams: { bearer: data?.user.username! },
-    onOpen: () => {
-      console.log("WebSocket connection established.")
-    },
-  })
+  const email = useUserStore((state) => state.user.email)
+
+  const { lastJsonMessage } = useWebSocket(
+    `ws://localhost:8080/ws/notifications/${email}`,
+    {
+      onOpen: () => {
+        console.log("WebSocket connection established.")
+      },
+    }
+  )
 
   return (
     <div className="relative">
