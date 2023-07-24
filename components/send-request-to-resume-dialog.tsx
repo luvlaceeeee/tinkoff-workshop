@@ -222,7 +222,7 @@ export function SendRequestToResumeDialog({ resumeId }: { resumeId: number }) {
                                 У вас нет активных вакансий
                               </p>
                               <Link
-                                href={`project/${projectId}/vacancies/create`}
+                                href={`/project/${projectId}/vacancies/create`}
                               >
                                 <Button
                                   size={"sm"}
