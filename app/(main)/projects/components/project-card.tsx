@@ -9,13 +9,16 @@ import { Button } from "@/components/ui/button"
 import { LinkTitle } from "@/components/link-title"
 import { AboutSection } from "@/components/sections/about-section"
 
+import { DeleteProjectDialog } from "./delete-project-dialog"
+
 export function ProjectCard(
   props: Omit<
     IProject,
-    "isLeader" | "members" | "vacanciesCount" | "contacts" | "description"
+    "members" | "vacanciesCount" | "contacts" | "description"
   >
 ) {
-  const { title, theme, membersCount, status, createdWhen, id } = props
+  const { title, theme, membersCount, status, createdWhen, id, isLeader } =
+    props
 
   return (
     <div className="flex w-full flex-col gap-2 rounded-3xl border bg-secondary/20 p-3 px-4 md:gap-3 md:px-5">
@@ -31,6 +34,7 @@ export function ProjectCard(
             Создан: {convertDate(createdWhen)}
           </p>
         </div>
+        {isLeader && <DeleteProjectDialog projectId={id} title={title} />}
       </section>
 
       <AboutSection

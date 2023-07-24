@@ -26,7 +26,7 @@ export const useCreateProject = () => {
 
         queryClient.invalidateQueries(["user-projects"])
         queryClient.invalidateQueries(["user"])
-        router.push(`/project/${project.id}`)
+        router.replace(`/project/${project.id}`)
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

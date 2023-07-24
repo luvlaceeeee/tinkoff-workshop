@@ -1,7 +1,7 @@
 "use client"
 
-import { redirect } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
+import { Trash } from "lucide-react"
 
 import $api from "@/config/axios"
 import {
@@ -16,26 +16,26 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { toast } from "@/components/ui/use-toast"
 import { queryClient } from "@/components/providers"
 
-export function LeaveProjectDialog(props: {
+export function DeleteProjectDialog(props: {
   projectId: number
   title: string
 }) {
   const { projectId, title } = props
+
   const { mutate, isLoading } = useMutation(
-    ["project-leave"],
-    () =>
-      $api.post(
-        `projects/leave/${projectId}`,
-        {},
-        { params: { newLeaderId: null } }
-      ),
+    ["project-delete"],
+    () => $api.delete(`projects/${projectId}`),
     {
       onSuccess: () => {
-        queryClient
-          .invalidateQueries(["user-projects"])
-          .then(() => redirect("/projects"))
+        toast({
+          title: "Успешно",
+          description: `Проект ${title} удален`,
+          variant: "accept",
+        })
+        queryClient.invalidateQueries(["user-projects"])
         queryClient.invalidateQueries(["user"])
       },
     }
@@ -45,21 +45,24 @@ export function LeaveProjectDialog(props: {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          size={"icon"}
           variant={"outline"}
-          className="border-destructive/30 bg-destructive/20 hover:bg-destructive/90"
+          className="border-destructive/30  bg-destructive/20 hover:bg-destructive/90"
         >
-          Покинуть проект
+          <Trash />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Вы уверены, что хотите покинуть проект {title}?
+            Вы уверены, что хотите удалить проект {title}?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Вы сможете вернуться в него только через вакансии проекта
+            Проект будет полностью стерт с наших серверов и не подлежит
+            восстановлению
           </AlertDialogDescription>
         </AlertDialogHeader>
+
         <AlertDialogFooter>
           <AlertDialogCancel>Отменить</AlertDialogCancel>
           <AlertDialogAction asChild>
@@ -69,7 +72,7 @@ export function LeaveProjectDialog(props: {
               onClick={() => mutate()}
               disabled={isLoading}
             >
-              Покинуть
+              Удалить
             </Button>
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -27,7 +27,7 @@ export const useCreateVacancy = (projectId: number) => {
         })
 
         queryClient.invalidateQueries(["project-vacancies", projectId])
-        router.push(`/project/${projectId}/vacancies`)
+        router.replace(`/project/${projectId}/vacancies`)
       },
       onError: (error: AxiosError<IErrorResponse>) => {
         console.log(error)

@@ -60,8 +60,12 @@ export function MultiSelectSkillsForm({
               if (!inputValue) return
 
               setInputValue("")
-              if (!selected.includes(inputValue.toLocaleLowerCase()))
-                append({ value: inputValue.toLowerCase() })
+              if (
+                !selected
+                  .map((skill) => skill.toLocaleLowerCase())
+                  .includes(inputValue.toLocaleLowerCase())
+              )
+                append({ value: inputValue })
             }}
           >
             Добавить
@@ -82,7 +86,12 @@ export function MultiSelectSkillsForm({
                     }}
                     onSelect={(value) => {
                       setInputValue("")
-                      if (!selected.includes(skill)) append({ value: skill })
+                      if (
+                        !selected
+                          .map((skill) => skill.toLocaleLowerCase())
+                          .includes(skill.toLocaleLowerCase())
+                      )
+                        append({ value: skillMap(skill) })
                     }}
                     className={`cursor-pointer `}
                   >

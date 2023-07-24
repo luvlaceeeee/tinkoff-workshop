@@ -17,6 +17,7 @@ export function ProjectEditMembers({
   // )
 
   const { data: members = [], isLoading } = useProjectMembersById(projectId)
+  const lead = members.find((member) => member.isLead)
 
   if (isLoading) return <div>Loading</div>
 
@@ -28,23 +29,28 @@ export function ProjectEditMembers({
 
       <div className="space-y-1">
         <h2 className="text-lg transition-colors">Создатель</h2>
-        <MembersCard {...members[0]} />
+        <MembersCard {...lead!} />
       </div>
 
       <div className="space-y-1">
         <h3 className="text-lg transition-colors">Участники</h3>
-        {members.slice(1).map((member) => (
-          <div className="flex items-center gap-2" key={generateKey("member")}>
-            <MembersCard {...member} />
-            <DeleteMemberDialog
-              projectId={projectId}
-              userId={member.userId}
-              direction={member.direction.directionName}
-              name={member.name}
-              surname={member.surname}
-            />
-          </div>
-        ))}
+        {members
+          .filter((member) => !member.isLead)
+          .map((member) => (
+            <div
+              className="flex items-center gap-2"
+              key={generateKey("member")}
+            >
+              <MembersCard {...member} />
+              <DeleteMemberDialog
+                projectId={projectId}
+                userId={member.userId}
+                direction={member.direction.directionName}
+                name={member.name}
+                surname={member.surname}
+              />
+            </div>
+          ))}
       </div>
     </div>
   )

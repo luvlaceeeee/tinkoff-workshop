@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation"
 import { AlignJustify, X } from "lucide-react"
 
 import { Icons } from "../icons"
-import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { HeaderNavigationMenu } from "./header-navigation-menu"
 import { MobileHeader } from "./mobile-header"
@@ -41,7 +40,6 @@ export function SiteHeader({ children }: { children: ReactNode }) {
             </Link>
           </div>
           <div className="space-x-2">
-            <ThemeToggle />
             <Button
               size={"icon"}
               variant={"ghost"}

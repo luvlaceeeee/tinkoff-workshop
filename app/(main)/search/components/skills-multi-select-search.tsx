@@ -99,7 +99,7 @@ export function SkillsMultiSelect() {
           {selected.map((skill) => {
             return (
               <Badge key={generateKey(skill)} variant="secondary">
-                {skillMap(skill)}
+                {skill}
                 <button
                   className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
                   onKeyDown={(e) => {
@@ -139,7 +139,11 @@ export function SkillsMultiSelect() {
             onClick={() => {
               if (!inputValue) return
               setInputValue("")
-              if (!selected.includes(inputValue.toLowerCase())) {
+              if (
+                !selected
+                  .map((skill) => skill.toLocaleLowerCase())
+                  .includes(inputValue.toLowerCase())
+              ) {
                 setSelected((prev) => [...prev, inputValue])
                 setSkillsToURL(inputValue)
               }
@@ -172,9 +176,13 @@ export function SkillsMultiSelect() {
                     }}
                     onSelect={(value) => {
                       setInputValue("")
-                      if (!selected.includes(skill)) {
-                        setSelected((prev) => [...prev, skill])
-                        setSkillsToURL(skill)
+                      if (
+                        !selected
+                          .map((skill) => skill.toLocaleLowerCase())
+                          .includes(skill.toLowerCase())
+                      ) {
+                        setSelected((prev) => [...prev, skillMap(skill)])
+                        setSkillsToURL(skillMap(skill))
                       }
                     }}
                     className={`cursor-pointer`}

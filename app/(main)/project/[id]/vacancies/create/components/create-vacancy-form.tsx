@@ -53,7 +53,7 @@ export function CreateVacancyForm({ projectId }: { projectId: number }) {
 
   function onSubmit(values: CreateVacancySchema) {
     const queryData = {
-      skills: values.skills?.map((skill) => skill.value.toLowerCase()),
+      skills: values.skills?.map((skill) => skill.value),
       description: values.description,
       direction: values.direction,
     }
