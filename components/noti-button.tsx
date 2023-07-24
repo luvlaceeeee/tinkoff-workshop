@@ -2,10 +2,20 @@
 
 import Link from "next/link"
 import { Bell } from "lucide-react"
+import { useSession } from "next-auth/react"
+import useWebSocket from "react-use-websocket"
 
 import { Button } from "./ui/button"
 
 export function NotificationButton() {
+  const { data } = useSession()
+  useWebSocket("ws://localhost:8080/ws/notifications", {
+    queryParams: { bearer: data?.user.username! },
+    onOpen: () => {
+      console.log("WebSocket connection established.")
+    },
+  })
+
   return (
     <div className="relative">
       <Link href="/notifications">
