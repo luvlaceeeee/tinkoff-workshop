@@ -34,6 +34,7 @@ import { useProjectMembersById } from "../hooks/useProjectMembersById"
 export function LeaveLeadDialog(props: { projectId: number; title: string }) {
   const { projectId, title } = props
   const [newLeadId, setNewLeadId] = useState<number | null>(null)
+
   const { mutate, isLoading } = useMutation(
     ["project-leave"],
     () =>
@@ -98,16 +99,12 @@ export function LeaveLeadDialog(props: { projectId: number; title: string }) {
                   </SelectItem>
                 ))
             ) : (
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="p-4 text-center text-xs text-muted-foreground md:text-sm">
                 В проекте больше нет пользователей
               </p>
             )}
           </SelectContent>
         </Select>
-        <p className="text-sm text-destructive">
-          Если вы не выберите ни одного пользователя, проект будет полностью
-          удален!
-        </p>
         <AlertDialogFooter>
           <AlertDialogCancel>Отменить</AlertDialogCancel>
           <AlertDialogAction asChild>
@@ -115,7 +112,7 @@ export function LeaveLeadDialog(props: { projectId: number; title: string }) {
               variant={"destructive"}
               loading={isLoading}
               onClick={() => mutate()}
-              disabled={isLoading}
+              disabled={isLoading || !newLeadId}
             >
               Покинуть
             </Button>

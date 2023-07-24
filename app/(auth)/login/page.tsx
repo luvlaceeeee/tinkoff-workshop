@@ -29,7 +29,7 @@ const LoginPage = () => {
             variant={"link"}
             className="text-muted-foreground/80 hover:text-muted-foreground"
           >
-            Нету аккаунта? Зарегистрируйтесь
+            Нет аккаунта? Зарегистрируйтесь!
           </Button>
         </Link>
       </p>

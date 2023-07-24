@@ -37,13 +37,9 @@ export function VacancyRequestCard({
           title: "Запрос принят",
           description: "Пользователь теперь в проекте, вакансия удалена",
         })
-        queryClient
-          .invalidateQueries([
-            "project-members",
-            "project-vacancies",
-            projectId,
-          ])
-          .then(() => router.replace(`/project/${projectId}`))
+        queryClient.invalidateQueries(["project-members", projectId])
+        router.replace(`/project/${projectId}`)
+        queryClient.invalidateQueries(["project-vacancies", projectId])
       },
       onError: (error: AxiosError<IErrorResponse>) => {
         toast({

@@ -27,7 +27,7 @@ export const useCreateResume = () => {
 
         queryClient
           .invalidateQueries(["user-resumes"])
-          .then(() => router.push(`/resumes/`))
+          .then(() => router.replace(`/resumes/`))
         queryClient.invalidateQueries(["resume-directions"])
         queryClient.invalidateQueries(["user"])
       },
