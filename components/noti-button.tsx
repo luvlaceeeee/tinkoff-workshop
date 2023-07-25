@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useUserStore } from "@/store/userStore"
 import { Bell } from "lucide-react"
@@ -29,9 +29,10 @@ type Notification = JsonValue & {
 export function NotificationButton() {
   const email = useUserStore((state) => state.user.email)
   const [loading, setLoading] = useState(true)
-  const [noti, setNoti] = useState()
+  const [noti, setNoti] = useState<Notification[]>([])
+  const [open, setOpen] = useState<boolean>(false)
 
-  const { lastJsonMessage } = useWebSocket<Notification[]>(
+  const { lastJsonMessage, sendMessage } = useWebSocket<Notification[]>(
     `ws://localhost:8080/ws/notifications/${email}`,
     {
       share: true,
@@ -40,28 +41,35 @@ export function NotificationButton() {
       },
     }
   )
-  console.log(lastJsonMessage)
+
+  useEffect(() => {
+    setNoti(lastJsonMessage)
+  }, [lastJsonMessage])
+
+  const handleDeleteNoti = (notiId: number) => {
+    sendMessage(`${notiId}`)
+    setNoti((prev) => prev.filter((noti) => noti.id !== notiId))
+    setOpen(false)
+  }
 
   return loading ? (
     <Button variant="secondary" size="icon">
       <Bell className="h-5 w-5" />
     </Button>
   ) : (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger>
         <div className="relative">
-          {/* <Link href="/notifications"> */}
           <Button variant="secondary" size="icon">
             <Bell className="h-5 w-5" />
           </Button>
-          {/* </Link> */}
-          {lastJsonMessage && (
+          {noti && (
             <div
               className={`${
-                !lastJsonMessage.length && "hidden"
+                !noti.length && "hidden"
               } absolute -right-1 -top-1 rounded-xl bg-destructive p-1.5 py-0 text-sm`}
             >
-              {lastJsonMessage.length}
+              {noti.length}
             </div>
           )}
         </div>
@@ -71,9 +79,14 @@ export function NotificationButton() {
         className="w-full max-w-sm rounded-2xl p-0 md:max-w-xl"
       >
         <ul className="scrollbar max-h-56 overflow-auto">
-          {lastJsonMessage && lastJsonMessage.length ? (
-            lastJsonMessage?.map((noti, i) => (
-              <Notification {...noti} className={i === 0 ? "border-t-0" : ""} />
+          {noti && noti.length ? (
+            noti?.map((noti, i) => (
+              //@ts-ignore
+              <Notification
+                {...noti}
+                className={i === 0 ? "border-t-0" : ""}
+                handleDelete={handleDeleteNoti}
+              />
             ))
           ) : (
             <p className="p-4 text-center text-xs text-muted-foreground">
@@ -86,7 +99,12 @@ export function NotificationButton() {
   )
 }
 
-const Notification = (props: Notification & { className?: string }) => {
+const Notification = (
+  props: Notification & {
+    className?: string
+    handleDelete: (notiId: number) => void
+  }
+) => {
   const {
     createdWhen,
     type,
@@ -96,6 +114,7 @@ const Notification = (props: Notification & { className?: string }) => {
     className,
     projectId,
     vacancyId,
+    handleDelete,
   } = props
   return (
     <li
@@ -121,8 +140,11 @@ const Notification = (props: Notification & { className?: string }) => {
             : `/project/${projectId}/vacancies/${vacancyId}/requests`
         }
       >
-        y
-        <Button variant={"outline"} size={"sm"}>
+        <Button
+          variant={"outline"}
+          size={"sm"}
+          onClick={() => handleDelete(id)}
+        >
           Смотреть заявки
         </Button>
       </Link>

@@ -24,9 +24,10 @@ export const useCreateProject = () => {
           description: "Создайте вакансию, чтобы найти людей",
         })
 
+        router.replace(`/project/${project.id}`)
+
         queryClient.invalidateQueries(["user-projects"])
         queryClient.invalidateQueries(["user"])
-        router.replace(`/project/${project.id}`)
       },
       onError: (error: AxiosError<IErrorResponse>) =>
         toast({

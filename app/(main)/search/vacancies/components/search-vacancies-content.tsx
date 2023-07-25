@@ -117,8 +117,8 @@ export function SearchVacanciesContent() {
           breakClassName="text-xl font-semibold"
           initialPage={page}
           onPageChange={onPageChange}
-          pageRangeDisplayed={1}
-          marginPagesDisplayed={1}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={2}
           pageCount={vacancies.pageCount}
           nextLabel={<ChevronRight />}
           previousLabel={<ChevronLeft />}

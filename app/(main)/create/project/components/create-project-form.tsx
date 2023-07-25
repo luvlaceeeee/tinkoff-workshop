@@ -59,7 +59,6 @@ export function CreateProjectForm() {
 
   function onSubmit(values: ProjectSchema) {
     mutate(values)
-    form.reset()
   }
 
   return (

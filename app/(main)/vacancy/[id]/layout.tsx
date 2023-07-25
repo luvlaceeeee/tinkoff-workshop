@@ -45,7 +45,7 @@ export default function VacancyLayout({
     <div className="flex flex-col">
       <MainPagesHeader
         title={vacancy.direction.description}
-        description={convertDate(vacancy.createdWhen)}
+        description={`Создано ${convertDate(vacancy.createdWhen)}`}
       >
         <div className="flex items-center gap-1 md:gap-2">
           <BackButton />

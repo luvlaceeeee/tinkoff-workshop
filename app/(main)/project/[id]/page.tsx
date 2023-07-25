@@ -20,6 +20,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
   )
 
   const { id } = useUserStore((state) => state.user)
+
   return (
     <div className="flex flex-col justify-between gap-5 md:flex-row md:gap-10">
       <div className="flex flex-col gap-3 border-b pb-5 md:flex-1 md:gap-5 md:border-b-0 md:border-r md:pb-0 md:pr-5">

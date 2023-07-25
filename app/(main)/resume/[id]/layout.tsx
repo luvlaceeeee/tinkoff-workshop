@@ -35,7 +35,7 @@ export default function ResumeLayout({
     <div className="flex flex-col">
       <MainPagesHeader
         title={resume.direction.description}
-        description={convertDate(resume.createdWhen)}
+        description={`Создано ${convertDate(resume.createdWhen)}`}
       >
         <div className="flex items-center gap-1 md:gap-2">
           <BackButton />

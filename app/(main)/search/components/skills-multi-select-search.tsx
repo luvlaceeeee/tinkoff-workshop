@@ -133,10 +133,12 @@ export function SkillsMultiSelect() {
             variant={"outline"}
             type="button"
             size={"sm"}
-            disabled={!inputValue}
             className="rounded-2xl"
             onClick={() => {
-              if (!inputValue) return
+              if (!inputValue) {
+                inputRef.current?.focus()
+                return
+              }
               setInputValue("")
               if (
                 !selected
@@ -155,6 +157,7 @@ export function SkillsMultiSelect() {
             type="button"
             size={"sm"}
             className="rounded-2xl border-destructive/50 hover:bg-destructive/50"
+            disabled={!selected.length}
             onClick={() => handleUnselectAll()}
           >
             Очистить

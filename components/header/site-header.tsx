@@ -40,8 +40,8 @@ export function SiteHeader({ children }: { children: ReactNode }) {
             </Link>
           </div>
 
-          <div className="space-x-2">
-            {/* <NotificationButton /> */}
+          <div className="flex space-x-2">
+            <NotificationButton />
             <Button
               size={"icon"}
               variant={"ghost"}

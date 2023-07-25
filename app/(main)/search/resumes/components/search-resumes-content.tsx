@@ -112,7 +112,7 @@ export function SearchResumesContent() {
           initialPage={page}
           onPageChange={onPageChange}
           pageRangeDisplayed={2}
-          marginPagesDisplayed={1}
+          marginPagesDisplayed={2}
           pageCount={resumes.pageCount}
           nextLabel={<ChevronRight />}
           previousLabel={<ChevronLeft />}
