@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/config/authOptions"
 
+import { NotificationButton } from "../noti-button"
 import { ThemeToggle } from "../theme-toggle"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
@@ -23,7 +24,7 @@ export async function RightPartHeader() {
               <Button variant={"secondary"}>Мои резюме</Button>
             </Link>
             {/* TODO Add Notifications */}
-            {/* <NotificationButton /> */}
+            <NotificationButton />
             <UserAvatarDropdown />
           </>
         ) : (
