@@ -26,6 +26,7 @@ export default function ProjectLayout({
   const { data: project = {} as IProject, isLoading } = useProjectById(
     +params.id
   )
+
   const pathname = usePathname()
 
   const { id } = useUserStore((state) => state.user)
@@ -45,7 +46,7 @@ export default function ProjectLayout({
       >
         <div className="flex items-center gap-2">
           <BackButton />
-          <div className="hidden space-x-2 md:block">
+          <div className="hidden space-x-2 md:flex">
             {project.members.find((member) => member.userId === id) &&
               (project.isLeader ? (
                 <LeaveLeadDialog title={project.title} projectId={project.id} />

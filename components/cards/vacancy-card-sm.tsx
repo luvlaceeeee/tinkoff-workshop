@@ -22,7 +22,7 @@ type VacancyCardSmallProps = Omit<HTMLAttributes<HTMLDivElement>, "id"> &
   Pick<
     IVacancy,
     "description" | "direction" | "id" | "project" | "skills" | "createdWhen"
-  >
+  > & { trimCount?: number }
 
 export function VacancyCardSmall(props: VacancyCardSmallProps) {
   const {
@@ -33,6 +33,7 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
     id,
     project,
     className,
+    trimCount = 40,
     ...rest
   } = props
 
@@ -52,7 +53,6 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
                 href={`/vacancy/${id}`}
                 className="text-xl md:text-2xl"
               >
-                {" "}
                 {direction.description}
               </LinkTitle>
             </CardTitle>
@@ -79,7 +79,9 @@ export function VacancyCardSmall(props: VacancyCardSmallProps) {
         <CardFooter className="flex flex-col items-start">
           <label className="text-xs text-muted-foreground">Описание:</label>
           {description && description.trim() ? (
-            <p className="break-normal">{trimLine(description.trim(), 60)}</p>
+            <p className="break-normal">
+              {trimLine(description.trim(), trimCount)}
+            </p>
           ) : (
             <p className="text-sm">Отсутствует</p>
           )}

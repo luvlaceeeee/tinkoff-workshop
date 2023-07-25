@@ -13,16 +13,23 @@ type UpdateProfileRequests = Omit<UserProfileSchema, "contacts"> & {
   contacts: string[] | undefined
 }
 
-export const useUpdateProfile = () => {
+export const useUpdateProfile = (reset: unknown) => {
   return useMutation(
     ["user-change"],
     (values: UpdateProfileRequests) =>
       $api.patch<IUser>("/users", values).then((res) => res.data),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
         toast({
           variant: "accept",
           title: "Профиль обновлен",
+        })
+        //@ts-ignore
+        reset({
+          ...data,
+          contacts: data?.contacts.map((contact) => ({
+            value: contact,
+          })),
         })
         queryClient.invalidateQueries({ queryKey: ["user"] })
       },

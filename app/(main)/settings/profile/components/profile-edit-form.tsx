@@ -48,7 +48,7 @@ export function ProfileEditForm({ user }: ProfileEditFormProps) {
     control: form.control,
   })
 
-  const { mutate, isLoading } = useUpdateProfile()
+  const { mutate, isLoading, data } = useUpdateProfile(form.reset)
 
   function onSubmit(values: UserProfileSchema) {
     const queryData = {

@@ -5,7 +5,7 @@ export const projectSchema = z.object({
     .string()
     .trim()
     .min(1, { message: "Обязательное поле" })
-    .max(30, { message: "Имя слишком длинное" }),
+    .max(60, { message: "Имя слишком длинное" }),
   theme: z
     .string()
     .trim()

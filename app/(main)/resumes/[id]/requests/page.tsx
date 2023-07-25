@@ -44,16 +44,8 @@ export default function ResumeRequestsPage({
           {isResumeLoading ? (
             <Skeleton className="h-60" />
           ) : (
-            <ResumeCardSmall {...resume} className="mt-2" />
+            <ResumeCardSmall {...resume} className="mt-2" trimCount={200} />
           )}
-        </div>
-        <div className="flex-1 space-y-1">
-          <h2 className="text-2xl font-semibold transition-colors md:text-3xl">
-            Статистика
-          </h2>
-          <p className="text-xs text-muted-foreground md:text-sm">
-            В разработке...
-          </p>
         </div>
       </div>
       <Accordion type="single" collapsible className="w-full">

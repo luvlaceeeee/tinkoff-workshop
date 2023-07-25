@@ -18,7 +18,7 @@ const badgeVariants = cva(
       },
       status: {
         FROZEN: "bg-blue-300 hover:bg-blue-400 text-black",
-        CLOSED: "bg-destructive hover:bg-destructive/80 text-black",
+        CLOSED: "bg-destructive hover:bg-destructive/80 text-foreground",
         IN_PROGRESS: "bg-green-300 hover:bg-green-400 text-black",
         PREPARING: "bg-orange-300 hover:bg-orange-400 text-black",
       },

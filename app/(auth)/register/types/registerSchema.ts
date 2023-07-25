@@ -5,11 +5,13 @@ export const registerSchema = z
     email: z
       .string()
       .min(1, { message: "Обязательное поле" })
+      .max(50, { message: "Почта слишком длинная" })
       .email({ message: "Неправильный формат почты" }),
     name: z
       .string()
       .min(1, { message: "Обязательное поле" })
       .min(2, { message: "Имя слишком короткое" })
+      .max(50, { message: "Имя слишком длинное" })
       .regex(new RegExp("^[А-Яа-яA-Za-z]+$"), {
         message: "Имя должно состоять из одного слова",
       }),
@@ -17,8 +19,9 @@ export const registerSchema = z
       .string()
       .min(1, { message: "Обязательное поле" })
       .min(2, { message: "Фамилия слишком короткая" })
+      .max(50, { message: "Фамилия слишком длинная" })
       .regex(new RegExp("^[А-Яа-яA-Za-z]+$"), {
-        message: "Имя должно состоять из одного слова",
+        message: "Имя должно состоять из одного слова и не содержать цифр",
       }),
     password: z
       .string()
