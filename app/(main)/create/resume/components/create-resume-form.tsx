@@ -50,7 +50,7 @@ export function CreateResumeForm() {
 
   function onSubmit(values: ResumeSchema) {
     const queryData = {
-      skills: values.skills?.map((skill) => skill.value.toLowerCase()),
+      skills: values.skills?.map((skill) => skill.value),
       description: values.description,
       direction: values.direction,
     }

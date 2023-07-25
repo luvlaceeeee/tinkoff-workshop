@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 
 //TODO Добавить кроп картинки и проверку на размер и тип файла
@@ -26,6 +27,18 @@ export function ChangeAvatarDialog() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [file, setFile] = useState<File>()
+  const [error, setError] = useState<string>()
+
+  const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files![0].size > 3_145_728) {
+      setError("Картинка слишком большая")
+      e.target.value = ""
+      return
+    }
+
+    setError("")
+    setFile(e.target.files![0])
+  }
 
   const { mutate, isLoading } = useMutation(
     ["change-avatar"],
@@ -65,7 +78,16 @@ export function ChangeAvatarDialog() {
           <DialogTitle>Обновление аватара</DialogTitle>
           <DialogDescription>Выберите файл и загрузите</DialogDescription>
         </DialogHeader>
-        <Input type="file" onChange={(e) => setFile(e.target.files![0])} />
+        <Input
+          type="file"
+          accept="image/jpeg, image/png, image/jpg"
+          onChange={(e) => onFileChange(e)}
+        />
+
+        <Label className="text-xs text-muted-foreground">
+          Максимальный размер файла до 5 мб. Доступные форматы: PNG, JPG, JPEG
+        </Label>
+        {error && <Label className="text-destructive">{error}</Label>}
         <DialogFooter>
           <Button
             onClick={() => {

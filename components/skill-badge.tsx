@@ -1,6 +1,5 @@
 import { HTMLAttributes } from "react"
 
-import { skillMap } from "@/lib/skillMap"
 import { cn } from "@/lib/utils"
 
 interface SkillBadgeProps extends HTMLAttributes<HTMLParagraphElement> {
@@ -16,7 +15,7 @@ export function SkillBadge({ skill, className, ...props }: SkillBadgeProps) {
       )}
       {...props}
     >
-      {skillMap(skill)}
+      {skill}
     </p>
   )
 }

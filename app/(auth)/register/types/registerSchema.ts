@@ -10,14 +10,14 @@ export const registerSchema = z
       .string()
       .min(1, { message: "Обязательное поле" })
       .min(2, { message: "Имя слишком короткое" })
-      .regex(new RegExp("^[A-Za-z]+$"), {
+      .regex(new RegExp("^[А-Яа-яA-Za-z]+$"), {
         message: "Имя должно состоять из одного слова",
       }),
     surname: z
       .string()
       .min(1, { message: "Обязательное поле" })
       .min(2, { message: "Фамилия слишком короткая" })
-      .regex(new RegExp("^[A-Za-z]+$"), {
+      .regex(new RegExp("^[А-Яа-яA-Za-z]+$"), {
         message: "Имя должно состоять из одного слова",
       }),
     password: z
