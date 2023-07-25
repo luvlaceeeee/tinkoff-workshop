@@ -26,20 +26,14 @@ export default function VacancyLayout({
     error,
   } = useVacancyById(+params.id)
 
-  if (error?.status === 406) {
-    router.back()
-  }
-
-  if (error) {
-    notFound()
-  }
-
   if (isLoading)
     return (
       <div className="flex h-full w-full flex-col items-center justify-center gap-6 animate-in fade-in duration-500">
         <Icons.loader className="h-14 w-14 fill-main" />
       </div>
     )
+
+  if (!vacancy.id) notFound()
 
   return (
     <div className="flex flex-col">

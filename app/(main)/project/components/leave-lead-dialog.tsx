@@ -58,7 +58,7 @@ export function LeaveLeadDialog(props: { projectId: number; title: string }) {
     useProjectMembersById(projectId)
 
   return (
-    <AlertDialog>
+    <AlertDialog onOpenChange={() => setNewLeadId(null)}>
       <AlertDialogTrigger asChild>
         <Button
           variant={"outline"}

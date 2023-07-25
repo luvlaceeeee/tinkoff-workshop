@@ -4,6 +4,7 @@ export const createVacancySchema = z
   .object({
     description: z
       .string()
+      .trim()
       .min(1, "Обязательное поле")
       .max(200, "Не больше 200 символов"),
     direction: z.string({ required_error: "Обязательное поле" }),

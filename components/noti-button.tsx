@@ -90,7 +90,7 @@ export function NotificationButton() {
             ))
           ) : (
             <p className="p-4 text-center text-xs text-muted-foreground">
-              У вас нету уведомлений
+              У вас нет уведомлений
             </p>
           )}
         </ul>

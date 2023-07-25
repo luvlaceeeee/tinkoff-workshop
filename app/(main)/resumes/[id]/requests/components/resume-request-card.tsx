@@ -67,7 +67,11 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
 
   const Footer = () => {
     if (status.statusName !== "IN_CONSIDERATION")
-      return <p>{status.description}</p>
+      return status.description === "Request is declined" ? (
+        <p className="text-destructive">Отклонен</p>
+      ) : (
+        <p className="text-accept">Принят</p>
+      )
 
     if (!isInvite) {
       return <p>В ожидании ответа</p>
@@ -75,7 +79,9 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
       return (
         <>
           <Button
-            variant={"destructive"}
+            size={"icon"}
+            variant={"outline"}
+            className="border-destructive/30  bg-destructive/20 hover:bg-destructive/90"
             loading={isRejectLoading}
             onClick={() => rejectMutate()}
             disabled={isRejectLoading}

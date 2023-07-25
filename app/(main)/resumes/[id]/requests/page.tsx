@@ -1,6 +1,7 @@
 "use client"
 
 import { Fragment } from "react"
+import { notFound } from "next/navigation"
 
 import { IResume } from "@/types/interfaces/IResume"
 import { generateKey } from "@/lib/generateKey"
@@ -26,13 +27,13 @@ export default function ResumeRequestsPage({
     useResumeById(params.id)
 
   const { data: incomingRequests = [], isLoading: isIncomingLoading } =
-    useResumeRequests(params.id, "INCOMING")
+    useResumeRequests(params.id, "INCOMING", { onError: () => notFound() })
 
   const { data: sentRequests = [], isLoading: isSentLoading } =
-    useResumeRequests(params.id, "SENT")
+    useResumeRequests(params.id, "SENT", { onError: () => notFound() })
 
   const { data: recentRequests = [], isLoading: isRecentLoading } =
-    useResumeRequests(params.id, "RECENT")
+    useResumeRequests(params.id, "RECENT", { onError: () => notFound() })
 
   return (
     <div className="flex flex-col justify-between gap-3">

@@ -39,7 +39,8 @@ export function DeleteVacancyDialog({
           variant: "accept",
           title: `Вакансия на направление ${direction} удалена`,
         })
-        queryClient.invalidateQueries(["project-vacancies", projectId])
+        console.log(projectId)
+        queryClient.invalidateQueries(["project-vacancies", projectId, true])
         setOpen(false)
       },
       onError: (error: AxiosError<IErrorResponse>) => {

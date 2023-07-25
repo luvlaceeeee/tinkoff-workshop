@@ -85,7 +85,9 @@ export function VacancyRequestCard({
       return (
         <>
           <Button
-            variant={"destructive"}
+            size={"icon"}
+            variant={"outline"}
+            className="border-destructive/30  bg-destructive/20 hover:bg-destructive/90"
             loading={isRejectLoading || isAcceptLoading}
             onClick={() => rejectMutate()}
             disabled={isRejectLoading || isAcceptLoading}

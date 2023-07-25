@@ -69,7 +69,7 @@ export function VacancyCard({
         <DeleteVacancyDialog
           id={id}
           direction={direction.description}
-          projectId={6}
+          projectId={projectId}
         />
         <Button variant={"outline"} className="bg-secondary/20">
           <Link href={"/search/resumes" + `?${queries.toString()}`}>

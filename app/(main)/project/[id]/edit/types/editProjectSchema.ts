@@ -3,14 +3,17 @@ import { z } from "zod"
 export const editProjectSchema = z.object({
   title: z
     .string()
+    .trim()
     .min(1, { message: "Обязательное поле" })
     .max(30, { message: "Имя слишком длинное" }),
   theme: z
     .string()
+    .trim()
     .min(1, { message: "Обязательное поле" })
     .max(100, { message: "Тема слишком длинная" }),
   description: z
     .string()
+    .trim()
     .min(1, { message: "Обязательное поле" })
     .max(200, { message: "Не больше 200 символов" }),
   status: z.string({ required_error: "Обязательное поле" }),

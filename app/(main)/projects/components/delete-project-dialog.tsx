@@ -49,7 +49,7 @@ export function DeleteProjectDialog(props: {
           variant={"outline"}
           className="border-destructive/30  bg-destructive/20 hover:bg-destructive/90"
         >
-          <Trash />
+          <Trash className="h-5 w-5" />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

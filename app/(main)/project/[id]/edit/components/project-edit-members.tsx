@@ -1,4 +1,5 @@
 import { generateKey } from "@/lib/generateKey"
+import { Skeleton } from "@/components/ui/skeleton"
 
 import { MembersCard } from "../../../components/members-card"
 import { useProjectMembersById } from "../../../hooks/useProjectMembersById"
@@ -19,7 +20,7 @@ export function ProjectEditMembers({
   const { data: members = [], isLoading } = useProjectMembersById(projectId)
   const lead = members.find((member) => member.isLead)
 
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return <Skeleton className="shrink-0 md:w-1/3" />
 
   return (
     <div className="shrink-0 space-y-3 md:w-1/3">
