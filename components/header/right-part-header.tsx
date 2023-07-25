@@ -46,7 +46,6 @@ export async function RightPartHeader() {
             <div className="flex w-full justify-between">
               <div className="flex gap-2">
                 <ThemeToggle />
-                <NotificationButton />
               </div>
 
               <UserAvatarDropdown />

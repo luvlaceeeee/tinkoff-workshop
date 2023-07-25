@@ -17,7 +17,6 @@ export const LandingHeader = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     setShowMobileMenu(false)
-    console.log(pathname)
   }, [pathname])
 
   return (
