@@ -1,6 +1,6 @@
 "use client"
 
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 
 import $api from "@/config/axios"
@@ -23,6 +23,7 @@ export function LeaveProjectDialog(props: {
   title: string
 }) {
   const { projectId, title } = props
+  const router = useRouter()
   const { mutate, isLoading } = useMutation(
     ["project-leave"],
     () =>
@@ -35,7 +36,7 @@ export function LeaveProjectDialog(props: {
       onSuccess: () => {
         queryClient
           .invalidateQueries(["user-projects"])
-          .then(() => redirect("/projects"))
+          .then(() => router.replace("/projects"))
         queryClient.invalidateQueries(["user"])
       },
     }

@@ -2,7 +2,6 @@
 
 import { Fragment, useState } from "react"
 import Link from "next/link"
-import { notFound } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 
 import { IVacancy } from "@/types/interfaces/IVacancy"
@@ -27,8 +26,7 @@ export default function ProjectVacanciesPage({
         .get<IVacancy[]>(`positions/projects`, {
           params: { projectId: params.id, isVisible: isVisible },
         })
-        .then((res) => res.data),
-    { onError: () => notFound() }
+        .then((res) => res.data)
   )
 
   return (

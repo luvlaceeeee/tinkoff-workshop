@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 
 import $api from "@/config/axios"
@@ -34,6 +34,7 @@ import { useProjectMembersById } from "../hooks/useProjectMembersById"
 export function LeaveLeadDialog(props: { projectId: number; title: string }) {
   const { projectId, title } = props
   const [newLeadId, setNewLeadId] = useState<number | null>(null)
+  const router = useRouter()
 
   const { mutate, isLoading } = useMutation(
     ["project-leave"],
@@ -47,7 +48,7 @@ export function LeaveLeadDialog(props: { projectId: number; title: string }) {
       onSuccess: () => {
         queryClient
           .invalidateQueries(["user-projects"])
-          .then(() => redirect("/projects"))
+          .then(() => router.replace("/projects"))
         queryClient.invalidateQueries(["user"])
       },
     }
