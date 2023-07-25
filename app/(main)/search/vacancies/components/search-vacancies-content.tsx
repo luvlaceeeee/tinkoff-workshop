@@ -4,10 +4,12 @@ import { Fragment, useEffect, useState } from "react"
 import { notFound } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import ReactPaginate from "react-paginate"
 
 import $api from "@/config/axios"
 import { generateKey } from "@/lib/generateKey"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import { useRouting } from "../../hooks/useRouting"
@@ -64,22 +66,6 @@ export function SearchVacanciesContent() {
     { keepPreviousData: true }
   )
 
-  const handleNextPage = () => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()))
-    current.set("page", String(page + 2))
-
-    if (!isPreviousData) {
-      router.push(pathname + `?${current.toString()}`)
-    }
-  }
-
-  const handlePrevPage = () => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()))
-    current.set("page", String(page))
-
-    router.push(pathname + `?${current.toString()}`)
-  }
-
   const handleCurrentPage = (pageNumber: number) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()))
     current.set("page", String(pageNumber))
@@ -87,6 +73,11 @@ export function SearchVacanciesContent() {
     if (!isPreviousData) {
       router.push(pathname + `?${current.toString()}`)
     }
+  }
+
+  //@ts-ignore
+  const onPageChange = (event) => {
+    handleCurrentPage(event.selected + 1)
   }
 
   if (isLoading)
@@ -121,55 +112,28 @@ export function SearchVacanciesContent() {
       </div>
 
       <div className="flex items-center justify-center gap-2">
-        <Button
-          onClick={handlePrevPage}
-          disabled={page === 0 || isPreviousData}
-          size={"icon"}
-        >
-          <ChevronLeft />
-        </Button>
-        <div className="flex items-center gap-2">
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => handleCurrentPage(1)}
-            className={page === 0 ? "bg-secondary" : ""}
-          >
-            {1}
-          </Button>
-
-          {[...new Array(vacancies.pageCount)].map((_, i) => {
-            if (i === 0 || i === vacancies.pageCount - 1) return
-            return (
-              <Button
-                key={generateKey("paginate-button")}
-                size={"icon"}
-                variant={"outline"}
-                onClick={() => handleCurrentPage(i + 1)}
-                className={page === i ? "bg-secondary" : ""}
-              >
-                {i + 1}
-              </Button>
-            )
-          })}
-          {vacancies.pageCount !== 1 && (
-            <Button
-              size={"icon"}
-              variant={"outline"}
-              onClick={() => handleCurrentPage(vacancies.pageCount)}
-              className={page === vacancies.pageCount - 1 ? "bg-secondary" : ""}
-            >
-              {vacancies.pageCount}
-            </Button>
+        <ReactPaginate
+          breakLabel="..."
+          breakClassName="text-xl font-semibold"
+          initialPage={page}
+          onPageChange={onPageChange}
+          pageRangeDisplayed={1}
+          marginPagesDisplayed={1}
+          pageCount={vacancies.pageCount}
+          nextLabel={<ChevronRight />}
+          previousLabel={<ChevronLeft />}
+          renderOnZeroPageCount={null}
+          className="flex gap-2"
+          activeClassName={cn(
+            buttonVariants({ variant: "outline", size: "icon" }),
+            "bg-secondary"
           )}
-        </div>
-        <Button
-          size={"icon"}
-          onClick={handleNextPage}
-          disabled={isPreviousData || page + 1 === vacancies.pageCount}
-        >
-          <ChevronRight />
-        </Button>
+          pageLinkClassName={cn(
+            buttonVariants({ variant: "outline", size: "icon" })
+          )}
+          previousClassName={buttonVariants({ size: "icon" })}
+          nextClassName={buttonVariants({ size: "icon" })}
+        />
       </div>
     </>
   )
