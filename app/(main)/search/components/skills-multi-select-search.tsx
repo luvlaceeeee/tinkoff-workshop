@@ -77,7 +77,6 @@ export function SkillsMultiSelect() {
           setSelected((prev) => {
             const newSelected = [...prev]
             const removeSkill = newSelected.pop()
-            console.log("text")
             removeSkillFromURL(removeSkill!)
             return newSelected
           })

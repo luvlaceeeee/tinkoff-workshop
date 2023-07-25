@@ -30,7 +30,6 @@ export const useCreateVacancy = (projectId: number) => {
         router.replace(`/project/${projectId}/vacancies`)
       },
       onError: (error: AxiosError<IErrorResponse>) => {
-        console.log(error)
         toast({
           variant: "destructive",
           title: "Ошибка",

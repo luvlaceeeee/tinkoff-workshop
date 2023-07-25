@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { AlignJustify, X } from "lucide-react"
 
 import { Icons } from "../icons"
+import { NotificationButton } from "../noti-button"
 import { Button } from "../ui/button"
 import { HeaderNavigationMenu } from "./header-navigation-menu"
 import { MobileHeader } from "./mobile-header"
@@ -35,11 +36,13 @@ export function SiteHeader({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 w-full bg-background/70 px-7 backdrop-blur-lg md:hidden">
         <div className="flex h-20 items-center justify-between">
           <div className="flex gap-6">
-            <Link href="/">
+            <Link href="/main">
               <Icons.logo className="w-40" />
             </Link>
           </div>
+
           <div className="space-x-2">
+            <NotificationButton />
             <Button
               size={"icon"}
               variant={"ghost"}
