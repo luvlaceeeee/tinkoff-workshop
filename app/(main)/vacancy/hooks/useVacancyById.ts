@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { notFound, useRouter } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 
@@ -11,6 +11,6 @@ export const useVacancyById = (id: number) => {
   return useQuery(
     [`vacancy`, id],
     () => $api.get<IVacancy>(`positions/${id}`).then((res) => res.data),
-    { onError: (error: AxiosError<IErrorResponse>) => console.log("first") }
+    { onError: (error: AxiosError<IErrorResponse>) => notFound() }
   )
 }
