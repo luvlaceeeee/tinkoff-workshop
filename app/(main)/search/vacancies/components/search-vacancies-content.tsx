@@ -66,22 +66,6 @@ export function SearchVacanciesContent() {
     { keepPreviousData: true }
   )
 
-  const handleNextPage = () => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()))
-    current.set("page", String(page + 2))
-
-    if (!isPreviousData) {
-      router.push(pathname + `?${current.toString()}`)
-    }
-  }
-
-  const handlePrevPage = () => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()))
-    current.set("page", String(page))
-
-    router.push(pathname + `?${current.toString()}`)
-  }
-
   const handleCurrentPage = (pageNumber: number) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()))
     current.set("page", String(pageNumber))
