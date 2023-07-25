@@ -33,7 +33,7 @@ export function NotificationButton() {
   const [open, setOpen] = useState<boolean>(false)
 
   const { lastJsonMessage, sendMessage } = useWebSocket<Notification[]>(
-    `ws://xn--d1almjy9c.xn--p1ai/api/v1/ws/notifications/${email}`,
+    `ws://xn--d1almjy9c.xn--p1ai/api/v1/notifications/${email}`,
     {
       share: true,
       onOpen: () => {
