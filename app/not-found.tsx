@@ -18,7 +18,9 @@ export default function NotFound() {
           </span>
           <p className="text-7xl font-bold">Такой страницы не существует :(</p>
           <Link href={"/"}>
-            <Button variant={"main"}>Вернуться на главную</Button>
+            <Button variant={"main"} className="mt-6">
+              Вернуться на главную
+            </Button>
           </Link>
         </div>
       </div>

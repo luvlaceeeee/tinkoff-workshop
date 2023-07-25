@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { notFound, usePathname } from "next/navigation"
 import { useUserStore } from "@/store/userStore"
 
 import { IProject } from "@/types/interfaces/IProject"
@@ -37,6 +37,8 @@ export default function ProjectLayout({
         <Icons.loader className="h-14 w-14 fill-main" />
       </div>
     )
+
+  if (!project.id) notFound()
 
   return (
     <div className="flex flex-col">

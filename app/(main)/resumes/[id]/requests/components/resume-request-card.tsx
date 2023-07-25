@@ -29,6 +29,7 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
           title: "Запрос принят",
           description: "Вы в проекте, ваше резюме отключено",
         })
+        queryClient.invalidateQueries(["resume-requests", id])
         queryClient
           .invalidateQueries(["users", "user-resumes", "user-projects"])
           .then(() => router.replace(`/project/${position.project.id}`))
@@ -52,7 +53,7 @@ export function ResumeRequestCard({ request }: { request: IResumeRequest }) {
           title: "Запрос отклонен",
           description: "Запрос перемещен в прошлые",
         })
-        queryClient.invalidateQueries(["vacancy-requests", id])
+        queryClient.invalidateQueries(["resume-requests", id])
       },
       onError: (error: AxiosError<IErrorResponse>) => {
         toast({
