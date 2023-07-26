@@ -158,7 +158,7 @@ export function CreateProjectForm() {
               >
                 <FormControl>
                   <SelectTrigger className="rounded-2xl">
-                    <SelectValue placeholder="Выберите ваше направление" />
+                    <SelectValue placeholder="Выберите ваше направление в проекте" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="rounded-2xl">

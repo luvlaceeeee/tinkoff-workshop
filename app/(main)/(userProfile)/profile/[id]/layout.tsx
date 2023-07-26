@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { useUserStore } from "@/store/userStore"
 
 import { IUser } from "@/types/interfaces/IUser"
@@ -26,6 +27,7 @@ export default function UserProfileLayout({
   const currentUser = useUserStore((state) => state.user)
 
   if (isLoading) return <UserProfileLoading />
+  if (!user.id) notFound()
 
   return (
     <div className="flex flex-col">

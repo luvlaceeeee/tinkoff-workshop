@@ -41,13 +41,13 @@ export function ProjectProfileSmall(props: ProjectProfileSmallProps) {
             title="Тема проекта"
             description={theme}
             titleSize="text-xl md:text-2xl"
-            className="space-y-0"
+            className="space-y-0 break-words"
           />
           <AboutSection
             title="Описание"
             description={description}
             titleSize="text-xl md:text-2xl"
-            className="space-y-0"
+            className="space-y-0 break-words"
           />
         </div>
       </Link>

@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { useUserStore } from "@/store/userStore"
 
 import { IResume } from "@/types/interfaces/IResume"
@@ -30,6 +31,8 @@ export default function ResumeLayout({
         <Icons.loader className="h-14 w-14 fill-main" />
       </div>
     )
+
+  if (!resume.id) notFound()
 
   return (
     <div className="flex flex-col">

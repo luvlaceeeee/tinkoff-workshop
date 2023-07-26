@@ -40,13 +40,15 @@ export function ProjectMembers({ projectId }: { projectId: number }) {
                 key={generateKey("skeleton")}
               />
             ))
-          : members
+          : members.length
+          ? members
               .filter((member) => !member.isLead)
               .map((member) => (
                 <Fragment key={generateKey("member-card")}>
                   <MembersCard {...member} />
                 </Fragment>
-              ))}
+              ))
+          : null}
       </div>
     </div>
   )

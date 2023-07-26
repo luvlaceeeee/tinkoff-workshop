@@ -30,7 +30,7 @@ export function MembersCard(props: IProjectMember) {
             {concatStrings(" ", name, surname)}
           </LinkTitle>
           <h2 className="text-xs text-muted-foreground md:text-sm">
-            {direction.description}
+            {direction && direction.description}
           </h2>
         </div>
       </div>
